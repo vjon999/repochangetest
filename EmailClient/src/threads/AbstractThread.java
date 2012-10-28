@@ -5,27 +5,21 @@ import java.io.IOException;
 
 import javax.mail.FetchProfile;
 import javax.mail.Folder;
-import javax.mail.FolderClosedException;
 import javax.mail.MessagingException;
 import javax.mail.Store;
 import javax.mail.UIDFolder;
 import javax.swing.JOptionPane;
+
 import network.Connection;
 import network.MailHandler;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import sun.security.ssl.DefaultSSLContextImpl;
-import account.AccountInformation;
 import account.MailAccount;
+
 import com.sun.mail.imap.IMAPFolder;
 import com.sun.mail.imap.IMAPSSLStore;
 import com.sun.mail.imap.IMAPStore;
 import com.sun.mail.pop3.POP3Folder;
 import com.sun.mail.pop3.POP3SSLStore;
 import com.sun.mail.pop3.POP3Store;
-
-import constants.Consts;
 
 import filesystem.MyLogger;
 import gui.MainFrame;
