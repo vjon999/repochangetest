@@ -3,6 +3,8 @@ package server;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import util.UCIUtil;
+
 public class test {
 
 	/**

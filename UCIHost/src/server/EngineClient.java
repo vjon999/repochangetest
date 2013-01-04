@@ -9,11 +9,6 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Properties;
 
-import unused.EngineToGUIWriter;
-import unused.GUIToEngineWriter;
-import unused.SimpleEngineToGUIWriter;
-import unused.SimpleGUIToEngineWriter;
-
 public class EngineClient implements Runnable {
 
 	private Properties config;

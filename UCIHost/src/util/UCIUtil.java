@@ -1,12 +1,16 @@
-package server;
+package util;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import personalize.User;
+import server.ProtocolConsts;
 
 public class UCIUtil {
 
@@ -63,5 +67,24 @@ public class UCIUtil {
 			os.write(buffer, 0, readLen);
 			os.flush();
 		}
+	}
+	
+	public static String readPacket(DatagramPacket packet) throws IOException {
+		return new String(packet.getData(), 0, packet.getLength());
+	}
+	
+	public static void sendPacket(String message, DatagramSocket datagramSocket, DatagramPacket oldPacket) throws IOException {
+		System.out.println("sending: "+message+"\tsize: "+message.getBytes().length);
+		DatagramPacket newPacket = new DatagramPacket(message.getBytes(), message.getBytes().length, oldPacket.getAddress(), oldPacket.getPort());
+		datagramSocket.send(newPacket);
+	}
+	
+	public static void sendPacket(String message, DatagramSocket datagramSocket, InetAddress address, int port) throws IOException {
+		DatagramPacket newPacket = new DatagramPacket(message.getBytes(), message.getBytes().length, address, port);
+		datagramSocket.send(newPacket);
+	}
+	
+	public static String[] getMessageParams(String message) {
+		return message.split(ProtocolConsts.DELIMITER);
 	}
 }

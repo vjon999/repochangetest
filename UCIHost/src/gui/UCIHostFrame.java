@@ -43,8 +43,8 @@ import personalize.User;
 import server.ControlServer;
 import server.EngineClient;
 import server.ProtocolConsts;
-import server.UCIUtil;
 import udp.DatagramEngineServer;
+import util.UCIUtil;
 import engines.Engine;
 
 /**

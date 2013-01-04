@@ -7,19 +7,27 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 import server.Consts;
 
 public class DatagramServer {
 
-	public static final int DEFAULT_PORT = 8888;
+	private static Logger LOG = Logger.getLogger(DatagramServer.class);
+	
+	public static final int DEFAULT_PORT = 11000;
 	private DatagramSocket datagramSocket = null;
 	private Properties config;
 	private boolean exit = false;
+	private String enginePath;
+	private int port;
 	
-	public DatagramServer() throws FileNotFoundException, IOException {
+	public DatagramServer(String enginePath, int port) throws FileNotFoundException, IOException {
 		config = new Properties();
+		this.port = port;
 		config.load(new FileInputStream("config.ini"));
-		datagramSocket = new DatagramSocket(DEFAULT_PORT);	
+		datagramSocket = new DatagramSocket(port);
+		this.enginePath = enginePath;
 		System.out.println("Port number: "+DEFAULT_PORT+" "+datagramSocket.getLocalSocketAddress());
 	}
 
@@ -29,12 +37,12 @@ public class DatagramServer {
 		Process p = null;
 		while(!exit) {
 			try {
-				String path = "H:/languages/Chess Projects/UCIServer/ChessEngines/Houdini_20_x64.exe";			
-				datagramSocket.receive(packet);
+				//String path = "H:/languages/Chess Projects/UCIServer/ChessEngines/Houdini_20_x64.exe";			
+				datagramSocket.receive(packet);				
 				
-				p = Runtime.getRuntime().exec(path);
+				p = Runtime.getRuntime().exec(enginePath);
 				
-				System.out.println("Connection received from "+ packet.getAddress().getHostName());
+				LOG.debug("Connection received from "+ packet.getAddress().getHostName());
 				Thread reader = new Thread(new AsyncDatagramReader(p.getOutputStream(), datagramSocket, packet));
 				Thread writer = new Thread(new AsyncDatagramWriter(p.getInputStream(), datagramSocket, packet.getAddress(), packet.getPort()));
 				writer.setDaemon(true);
@@ -42,12 +50,12 @@ public class DatagramServer {
 				writer.start();
 				
 				if(reader.isAlive()) reader.join();
-				//if(writer.isAlive()) writer.join();
+				if(writer.isAlive()) writer.join();
 				
-				System.out.println("Closing");
+				LOG.info("Closing Engine");
 				DatagramPacket newPacket = new DatagramPacket("exit".getBytes(), 4, packet.getAddress(), packet.getPort());
 				datagramSocket.send(newPacket);
-				System.out.println("Closed");
+				LOG.info("Closed Engine");
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -58,8 +66,11 @@ public class DatagramServer {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		DatagramServer server = new DatagramServer();
+		//System.getProperties().put("-Dlog4j.configuration", "H:/languages/Java/Java Projects/Eclipse Projects/UCIHost/src/log4j.properties");
+		LOG.info("server started");
+		DatagramServer server = new DatagramServer("H:/languages/Chess Projects/UCIServer/ChessEngines/Houdini_20_x64.exe", DEFAULT_PORT);
 		server.start();
+		
 	}
 	
 	public DatagramSocket getDatagramSocket() {

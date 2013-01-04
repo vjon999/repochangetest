@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="client"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="H:/languages/Java/Jars/javamail-1.4.2/mail.jar"/>
+	<classpathentry kind="lib" path="/Jars/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

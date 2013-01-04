@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Properties;
 
 import personalize.User;
+import util.IPGetter;
+import util.UCIUtil;
 
 public class ControlServer implements Runnable {
 	public static final int DEFAULT_PORT = 8888;
@@ -30,7 +32,14 @@ public class ControlServer implements Runnable {
 		String response;
 		try {
 			serverSocket = new ServerSocket(Integer.parseInt(String.valueOf(config.get("port"))), DEFAULT_PORT);	
-			System.out.println("Port number: "+DEFAULT_PORT+" "+serverSocket.getLocalSocketAddress());
+			System.out.println("Port number: "+config.get("port")+" "+serverSocket.getLocalSocketAddress());
+			try {
+				IPGetter.mailExternalIP("vickysengupta006@gmail.com");
+		    } 
+		    catch (Exception e)
+		    {
+		    	e.printStackTrace();
+		    }
 			Thread t;
 			while (connectionCount < maxConnectionsServable) {
 				System.out.println("waiting for connection...");
@@ -39,7 +48,8 @@ public class ControlServer implements Runnable {
 				System.out.println(clientSocket.getInetAddress().getHostName());
 				System.out.println(config.getProperty(clientSocket.getInetAddress().getHostName()));
 				response = UCIUtil.readStream(clientSocket.getInputStream());
-				System.out.println(response);
+				System.out.println("Client is: "+clientSocket.getRemoteSocketAddress()+":"+clientSocket.getPort());
+				System.out.println("response: "+response);
 				if(response.indexOf(ProtocolConsts.AUTHENTICATE) == 0) {
 					User user = new User();
 					if(UCIUtil.authenticate(response, user)) {
