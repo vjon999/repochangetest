@@ -14,6 +14,7 @@ public class DatagramEngineServer implements Runnable {
 	private AsyncDatagramReader asyncDatagramReader;
 	private AsyncDatagramWriter asyncDatagramWriter;
 	DatagramSocket datagramSocket = null;
+	private Boolean infinite;
 	
 	public DatagramEngineServer(Engine engine) {
 		this.engine = engine;
@@ -32,8 +33,8 @@ public class DatagramEngineServer implements Runnable {
 				System.out.println("Connection received from "+ packet.getAddress().getHostName());
 				engine.start();
 				
-				asyncDatagramReader = new AsyncDatagramReader(engine.getOutputStream(), datagramSocket, packet);
-				asyncDatagramWriter = new AsyncDatagramWriter(engine.getInputStream(), datagramSocket, packet.getAddress(), packet.getPort());
+				asyncDatagramReader = new AsyncDatagramReader(engine.getOutputStream(), datagramSocket, packet, infinite);
+				asyncDatagramWriter = new AsyncDatagramWriter(engine.getInputStream(), datagramSocket, packet.getAddress(), packet.getPort(), infinite);
 				Thread reader = new Thread(asyncDatagramReader);
 				Thread writer = new Thread(asyncDatagramWriter);
 				
