@@ -5,10 +5,14 @@ import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
+import org.apache.log4j.Logger;
+
 import server.Consts;
 
 public class AsyncDatagramReader implements Runnable {
 
+	private static Logger LOG = Logger.getLogger(AsyncDatagramReader.class);
+	
 	private DatagramSocket socket;
 	private volatile boolean stop = false;
 	private OutputStream os;
@@ -23,8 +27,11 @@ public class AsyncDatagramReader implements Runnable {
 	@Override
 	public void run() {
 		byte[] buf = new byte[Consts.BUFFER_SIZE];
+		String message = null;
 		try {
 			os.flush();
+			message = new String(firstPacket.getData(), 0, firstPacket.getLength());
+			LOG.debug("message: "+message);
 			os.write(firstPacket.getData(), 0, firstPacket.getLength());
 			os.flush();
 		} catch (IOException e1) {
@@ -34,6 +41,8 @@ public class AsyncDatagramReader implements Runnable {
 			 DatagramPacket packet = new DatagramPacket(buf, buf.length);
 	         try {
 				socket.receive(packet);
+				message = new String(firstPacket.getData(), 0, firstPacket.getLength());
+				LOG.debug("message: "+message);
 				os.write(packet.getData(), 0, packet.getLength());
 				os.flush();
 				if("quit\n".contains(new String(packet.getData(), 0, packet.getLength()))) {
@@ -43,7 +52,7 @@ public class AsyncDatagramReader implements Runnable {
 				e.printStackTrace();
 			} 
 		 }
-         System.out.println("Closing "+getClass().getName());
+		 LOG.info("Closing "+getClass().getName());
 	}
 	
 	public void stop() {

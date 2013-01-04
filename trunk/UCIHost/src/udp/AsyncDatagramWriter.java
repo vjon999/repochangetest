@@ -6,10 +6,14 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+import org.apache.log4j.Logger;
+
 import server.Consts;
 
 public class AsyncDatagramWriter implements Runnable {
 
+	private static Logger LOG = Logger.getLogger(AsyncDatagramWriter.class);
+	
 	private InputStream is;
 	private DatagramSocket socket;
 	private InetAddress address;
@@ -31,6 +35,7 @@ public class AsyncDatagramWriter implements Runnable {
 			if(null != is) {
 				int readLen = buffer.length;
 				while (!stop && (readLen = is.read(buffer, 0, buffer.length)) != -1) {
+					LOG.debug(getClass().getName()+":"+new String(buffer, 0, readLen));
 					packet = new DatagramPacket(buffer, readLen, address, port);
 					socket.send(packet);
 				}
@@ -38,7 +43,7 @@ public class AsyncDatagramWriter implements Runnable {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		System.out.println("closing writer");
+		LOG.info("closing writer");
 	}
 	
 	public void stop() {

@@ -2,6 +2,8 @@ package server;
 
 public interface ProtocolConsts {
 	
+	public static final int DEFAULT_ADMIN_PORT = 11000;
+	
 	public static final String AUTHENTICATE = "authenticate";
 	public static final String AUTHENTICATION_SUCCESSFUL = "authentication_success";
 	public static final String AUTHENTICATION_FAIL = "authentication_failed";
@@ -12,6 +14,7 @@ public interface ProtocolConsts {
 	public static final String PORT = "port";
 	
 	public static final String ENGINE_NAME = "engine_name";
+	public static final String AVAILABLE_ENGINES = "available_engines";
 	public static final String GET_AVAILABLE_ENGINES = "get_available_engines";
 	public static final String TEST_CONNECTION = "test_connection";
 	public static final String SUCCESSFUL_CONNECTION_MESSAGE = "success";

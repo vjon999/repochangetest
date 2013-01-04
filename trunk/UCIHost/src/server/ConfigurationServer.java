@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import personalize.User;
+import util.UCIUtil;
 import engines.Engine;
 
 public class ConfigurationServer extends AbstractSocketServer {
