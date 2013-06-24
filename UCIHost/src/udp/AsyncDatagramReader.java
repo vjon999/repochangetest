@@ -4,58 +4,62 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 
 import server.Consts;
 
 public class AsyncDatagramReader implements Runnable {
 
-	private static Logger LOG = Logger.getLogger(AsyncDatagramReader.class);
+	private static Logger LOG = Logger.getLogger(AsyncDatagramReader.class.getName());
 	
 	private DatagramSocket socket;
 	private volatile boolean stop = false;
 	private OutputStream os;
 	private DatagramPacket firstPacket;
-	private Boolean infinite;
+	private Boolean exit;
 	
-	public AsyncDatagramReader(OutputStream os, DatagramSocket socket,DatagramPacket packet, Boolean infinite) {
+	public AsyncDatagramReader(OutputStream os, DatagramSocket socket,DatagramPacket packet, Boolean exit) {
 		this.os = os;
 		this.socket = socket;
 		this.firstPacket = packet;
-		this.infinite = infinite;
+		this.exit = exit;
 	}
 	
 	@Override
 	public void run() {
 		byte[] buf = new byte[Consts.BUFFER_SIZE];
-		String message = null;
-		try {
+		StringBuffer message = new StringBuffer();
+		/*try {
 			os.flush();
 			message = new String(firstPacket.getData(), 0, firstPacket.getLength());
 			LOG.debug("Chessbase: "+message);
-			os.write(firstPacket.getData(), 0, firstPacket.getLength());
+			os.write(message.getBytes(), 0, message.length());
 			os.flush();
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		}
+		}*/
 		while (!stop) {
 			DatagramPacket packet = new DatagramPacket(buf, buf.length);
 			try {
 				socket.receive(packet);
-				message = new String(packet.getData(), 0, packet.getLength());
-				if(message.contains("go infinite")) {
+				message.append(new String(packet.getData(), 0, packet.getLength()));
+				/*if(message.indexOf("go infinite") != -1) {
 					infinite = true;
 				}
 				else {
 					infinite = false;
+				}*/
+				LOG.info("Chessbase: " + message);
+				if(message.lastIndexOf("\n") != message.length()-1) {
+					message.append("\n");
 				}
-				LOG.debug("Chessbase: " + message);
-				os.write(packet.getData(), 0, packet.getLength());
+				os.write(message.toString().getBytes(), 0, message.length());
 				os.flush();
-				if ("quit\n".contains(new String(packet.getData(), 0, packet.getLength()))) {
+				if (message.indexOf("quit") != -1) {
 					stop = true;
+					exit = true;
 				}
+				message = new StringBuffer();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
