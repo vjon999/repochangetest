@@ -19,6 +19,8 @@ public interface ProtocolConsts {
 	public static final String TEST_CONNECTION = "test_connection";
 	public static final String SUCCESSFUL_CONNECTION_MESSAGE = "success";
 	public static final String SUCCESSFUL_ENGINE_SELECTION_MESSAGE = "successfully_engine_selected";
+	public static final String HELLO_PACKET = "helloPacket";
+	
 	public static final String DELIMITER = ",";
 	
 	public static final String SAVE_CONFIGURATION = "save_config";
