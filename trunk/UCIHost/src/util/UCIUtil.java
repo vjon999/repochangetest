@@ -81,6 +81,7 @@ public class UCIUtil {
 	
 	public static void sendPacket(String message, DatagramSocket datagramSocket, InetAddress address, int port) throws IOException {
 		DatagramPacket newPacket = new DatagramPacket(message.getBytes(), message.getBytes().length, address, port);
+		System.out.println(address+":"+port);
 		datagramSocket.send(newPacket);
 	}
 	
