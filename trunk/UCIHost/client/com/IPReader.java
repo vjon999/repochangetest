@@ -31,7 +31,7 @@ public class IPReader {
 		
 	}
 
-	public String getIP() throws MessagingException {
+	public static String getIP() throws MessagingException {
 
 		Folder inbox;
 		String email = "vickysengupta006@gmail.com";
