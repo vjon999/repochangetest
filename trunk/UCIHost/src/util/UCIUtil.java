@@ -74,14 +74,12 @@ public class UCIUtil {
 	}
 	
 	public static void sendPacket(String message, DatagramSocket datagramSocket, DatagramPacket oldPacket) throws IOException {
-		System.out.println("sending: "+message+"\tsize: "+message.getBytes().length);
 		DatagramPacket newPacket = new DatagramPacket(message.getBytes(), message.getBytes().length, oldPacket.getAddress(), oldPacket.getPort());
 		datagramSocket.send(newPacket);
 	}
 	
 	public static void sendPacket(String message, DatagramSocket datagramSocket, InetAddress address, int port) throws IOException {
 		DatagramPacket newPacket = new DatagramPacket(message.getBytes(), message.getBytes().length, address, port);
-		System.out.println(address+":"+port);
 		datagramSocket.send(newPacket);
 	}
 	

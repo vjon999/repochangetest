@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.util.IPGetter;
+
 import personalize.User;
-import util.IPGetter;
 import util.UCIUtil;
 
 public class ControlServer implements Runnable {
