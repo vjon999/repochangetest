@@ -41,8 +41,8 @@ public class UCIUtil {
 	private static Logger LOG = Logger.getLogger(UCIUtil.class.getName());
 	public static String CHARSET = "UTF-8";
 	
-	private static byte[] IV = new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-        0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f};
+	/*private static byte[] IV = new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+        0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f};*/
 
 	public static String readStream(InputStream is) throws IOException {
 		StringBuilder sb = new StringBuilder();
@@ -210,7 +210,6 @@ public class UCIUtil {
 		Folder inbox;
 		/*String email = "vickysengupta006@gmail.com";
 		String pass = "chinat0wn";*/
-		String ip = null;
 
 		/* Set the mail properties */
 		Properties props = System.getProperties();
