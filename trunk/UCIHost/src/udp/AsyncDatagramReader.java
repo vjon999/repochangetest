@@ -6,9 +6,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.logging.Logger;
 
+import com.util.ProtocolConstants;
 import com.util.UCIUtil;
-
-import server.Consts;
 
 public class AsyncDatagramReader implements Runnable {
 
@@ -32,13 +31,13 @@ public class AsyncDatagramReader implements Runnable {
 	
 	@Override
 	public void run() {
-		byte[] buf = new byte[Consts.BUFFER_SIZE];
+		byte[] buf = new byte[ProtocolConstants.BUFFER_SIZE];
 		StringBuffer message = new StringBuffer();
 		while (!stop) {
 			DatagramPacket packet = new DatagramPacket(buf, buf.length);
 			try {
 				socket.receive(packet);
-				message.append(UCIUtil.readPacket(packet, password));				
+				message.append(UCIUtil.readPacket(packet, password));
 				if(message.lastIndexOf("\n") != message.length()-1) {
 					message.append("\n");
 				}

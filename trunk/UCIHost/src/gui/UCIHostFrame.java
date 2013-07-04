@@ -37,14 +37,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import mail.MailHandler;
-
 import personalize.User;
-
-import server.ControlServer;
-import server.EngineClient;
-import server.ProtocolConsts;
 import udp.DatagramEngineServer;
-import util.UCIUtil;
+
+import com.util.ProtocolConstants;
+import com.util.UCIUtil;
+
 import engines.Engine;
 
 /**
@@ -379,19 +377,19 @@ public class UCIHostFrame extends javax.swing.JFrame {
 				System.out.println(clientSocket.getInetAddress().getHostName());
 				response = UCIUtil.readStream(clientSocket.getInputStream());
 				System.out.println(response);
-				if(response.indexOf(ProtocolConsts.AUTHENTICATE) == 0) {
+				if(response.indexOf(ProtocolConstants.AUTHENTICATE) == 0) {
 					User user = new User();
-					if(UCIUtil.authenticate(response, user)) {
-						UCIUtil.writeString(ProtocolConsts.AUTHENTICATION_SUCCESSFUL, clientSocket.getOutputStream());
+					if(UCIUtil.authenticate(response, user.getUserName(), user.getPassword())) {
+						UCIUtil.writeString(ProtocolConstants.AUTHENTICATION_SUCCESSFUL, clientSocket.getOutputStream());
 						System.out.println("authenticated");
 						Properties prop = new Properties();
 						prop.load(new FileInputStream(System.getProperty("user.dir")+"/"+user.getUserName()+".ini"));
 					}
 					else {
-						UCIUtil.writeString(ProtocolConsts.AUTHENTICATION_FAIL, clientSocket.getOutputStream());
+						UCIUtil.writeString(ProtocolConstants.AUTHENTICATION_FAIL, clientSocket.getOutputStream());
 					}
 				}
-				else if(response.indexOf(ProtocolConsts.GET_AVAILABLE_ENGINES) == 0) {
+				else if(response.indexOf(ProtocolConstants.GET_AVAILABLE_ENGINES) == 0) {
 					
 				}
 			}

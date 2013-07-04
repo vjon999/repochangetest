@@ -8,15 +8,15 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.Properties;
 
-import server.Consts;
-import server.ProtocolConsts;
-import util.UCIUtil;
+import com.util.ProtocolConstants;
+import com.util.UCIUtil;
 
-public class DatagramAdminServer implements ProtocolConsts {
+public class DatagramAdminServer implements ProtocolConstants {
 
 	private DatagramSocket datagramSocket = null;
 	private Properties config;
 	private boolean exit = false;
+	private String password;
 	
 	public DatagramAdminServer() throws IOException {
 		config = new Properties();
@@ -26,7 +26,7 @@ public class DatagramAdminServer implements ProtocolConsts {
 	}
 
 	public void start() {		
-		byte[] buffer = new byte[Consts.BUFFER_SIZE];
+		byte[] buffer = new byte[ProtocolConstants.BUFFER_SIZE];
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 		
 		String response = null;
@@ -37,19 +37,19 @@ public class DatagramAdminServer implements ProtocolConsts {
 			try {				
 				datagramSocket.receive(packet);
 				System.out.println("Connection received from "+ packet.getAddress().getHostName());				
-				response = UCIUtil.readPacket(packet);
+				response = UCIUtil.readPacket(packet, password.getBytes());
 				params = UCIUtil.getMessageParams(response);
 				command = params[0];
 				System.out.println(response);
 				if(GET_AVAILABLE_ENGINES.equals(command)) {
-					UCIUtil.sendPacket(config.getProperty(AVAILABLE_ENGINES), datagramSocket, packet);
+					UCIUtil.sendPacket(config.getProperty(AVAILABLE_ENGINES).getBytes(UCIUtil.CHARSET), password.getBytes() ,datagramSocket, packet.getAddress(), packet.getPort());
 				}
 				else if(SELECTED_ENGINE.equals(command)) {
 					selectedEngine = params[1];
-					UCIUtil.sendPacket(SUCCESSFUL_ENGINE_SELECTION_MESSAGE+DELIMITER+config.getProperty(selectedEngine), datagramSocket, packet);
+					UCIUtil.sendPacket((SUCCESSFUL_ENGINE_SELECTION_MESSAGE+DELIMITER+config.getProperty(selectedEngine)).getBytes(), password.getBytes() ,datagramSocket, packet.getAddress(), packet.getPort());
 				}
 				else {
-					UCIUtil.sendPacket(UNKNOWN_COMMAND, datagramSocket, packet);
+					UCIUtil.sendPacket(UNKNOWN_COMMAND.getBytes(), password.getBytes() ,datagramSocket, packet.getAddress(), packet.getPort());
 					System.out.println("Closed");
 				}
 			} catch (IOException e) {
@@ -59,17 +59,13 @@ public class DatagramAdminServer implements ProtocolConsts {
 	}
 	
 	public void sendHelloPacket() {
-		byte[] buffer = new byte[Consts.BUFFER_SIZE];
+		byte[] buffer = new byte[ProtocolConstants.BUFFER_SIZE];
 		DatagramPacket packet = new DatagramPacket(buffer, 0, buffer.length);
 		packet.setPort(DEFAULT_ADMIN_PORT);
 		packet.setAddress(datagramSocket.getInetAddress());
-		try {
-			System.out.println(datagramSocket.getLocalAddress());
-			UCIUtil.sendPacket(HELLO_PACKET, datagramSocket, datagramSocket.getLocalAddress(), DEFAULT_ADMIN_PORT);
-			packet = new DatagramPacket(buffer, buffer.length);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		System.out.println(datagramSocket.getLocalAddress());
+		UCIUtil.sendPacket(HELLO_PACKET.getBytes(), password.getBytes() ,datagramSocket, datagramSocket.getLocalAddress(), DEFAULT_ADMIN_PORT);
+		packet = new DatagramPacket(buffer, buffer.length);
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {

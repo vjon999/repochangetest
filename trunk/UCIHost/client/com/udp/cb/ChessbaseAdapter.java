@@ -8,11 +8,11 @@ import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import server.Consts;
-
+import com.util.ProtocolConstants;
 import com.util.UCIUtil;
 
 public class ChessbaseAdapter {
@@ -33,10 +33,26 @@ public class ChessbaseAdapter {
 	private byte[] password;
 
 	private void listen() throws FileNotFoundException, IOException, InterruptedException {
+		
 		config = new Properties();
 		config.load(new FileInputStream("clientConfig.ini"));
-		targetAddress = InetAddress.getByName(config.getProperty("target_ip"));
-		targetPort = Integer.parseInt(config.getProperty("target_port"));
+		if(null != config.getProperty("auto_config") && "true".equalsIgnoreCase(config.getProperty("auto_config"))) {
+			try {
+				String params[] = UCIUtil.getIPFromMail(config.getProperty("clientMail"), config.getProperty("clientMailPass")).split(":");
+				targetAddress = InetAddress.getByName(UCIUtil.getParam(params, 0));
+				targetPort = Integer.parseInt(UCIUtil.getParam(params, 1))+Integer.parseInt(config.getProperty("target_port"));
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			targetAddress = InetAddress.getByName(config.getProperty("target_ip"));
+		}
+		if(targetPort == -1 || targetPort == 0) {
+			targetPort = Integer.parseInt(config.getProperty("target_port"));
+		}
+		LOG.info("server: "+targetAddress+"port: "+targetPort);	
 		password = config.getProperty("secretKey").getBytes();
 		datagramSocket = new DatagramSocket();
 
@@ -48,7 +64,7 @@ public class ChessbaseAdapter {
 
 			@Override
 			public void run() {
-				byte[] buf = new byte[Consts.BUFFER_SIZE];
+				byte[] buf = new byte[ProtocolConstants.BUFFER_SIZE];
 				OutputStream os = System.out;
 				DatagramPacket inputPacket;
 				while (!exit) {
@@ -74,11 +90,11 @@ public class ChessbaseAdapter {
 
 			@Override
 			public void run() {
-				byte[] buffer = new byte[Consts.BUFFER_SIZE];
+				byte[] buffer = new byte[ProtocolConstants.BUFFER_SIZE];
 				try {
 					int readLen = buffer.length;
 					while (!exit && (readLen = consoleInputStream.read(buffer, 0, buffer.length)) != -1) {
-						UCIUtil.sendPacket(buffer, 0, readLen, password, datagramSocket, targetAddress, targetPort);
+						UCIUtil.sendPacket(Arrays.copyOfRange(buffer, 0, readLen), password, datagramSocket, targetAddress, targetPort);
 						if (new String(buffer, 0, readLen).contains("quit"))
 							exit = true;
 					}
@@ -106,12 +122,12 @@ public class ChessbaseAdapter {
 	}
 
 	public boolean connect() throws IOException {
-		DatagramPacket connPacket = new DatagramPacket(new byte[1024], 1024);
+		DatagramPacket connPacket = new DatagramPacket(new byte[ProtocolConstants.BUFFER_SIZE], ProtocolConstants.BUFFER_SIZE);
 		String connResp = null;
 		int connAttepmt = 0;
 		do {
 			connAttepmt++;
-			UCIUtil.sendPacket(START_MSG, password, datagramSocket, targetAddress, targetPort);
+			UCIUtil.sendPacket(START_MSG.getBytes(UCIUtil.CHARSET), password, datagramSocket, targetAddress, targetPort);
 			LOG.fine("sent connection initator packet :" + START_MSG + " to " + targetAddress + ":" + targetPort);
 			datagramSocket.receive(connPacket);
 			connResp = UCIUtil.readPacket(connPacket, password);
@@ -126,8 +142,6 @@ public class ChessbaseAdapter {
 	/**
 	 * @param args
 	 * @throws IOException
-	 * @throws FileNotFoundException
-	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
 		System.getProperties().put("Djava.util.logging.config.file", "D:\\JavaWorks\\UCIHost\\UCIHost\\logging.properties");

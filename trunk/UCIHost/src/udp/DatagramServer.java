@@ -15,11 +15,10 @@ import java.util.logging.Logger;
 
 import javax.mail.MessagingException;
 
+import com.util.ProtocolConstants;
 import com.util.UCIUtil;
 
-import server.Consts;
-
-public class DatagramServer {
+public class DatagramServer implements Runnable {
 
 	private static Logger LOG = Logger.getLogger(DatagramServer.class.getName());
 
@@ -29,20 +28,28 @@ public class DatagramServer {
 	public Boolean exit = false;
 	private String enginePath;
 	private boolean started = false;
+	private int cores = -1;
 
-	private Boolean infinite = false;
 	private static List<DatagramServer> servers = new ArrayList<>();
 	private byte[] password;
 
 	public DatagramServer(String enginePath, int port) throws FileNotFoundException, IOException, MessagingException {
-
+		
+		
 		InetAddress.getByName(config.getProperty("client_ip"));
 		datagramSocket = new DatagramSocket(port);
 		// datagramSocket.setReuseAddress(true);
 		// datagramSocket.bind(new InetSocketAddress("192.168.1.2", 11000));
+		System.out.println(datagramSocket.getLocalSocketAddress());
 		System.out.println(datagramSocket.getLocalPort());
 		this.enginePath = enginePath;
-		password = "passwordpassword".getBytes();
+		password = config.getProperty("secretKey").getBytes();
+		cores = Runtime.getRuntime().availableProcessors();
+		LOG.info("available cores: "+cores);
+		if(cores > 1)
+			cores = cores-1;
+		LOG.info("usable cores: "+cores);
+		System.out.println("cores: "+cores);
 		// LOG.info("Port number: "+DEFAULT_PORT+" "+datagramSocket.getLocalSocketAddress());
 	}
 
@@ -52,13 +59,21 @@ public class DatagramServer {
 			throw new IOException("cannot find the mapping for corresponding port...");
 		}
 		enginePath = config.getProperty(String.valueOf(port));
-		datagramSocket = new DatagramSocket(port);
+		datagramSocket = new DatagramSocket(port);		
+		System.out.println("======="+datagramSocket.getLocalAddress());
 		password = config.getProperty("secretKey").getBytes();
 		System.out.println("listening on port: " + datagramSocket.getLocalPort() + "\tengine: " + enginePath);
+		
+		cores = Runtime.getRuntime().availableProcessors();
+		LOG.info("available cores: "+cores);
+		if(cores > 1)
+			cores = cores-1;
+		LOG.info("usable cores: "+cores);
+		System.out.println("cores: "+cores);
 	}
 
-	public void start() {
-		byte[] buffer = new byte[Consts.BUFFER_SIZE];
+	public void listen() {
+		byte[] buffer = new byte[ProtocolConstants.BUFFER_SIZE];
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 		Process p = null;
 		boolean init = false;
@@ -69,12 +84,10 @@ public class DatagramServer {
 			while (!exit) {
 				if (init) {
 					if (!started) {
-						// datagramSocket.receive(packet);
 						p = Runtime.getRuntime().exec(enginePath);
+						//p.getOutputStream().write(("setoption name Max CPUs value "+cores+"\nsetoption name CPU Usage value 100\n").getBytes());
+						p.getOutputStream().write(("setoption name Threads value "+cores+"\nsetoption name CPU Usage value 100\n").getBytes());
 						started = true;
-						p.getOutputStream().write("setoption name MultiPV value 6\n".getBytes());
-						p.getOutputStream().flush();
-						p.getInputStream().read(new byte[1024]);
 						LOG.fine("Connection received from " + packet.getAddress().getHostName());
 					}
 
@@ -96,7 +109,7 @@ public class DatagramServer {
 					 * packet.getAddress(), packet.getPort());
 					 * datagramSocket.send(newPacket);
 					 */
-					UCIUtil.sendPacket("exit", password, datagramSocket, packet.getAddress(), packet.getPort());
+					UCIUtil.sendPacket("exit".getBytes(UCIUtil.CHARSET), password, datagramSocket, packet.getAddress(), packet.getPort());
 					LOG.info("Closed Engine");
 					init = false;
 					p.destroy();
@@ -105,10 +118,7 @@ public class DatagramServer {
 					packet = new DatagramPacket(buffer, buffer.length);
 					LOG.info("waiting for packet... on port " + datagramSocket.getLocalPort());
 					datagramSocket.receive(packet);
-					receivedText = UCIUtil.readPacket(packet, password);// new
-																		// String(packet.getData(),
-																		// 0,
-																		// packet.getLength());
+					receivedText = UCIUtil.readPacket(packet, password);
 					LOG.info("packet recvd " + receivedText + " from " + packet.getSocketAddress());
 					if (receivedText.equalsIgnoreCase("helloserver")) {
 						sentMsg = "connected";
@@ -121,12 +131,7 @@ public class DatagramServer {
 					} else {
 						sentMsg = "unknown command";
 					}
-					/*
-					 * newPacket = new DatagramPacket(sentMsg.getBytes(),
-					 * sentMsg.length(), packet.getAddress(), packet.getPort());
-					 * datagramSocket.send(newPacket);
-					 */
-					UCIUtil.sendPacket(sentMsg, password, datagramSocket, packet.getAddress(), packet.getPort());
+					UCIUtil.sendPacket(sentMsg.getBytes(UCIUtil.CHARSET), password, datagramSocket, packet.getAddress(), packet.getPort());
 				}
 			}
 		} catch (IOException | InterruptedException e) {
@@ -141,10 +146,21 @@ public class DatagramServer {
 		LOG.info("server started");
 		config = new Properties();
 		config.load(new FileInputStream("config.ini"));
-		for (int port = DEFAULT_PORT; port <= 11010; port++) {
+		
+		try {
+			System.out.println(UCIUtil.getExternalIP());
+			UCIUtil.mailExternalIP(UCIUtil.getExternalIP()+":admin_port="+UCIUtil.getAdminPort(), config.getProperty("fromMail"), config.getProperty("mailPass"), config.getProperty("toMail"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		int count = 0;
+		for (int port = DEFAULT_PORT; port <= 11080; port++) {
 			if (config.containsKey(String.valueOf(port))) {
-				servers.add(new DatagramServer(port));
-				servers.get(port - 11000).start();
+				servers.add(new DatagramServer(port));				
+				new Thread(servers.get(count)).start();
+				count++;
 			}
 		}
 		
@@ -173,5 +189,10 @@ public class DatagramServer {
 
 	public DatagramSocket getDatagramSocket() {
 		return datagramSocket;
+	}
+	
+	@Override
+	public void run() {
+		listen();
 	}
 }

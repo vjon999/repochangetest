@@ -23,8 +23,6 @@ import java.util.logging.Logger;
 
 import javax.mail.MessagingException;
 
-import com.util.IPGetter;
-
 /**
  *
  * @author root

@@ -1,8 +1,9 @@
-package server;
+package com.util;
 
-public interface ProtocolConsts {
+public interface ProtocolConstants {
 	
 	public static final int DEFAULT_ADMIN_PORT = 11000;
+	public static final int BUFFER_SIZE = 1024*5;
 	
 	public static final String AUTHENTICATE = "authenticate";
 	public static final String AUTHENTICATION_SUCCESSFUL = "authentication_success";
