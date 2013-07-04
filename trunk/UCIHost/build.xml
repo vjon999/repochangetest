@@ -2,9 +2,9 @@
 <project name="Ant-Test" default="main" basedir=".">
 	<!-- Sets variables which can later be used. -->
 	<!-- The value of a property is accessed via ${} -->
+	<property file="build.properties"/>
 	<property name="src.dir" location="src" />
 	<property name="build.dir" location="build" />
-	<property name="dist.dir" location="dist" />
 	<property name="docs.dir" location="docs" />
 
 	<!-- Deletes the existing build, docs and dist directory-->
@@ -28,6 +28,14 @@
 		</javac>
 	</target>
 
+	<target name="compileServer" depends="clean, makedir">
+		<javac srcdir="src/com:util" destdir="${build.dir}">
+			<classpath>
+				<pathelement location="../Jars/mail.jar" />
+			</classpath>
+		</javac>
+	</target>
+
 	<!-- Creates Javadoc -->
 	<target name="docs" depends="compileClient">
 		<javadoc packagenames="src" sourcepath="${src.dir}" destdir="${docs.dir}">
@@ -40,15 +48,30 @@
 
 	<!--Creates the deployable jar file  -->
 	<target name="clientJar" depends="compileClient">
-		<jar destfile="${dist.dir}\UCIClient.jar" basedir="${build.dir}">
+		<jar destfile="${dist.dir}\${client.jar.name}" basedir="${build.dir}">
 			<manifest>
-				<attribute name="Main-Class" value="com.udp.cb.ChessbaseAdapter.Main" />
+				<attribute name="Main-Class" value="com.udp.cb.ChessbaseAdapter" />
 			</manifest>
 		</jar>
 	</target>
 
-	<target name="main" depends="compileClient, clientJar">
+	<target name="serverJar" depends="compileServer">
+		<jar destfile="${dist.dir}\${server.jar.name}" basedir="${build.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="com.udp.DatagramServer" />
+			</manifest>
+			<zipgroupfileset dir="../Jars" includes="mail.jar" />
+		</jar>
+	</target>
+
+	<target name="main" depends="serverJar, clientJar">
 		<description>Main target</description>
+		<tstamp>
+			<format property="server.archive.name" pattern="'UCIServer_'dd_mm_yyyy_HHmmss'.jar'" />
+		</tstamp>
+		<rename dest="${external.loc}\${server.archive.name}" src="${external.loc}\${server.jar.name}"/>
+		<move file="dist/${server.jar.name}" todir="${external.loc}" />
+		<move file="dist/${client.jar.name}" todir="${external.loc}" />
 	</target>
 
 </project>
