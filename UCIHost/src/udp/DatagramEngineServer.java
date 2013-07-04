@@ -3,9 +3,9 @@ package udp;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
 
-import server.Consts;
+import com.util.ProtocolConstants;
+
 import engines.Engine;
 
 public class DatagramEngineServer implements Runnable {
@@ -21,7 +21,7 @@ public class DatagramEngineServer implements Runnable {
 	}
 	
 	public void run() {
-		byte[] buffer = new byte[Consts.BUFFER_SIZE];
+		byte[] buffer = new byte[ProtocolConstants.BUFFER_SIZE];
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);		
 		
 		try {

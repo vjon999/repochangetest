@@ -13,7 +13,10 @@ import java.util.Map;
 import java.util.Properties;
 
 import personalize.User;
-import util.UCIUtil;
+
+import com.util.ProtocolConstants;
+import com.util.UCIUtil;
+
 import engines.Engine;
 
 public class ConfigurationServer extends AbstractSocketServer {
@@ -27,7 +30,7 @@ public class ConfigurationServer extends AbstractSocketServer {
 	public ConfigurationServer() throws IOException {
 		config = new Properties();
 		config.load(new FileInputStream("config.ini"));
-		for(String engine:((String)config.getProperty(Consts.AVAILABLE_ENGINES_KEY)).split(",")) {
+		for(String engine:((String)config.getProperty(ProtocolConstants.AVAILABLE_ENGINES)).split(",")) {
 			engine = engine.trim();
 			if(null != config.getProperty(engine)) {
 				engines.put(engine, new Engine(engine, config.getProperty(engine)));
@@ -80,24 +83,24 @@ public class ConfigurationServer extends AbstractSocketServer {
 		InputStream in = clientSocket.getInputStream();
 		while((command = UCIUtil.readStream(in)) != null) {
 			System.out.println(command);
-			if(command.equals(ProtocolConsts.GET_AVAILABLE_ENGINES)) {
+			if(command.equals(ProtocolConstants.GET_AVAILABLE_ENGINES)) {
 				StringBuilder sb = new StringBuilder();
 				for(String key : engines.keySet()) {
 					sb.append(key+",");
 				}
 				UCIUtil.writeString(sb.toString(), out);
 			}
-			else if(command.indexOf(ProtocolConsts.AUTHENTICATE) == 0) {
+			else if(command.indexOf(ProtocolConstants.AUTHENTICATE) == 0) {
 				user = new User();
-				if(UCIUtil.authenticate(command, user))
-					UCIUtil.writeString(ProtocolConsts.AUTHENTICATION_SUCCESSFUL, out);
+				if(UCIUtil.authenticate(command, user.getUserName(), user.getPassword()))
+					UCIUtil.writeString(ProtocolConstants.AUTHENTICATION_SUCCESSFUL, out);
 				else
-					UCIUtil.writeString(ProtocolConsts.AUTHENTICATION_FAIL, out);
+					UCIUtil.writeString(ProtocolConstants.AUTHENTICATION_FAIL, out);
 			}
-			else if(command.equals(ProtocolConsts.GET_PORT)) {
-				UCIUtil.writeString(config.getProperty(ProtocolConsts.PORT), out);
+			else if(command.equals(ProtocolConstants.GET_PORT)) {
+				UCIUtil.writeString(config.getProperty(ProtocolConstants.PORT), out);
 			}
-			else if(command.indexOf(ProtocolConsts.SAVE_CONFIGURATION) == 0) {
+			else if(command.indexOf(ProtocolConstants.SAVE_CONFIGURATION) == 0) {
 				String arr[] = command.split("\\|")[1].split("=");
 				System.out.println(arr[0]+"@"+arr[1]);
 				File file = new File(System.getProperty("user.dir")+"/"+user.getUserName()+".ini");
@@ -105,12 +108,12 @@ public class ConfigurationServer extends AbstractSocketServer {
 					file.createNewFile();
 				Properties properties = new Properties();
 				properties.load(new FileInputStream(file));
-				properties.put(ProtocolConsts.SELECTED_ENGINE, arr[1]);
+				properties.put(ProtocolConstants.SELECTED_ENGINE, arr[1]);
 				properties.store(new FileOutputStream(file), "auto save");
-				UCIUtil.writeString(ProtocolConsts.SAVE_SUCCESSFUL, out);
+				UCIUtil.writeString(ProtocolConstants.SAVE_SUCCESSFUL, out);
 			}
-			else if(command.equals(ProtocolConsts.SELECTED_ENGINE)) {
-				UCIUtil.writeString(ProtocolConsts.ENGINE_NAME, out);
+			else if(command.equals(ProtocolConstants.SELECTED_ENGINE)) {
+				UCIUtil.writeString(ProtocolConstants.ENGINE_NAME, out);
 				String engineName = null;
 				engineName = UCIUtil.readStream(in);;
 				System.out.println(engines);
@@ -119,17 +122,17 @@ public class ConfigurationServer extends AbstractSocketServer {
 					System.out.println("Engine name selected is: "+selectedEngine.getPath());
 					config.put(clientSocket.getInetAddress().getHostName(), selectedEngine.getName());
 					config.store(new FileOutputStream("config.ini"), "");
-					UCIUtil.writeString(ProtocolConsts.SUCCESSFUL_ENGINE_SELECTION_MESSAGE, out);
+					UCIUtil.writeString(ProtocolConstants.SUCCESSFUL_ENGINE_SELECTION_MESSAGE, out);
 				}
 				else {
 					UCIUtil.writeString("illegal engine name", out);
 				}
 			}
-			else if(command.equals(ProtocolConsts.CLOSE_CONNECTION)) {
+			else if(command.equals(ProtocolConstants.CLOSE_CONNECTION)) {
 				break;
 			}
 			else {
-				UCIUtil.writeString(ProtocolConsts.UNKNOWN_COMMAND, out);
+				UCIUtil.writeString(ProtocolConstants.UNKNOWN_COMMAND, out);
 			}					
 		}
 		

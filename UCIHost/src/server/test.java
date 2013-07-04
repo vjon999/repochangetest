@@ -1,9 +1,8 @@
 package server;
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import util.UCIUtil;
+import com.util.UCIUtil;
 
 public class test {
 

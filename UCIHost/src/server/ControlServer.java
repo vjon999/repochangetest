@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.util.IPGetter;
-
 import personalize.User;
-import util.UCIUtil;
+
+import com.util.ProtocolConstants;
+import com.util.UCIUtil;
 
 public class ControlServer implements Runnable {
 	public static final int DEFAULT_PORT = 8888;
@@ -34,13 +34,13 @@ public class ControlServer implements Runnable {
 		try {
 			serverSocket = new ServerSocket(Integer.parseInt(String.valueOf(config.get("port"))), DEFAULT_PORT);	
 			System.out.println("Port number: "+config.get("port")+" "+serverSocket.getLocalSocketAddress());
-			try {
+			/*try {
 				IPGetter.mailExternalIP("vickysengupta006@gmail.com");
 		    } 
 		    catch (Exception e)
 		    {
 		    	e.printStackTrace();
-		    }
+		    }*/
 			Thread t;
 			while (connectionCount < maxConnectionsServable) {
 				System.out.println("waiting for connection...");
@@ -51,14 +51,14 @@ public class ControlServer implements Runnable {
 				response = UCIUtil.readStream(clientSocket.getInputStream());
 				System.out.println("Client is: "+clientSocket.getRemoteSocketAddress()+":"+clientSocket.getPort());
 				System.out.println("response: "+response);
-				if(response.indexOf(ProtocolConsts.AUTHENTICATE) == 0) {
+				if(response.indexOf(ProtocolConstants.AUTHENTICATE) == 0) {
 					User user = new User();
-					if(UCIUtil.authenticate(response, user)) {
-						UCIUtil.writeString(ProtocolConsts.AUTHENTICATION_SUCCESSFUL, clientSocket.getOutputStream());
+					if(UCIUtil.authenticate(response, user.getUserName(), user.getPassword())) {
+						UCIUtil.writeString(ProtocolConstants.AUTHENTICATION_SUCCESSFUL, clientSocket.getOutputStream());
 						System.out.println("authenticated");
 						Properties prop = new Properties();
 						prop.load(new FileInputStream(System.getProperty("user.dir")+"/"+user.getUserName()+".ini"));
-						String engineName = (String) prop.get(ProtocolConsts.SELECTED_ENGINE);
+						String engineName = (String) prop.get(ProtocolConstants.SELECTED_ENGINE);
 						System.out.println(config.get(engineName));
 						t = new Thread(new EngineClient(clientSocket, (String) config.get(engineName)));
 						t.start();
@@ -67,7 +67,7 @@ public class ControlServer implements Runnable {
 						System.out.println("connection count = "+connectionCount);
 					}
 					else {
-						UCIUtil.writeString(ProtocolConsts.AUTHENTICATION_FAIL, clientSocket.getOutputStream());
+						UCIUtil.writeString(ProtocolConstants.AUTHENTICATION_FAIL, clientSocket.getOutputStream());
 					}
 				}												
 			}

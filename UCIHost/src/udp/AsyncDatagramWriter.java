@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
-import server.Consts;
-
+import com.util.ProtocolConstants;
 import com.util.UCIUtil;
 
 public class AsyncDatagramWriter implements Runnable {
@@ -37,12 +37,12 @@ public class AsyncDatagramWriter implements Runnable {
 
 	@Override
 	public void run() {
-		byte[] buffer = new byte[Consts.BUFFER_SIZE/2];
+		byte[] buffer = new byte[ProtocolConstants.BUFFER_SIZE/2];
 		try {
 			if(null != is) {
 				int readLen = buffer.length;
 				while((readLen = is.read(buffer, 0, buffer.length)) != -1) {
-						UCIUtil.sendPacket(buffer, 0, readLen, password, socket, address, port);
+					UCIUtil.sendPacket(Arrays.copyOfRange(buffer, 0, readLen), password, socket, address, port);
 				}
 			}
 		} catch (IOException ex) {
