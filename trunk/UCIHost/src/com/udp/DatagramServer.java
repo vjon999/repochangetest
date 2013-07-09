@@ -29,6 +29,7 @@ public class DatagramServer implements Runnable {
 	private String enginePath;
 	private boolean started = false;
 	private int cores = -1;
+	private static int adminPort;
 
 	private static List<DatagramServer> servers = new ArrayList<>();
 	private byte[] password;
@@ -54,12 +55,8 @@ public class DatagramServer implements Runnable {
 	}
 
 	public DatagramServer(int port) throws FileNotFoundException, IOException, MessagingException {
-		if (!config.containsKey(String.valueOf(port))) {
-			System.err.println("cannot find the mapping for corresponding port...");
-			throw new IOException("cannot find the mapping for corresponding port...");
-		}
 		enginePath = config.getProperty(String.valueOf(port));
-		datagramSocket = new DatagramSocket(port);		
+		datagramSocket = new DatagramSocket(adminPort+port);		
 		System.out.println("======="+datagramSocket.getLocalAddress());
 		password = config.getProperty("secretKey").getBytes();
 		System.out.println("listening on port: " + datagramSocket.getLocalPort() + "\tengine: " + enginePath);
@@ -131,6 +128,7 @@ public class DatagramServer implements Runnable {
 					} else {
 						sentMsg = "unknown command";
 					}
+					LOG.info("packet sent: " + sentMsg);
 					UCIUtil.sendPacket(sentMsg.getBytes(UCIUtil.CHARSET), password, datagramSocket, packet.getAddress(), packet.getPort());
 				}
 			}
@@ -143,20 +141,20 @@ public class DatagramServer implements Runnable {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, MessagingException {
 		System.getProperties().put("Djava.util.logging.config.file", "logging.properties");
-		LOG.info("server started");
+		LOG.info("server starting");
 		config = new Properties();
 		config.load(new FileInputStream("config.ini"));
-		
+		adminPort = UCIUtil.getAdminPort();
 		try {
-			System.out.println(UCIUtil.getExternalIP());
-			UCIUtil.mailExternalIP(UCIUtil.getExternalIP()+":admin_port="+UCIUtil.getAdminPort(), config.getProperty("fromMail"), config.getProperty("mailPass"), config.getProperty("toMail"));
+			LOG.info(UCIUtil.getExternalIP());
+			UCIUtil.mailExternalIP(UCIUtil.getExternalIP()+":admin_port="+adminPort, config.getProperty("fromMail"), config.getProperty("mailPass"), config.getProperty("toMail"));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 		int count = 0;
-		for (int port = DEFAULT_PORT; port <= 11080; port++) {
+		for (int port = 0; port <= 10; port++) {
 			if (config.containsKey(String.valueOf(port))) {
 				servers.add(new DatagramServer(port));				
 				new Thread(servers.get(count)).start();
@@ -185,6 +183,7 @@ public class DatagramServer implements Runnable {
 				}				
 			}
 		}).start();
+		LOG.info("server started");
 	}
 
 	public DatagramSocket getDatagramSocket() {

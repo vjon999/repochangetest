@@ -1,2 +1,2 @@
 cd %CD%
-java -cp UCIHost.jar server.ControlServer
+java -Djava.util.logging.config.file=logging.properties -cp UCIServer.jar com.chess.server.udp.DatagramServer

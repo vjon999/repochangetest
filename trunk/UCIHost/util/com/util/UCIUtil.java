@@ -248,11 +248,21 @@ public class UCIUtil {
 	
 	public static int getAdminPort() {
 		String suffix;
+		int temp;
 		try {
 			suffix = InetAddress.getLocalHost().getHostAddress().toString();
 			suffix = suffix.substring(suffix.lastIndexOf(".")+1);
-			suffix = "110"+suffix+"0";
-			System.out.println(suffix);
+			temp = Integer.parseInt(suffix);
+			if(temp < 10) {
+				suffix = "110"+suffix+"0";
+			}
+			else if(temp < 100) {
+				suffix = "11"+suffix+"0";
+			}
+			else {
+				suffix = "11"+suffix;
+			}
+			LOG.info("adminPort = "+suffix);
 			return Integer.parseInt(suffix);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();

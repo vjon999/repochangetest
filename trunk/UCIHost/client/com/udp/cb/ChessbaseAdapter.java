@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -21,10 +22,13 @@ public class ChessbaseAdapter {
 	public static final int MAX_CONN_ATTEMPT = 5;
 	public static final String START_MSG = "helloserver";
 	public static final String CONN_SUCCESS_MSG = "connected";
+	public static final String QUIT_MSG = "quit";
+	public static final String CLOSE_MSG = "close";
 
 	private DatagramSocket datagramSocket = null;
 	private Properties config;
 	private boolean exit = false;
+	private int adminPort;
 	private int targetPort;
 	private Thread cbReader;
 	private Thread cbWriter;
@@ -36,10 +40,22 @@ public class ChessbaseAdapter {
 		
 		config = new Properties();
 		config.load(new FileInputStream("clientConfig.ini"));
-		if(null != config.getProperty("auto_config") && "true".equalsIgnoreCase(config.getProperty("auto_config"))) {
+		adminPort = Integer.parseInt(config.getProperty("admin_port"));
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					close();
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+			}
+		}));
+		/*if(null != config.getProperty("auto_config") && "true".equalsIgnoreCase(config.getProperty("auto_config"))) {
 			try {
 				String params[] = UCIUtil.getIPFromMail(config.getProperty("clientMail"), config.getProperty("clientMailPass")).split(":");
-				targetAddress = InetAddress.getByName(UCIUtil.getParam(params, 0));
+				targetAddress = InetAddress.getByName(UCIUtil.getParam(params, 0));				
 				targetPort = Integer.parseInt(UCIUtil.getParam(params, 1))+Integer.parseInt(config.getProperty("target_port"));
 			}
 			catch(Exception e) {
@@ -48,12 +64,13 @@ public class ChessbaseAdapter {
 		}
 		else {
 			targetAddress = InetAddress.getByName(config.getProperty("target_ip"));
-		}
-		if(targetPort == -1 || targetPort == 0) {
-			targetPort = Integer.parseInt(config.getProperty("target_port"));
-		}
+		}*/
+		targetAddress = InetAddress.getByName(config.getProperty("target_ip"));
+		targetPort = adminPort + Integer.parseInt(config.getProperty("target_port"));
+		
 		LOG.info("server: "+targetAddress+"port: "+targetPort);	
-		password = config.getProperty("secretKey").getBytes();
+		//password = config.getProperty("secretKey").getBytes();
+		password = "test123".getBytes();
 		datagramSocket = new DatagramSocket();
 
 		if (!connect()) {
@@ -137,6 +154,13 @@ public class ChessbaseAdapter {
 		} while (connAttepmt < MAX_CONN_ATTEMPT);
 
 		return false;
+	}
+	
+	public void close() throws UnsupportedEncodingException {
+		LOG.fine("closing client packet :" + QUIT_MSG + " to " + targetAddress + ":" + targetPort);
+		UCIUtil.sendPacket(QUIT_MSG.getBytes(UCIUtil.CHARSET), password, datagramSocket, targetAddress, targetPort);
+		LOG.fine("closing client packet :" + CLOSE_MSG + " to " + targetAddress + ":" + targetPort);
+		UCIUtil.sendPacket(CLOSE_MSG.getBytes(UCIUtil.CHARSET), password, datagramSocket, targetAddress, targetPort);
 	}
 
 	/**
