@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Ant-Test" default="main" basedir=".">
+<project name="UCI project" default="main" basedir=".">
 	<!-- Sets variables which can later be used. -->
 	<!-- The value of a property is accessed via ${} -->
 	<property file="build.properties"/>
@@ -52,6 +52,7 @@
 			<manifest>
 				<attribute name="Main-Class" value="com.udp.cb.ChessbaseAdapter" />
 			</manifest>
+			<zipgroupfileset dir="../Jars" includes="mail.jar" />
 		</jar>
 	</target>
 
@@ -68,8 +69,10 @@
 		<description>Main target</description>
 		<tstamp>
 			<format property="server.archive.name" pattern="'UCIServer_'dd_mm_yyyy_HHmmss'.jar'" />
+			<format property="client.archive.name" pattern="'UCIClient_'dd_mm_yyyy_HHmmss'.jar'" />
 		</tstamp>
 		<rename dest="${external.loc}\${server.archive.name}" src="${external.loc}\${server.jar.name}"/>
+		<rename dest="${external.loc}\${client.archive.name}" src="${external.loc}\${client.jar.name}"/>
 		<move file="dist/${server.jar.name}" todir="${external.loc}" />
 		<move file="dist/${client.jar.name}" todir="${external.loc}" />
 	</target>
