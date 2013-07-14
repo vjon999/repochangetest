@@ -30,4 +30,15 @@ public interface ProtocolConstants {
 	public static final String SELECTED_ENGINE = "selected_engine";
 	
 	public static final String UNKNOWN_COMMAND = "unknown_command";
+	
+	
+	
+	public static final String START_MSG = "helloserver";
+	public static final String CONN_SUCCESS_MSG = "connected";
+	public static final String SET_PROTOCOL_TCP = "protocol=tcp";
+	public static final String SET_PROTOCOL_UDP = "protocol=udp";
+	public static final String SUCCESS_SET_PROTOCOL_TCP = "tcp protocol set";
+	public static final String SUCCESS_SET_PROTOCOL_UDP = "udp protocol set";
+	public static final String QUIT_MSG = "quit";
+	public static final String CLOSE_MSG = "close";
 }
