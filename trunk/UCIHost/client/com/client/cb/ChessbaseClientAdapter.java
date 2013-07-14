@@ -7,13 +7,10 @@ import static com.util.ProtocolConstants.SET_PROTOCOL_TCP;
 import static com.util.ProtocolConstants.START_MSG;
 import static com.util.ProtocolConstants.SUCCESS_SET_PROTOCOL_TCP;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -96,7 +93,6 @@ public class ChessbaseClientAdapter {
 
 			@Override
 			public void run() {
-				OutputStream os = System.out;
 				String serverMsg = null;
 				while (!exit) {
 					try {
@@ -107,8 +103,8 @@ public class ChessbaseClientAdapter {
 							exit = true;
 						}
 						else {
-							os.write(serverMsg.getBytes());
-							os.flush();
+							System.out.write(serverMsg.getBytes());
+							System.out.flush();
 						}
 					} catch (IOException e) {
 						e.printStackTrace();
