@@ -59,13 +59,13 @@ public class AdminServer implements Runnable {
 		LOG.info("admin port: "+adminPort);
 		adminServerSocket = new ServerSocket(adminPort);
 		
-		/*try {
+		try {
 			LOG.info(UCIUtil.getExternalIP());
 			UCIUtil.mailExternalIP(UCIUtil.getExternalIP() + ":admin_port=" + adminPort, config.getProperty("fromMail"),
 					config.getProperty("mailPass"), config.getProperty("toMail"));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 		
 		
 		
