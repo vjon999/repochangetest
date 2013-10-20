@@ -74,7 +74,7 @@ public class ChessbaseClientAdapter {
 			targetAddress = InetAddress.getByName(config.getProperty("target_ip"));
 		}*/
 		targetAddress = InetAddress.getByName(config.getProperty("target_ip"));
-		targetPort = adminPort/* + Integer.parseInt(config.getProperty("target_port"))*/;
+		targetPort = adminPort + Integer.parseInt(config.getProperty("target_port"));
 		
 		LOG.finest("server: "+targetAddress.getHostName()+"\tport: "+targetPort);	
 		//password = config.getProperty("secretKey").getBytes();
@@ -88,7 +88,7 @@ public class ChessbaseClientAdapter {
 			LOG.finest("connected");
 		}*/
 
-		networkRW = new TCPNetworkRW(new Socket(targetAddress, targetPort+1));
+		networkRW = new TCPNetworkRW(new Socket(targetAddress, targetPort));
 		cbWriter = new Thread(new Runnable() {
 
 			@Override
