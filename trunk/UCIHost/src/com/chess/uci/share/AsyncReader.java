@@ -28,7 +28,7 @@ public class AsyncReader implements Runnable {
 				if(message.lastIndexOf("\n") != message.length()-1) {
 					message.append("\n");
 				}
-				LOG.info("client: " + message+"\tLength: "+message);
+				LOG.finer("client: " + message+"\tLength: "+message);
 				os.write(message.toString().getBytes());
 				os.flush();
 				message = new StringBuffer();

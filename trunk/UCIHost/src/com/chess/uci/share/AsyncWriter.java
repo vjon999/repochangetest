@@ -26,7 +26,7 @@ public class AsyncWriter implements Runnable {
 			if(null != is) {
 				int readLen = buffer.length;
 				while((readLen = is.read(buffer, 0, buffer.length)) != -1) {
-					LOG.info("Server: "+new String(buffer, 0, readLen));
+					LOG.finer("Server: "+new String(buffer, 0, readLen));
 					networkRW.writeToNetwork(Arrays.copyOfRange(buffer, 0, readLen));
 				}
 			}

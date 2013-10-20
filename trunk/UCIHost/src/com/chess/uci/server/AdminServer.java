@@ -91,7 +91,7 @@ public class AdminServer implements Runnable {
 				String line = null;
 				try {
 					while ((line = reader.readLine()) != null) {
-						LOG.info("Admin command: "+line);
+						LOG.fine("Admin command: "+line);
 						if (line.startsWith(":q")) {
 							exit = true;
 							for (EngineServer s : servers) {
@@ -112,7 +112,7 @@ public class AdminServer implements Runnable {
 		/*while(!exit)
 			handshake();*/
 		initEngines("tcp");
-		LOG.info("Admin server closed");
+		LOG.fine("Admin server closed");
 	}
 	
 	public Process startEngine() throws IOException {
@@ -141,7 +141,7 @@ public class AdminServer implements Runnable {
 		protocol = "tcp";
 		do {
 			request = adminNetworkRW.readFromNetwork();
-			LOG.info("Client: " + request);
+			LOG.fine("Client: " + request);
 			String sentMsg = null;
 			if (request.equalsIgnoreCase("helloserver")) {
 				sentMsg = "connected";
