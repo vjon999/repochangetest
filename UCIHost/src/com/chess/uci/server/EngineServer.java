@@ -28,7 +28,7 @@ public class EngineServer implements Runnable {
 		LOG.info("waiting for connection on Engine port: "+serverSocket.getLocalPort());
 		LOG.info("Engine: "+enginePath);
 		networkRW = new TCPNetworkRW(serverSocket.accept());
-		LOG.info("\n--------------------------------------Start Server ----------------------------------\n");
+		LOG.fine("\n--------------------------------------Start Server ----------------------------------\n");
 		Process p = null;
 		if(!networkRW.isClosed() && networkRW.isConnected()) {
 			try {
@@ -44,7 +44,7 @@ public class EngineServer implements Runnable {
 				if(engineToGUIWriterThread.isAlive())
 					engineToGUIWriterThread.join();
 
-				LOG.info("Closing Engine on port "+networkRW.getPort());
+				LOG.fine("Closing Engine on port "+networkRW.getPort());
 				networkRW.writeToNetwork("exit");
 				networkRW.close();
 			} catch (IOException | InterruptedException e) {
