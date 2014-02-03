@@ -3,6 +3,7 @@ package com.ju.it.pratik.img;
 public interface WMConsts {
 
 	public static final String RESOURCE_IMAGES = "src/main/resources/images/";
+	public static final String WATERMARKED_IMAGES = RESOURCE_IMAGES + "watermarked/";
 	public static final String OUTPUT_FOLDER = RESOURCE_IMAGES + "output/";
 	public static final String DEFAULT_WATERMARK_INPUT_FILE_NAME = "lena_512.bmp";//"Hydrangeas_512.jpg";
 	public static final String DEFAULT_WATERMARKED_IMAGE = "lena_512_rgb_wm.bmp";
@@ -26,5 +27,5 @@ public interface WMConsts {
 	
 	public static final String WATER_MARK = "This is abc test";
 	
-	public static final int WM_THRESHOLD = 5;
+	public static final int WM_THRESHOLD = 30;
 }

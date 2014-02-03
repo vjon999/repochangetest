@@ -50,6 +50,21 @@ public class ImageUtils {
 		ImageIO.write(image, "BMP", new File(fName));
 	}
 	
+	public static void saveJPGImage(BufferedImage bufferedImage, String fName) throws IOException {
+		LOG.fine("Saving file at fName: "+fName);
+		ImageIO.write(bufferedImage, "jpg", new File(fName));
+	}
+	
+	public static BufferedImage toBufferedImage(int[] pixels, int width, int height) {
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		for(int i=0;i<height;i++) {
+			for(int j=0;j<width;j++) {
+				image.setRGB(j, i, pixels[i*width+j]);
+			}
+		}
+		return image;
+	}
+	
 	public static void getChannels(int rgb[], int r[], int[] g, int[] b) {
 		for(int i=0;i<rgb.length;i++) {
 			r[i] = (rgb[i]>>16) & 0x00ff;
@@ -223,6 +238,36 @@ public class ImageUtils {
 			}
 		}
 		return image2D;
+	}
+	
+	public static double[][] to2D(double[] image, int height, int width) {
+		double[][] image2D = new double[height][width];
+		for(int i=0;i<height;i++) {
+			for(int j=0;j<width;j++) {
+				image2D[i][j] = image[i*width+j];					
+			}
+		}
+		return image2D;
+	}
+	
+	public static double[] to1D(double[][] image, int height, int width) {
+		double[] image1D = new double[height*width];
+		for(int i=0;i<height;i++) {
+			for(int j=0;j<width;j++) {
+				image1D[i*width+j] = image[i][j];					
+			}
+		}
+		return image1D;
+	}
+	
+	public static int[] to1D(int[][] image, int height, int width) {
+		int[] image1D = new int[height*width];
+		for(int i=0;i<height;i++) {
+			for(int j=0;j<width;j++) {
+				image1D[i*width+j] = image[i][j];					
+			}
+		}
+		return image1D;
 	}
 
 }
