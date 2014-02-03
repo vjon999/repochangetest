@@ -234,59 +234,7 @@ public class WatermarkUtils {
 	
 	
 	
-	public double[] watermarkBlock1(double[] image, int width, int height, String watermarkBits, Location[] policy) {
-		double[][] image2D = new double[height][width];
-		for(int i=0;i<height;i++) {
-			for(int j=0;j<width;j++) {
-				image2D[i][j] = image[i*width+j];
-			}
-		}
-		
-		int m = height/WMConsts.BLOCK_SIZE;
-		int n = width/WMConsts.BLOCK_SIZE;;
-		for(int y=0;y<m;y++) {
-			for(int x=0;x<n;x++) {
-				int num = Character.getNumericValue(watermarkBits.charAt(y*m+x)); 
-				watermarkBlock1(image2D, x*WMConsts.BLOCK_SIZE, y*WMConsts.BLOCK_SIZE, num, policy);			
-			}
-		}
-		
-		for(int i=0;i<height;i++) {
-			for(int j=0;j<width;j++) {
-				image[i*width+j] = image2D[i][j];					
-			}
-		}
-		return image;	
-	}
 	
-	public void watermarkBlock1(double[][] block, int startX, int startY, int wBit, Location[] policy) {
-		double avg = 0;
-		for(int i=startX;i<startX+WMConsts.BLOCK_SIZE;i++) {
-			for(int j=startY;j<startY+WMConsts.BLOCK_SIZE;j++) {
-				boolean escape = false;
-				for(int k=0;k<policy.length;k++) {
-					if(policy[k].getY() == i && policy[k].getX() == j) {
-						escape = true;
-						break;
-					}
-				}
-				if(!escape) {
-					avg += block[i][j];
-				}
-			}
-		}
-		avg = avg/((WMConsts.BLOCK_SIZE*WMConsts.BLOCK_SIZE)-4);
-		if(wBit == 0) {
-			for(int i=0;i<policy.length;i++) {
-				block[startY+policy[i].getY()][startX+policy[i].getX()] = Math.round(avg - WMConsts.WM_THRESHOLD);
-			}
-		}
-		else {
-			for(int i=0;i<policy.length;i++) {
-				block[startY+policy[i].getY()][startX+policy[i].getX()] = Math.round(avg + WMConsts.WM_THRESHOLD); 
-			}
-		}
-	}
 	
 	public String readWatermark(int[] watermark) {
 		StringBuilder sb = new StringBuilder();
@@ -315,13 +263,17 @@ public class WatermarkUtils {
 		return String.format("%8s", Integer.toBinaryString(byt & 0xFF)).replace(' ', '0');
 	}
 	
-	public String recWatermarkBlock1(double[] image, int width, int height, Location[] policy, String watermarkStr) {
+	/*public String recWatermarkBlock1(double[] image, int width, int height, Location[] policy, String watermarkStr) {
 		StringBuilder wm = new StringBuilder();
 		double[][] image2D = new double[height][width];
 		for(int i=0;i<height;i++) {
 			for(int j=0;j<width;j++) {
-				image2D[i][j] = image[i*width+j];				
+				image2D[i][j] = image[i*width+j];	
+				if(i<8&&j<8)
+					System.out.print(image2D[i][j]+"\t");
 			}
+			if(i<8)
+				System.out.println();
 		}
 		
 		int m = height/WMConsts.BLOCK_SIZE;
@@ -332,12 +284,6 @@ public class WatermarkUtils {
 				recWatermarkBlock1(image2D, x*WMConsts.BLOCK_SIZE, y*WMConsts.BLOCK_SIZE, policy, wm, Character.getNumericValue(watermarkStr.charAt(ctr++)));
 			}
 		}
-		
-		/*for(int i=0;i<height;i++) {
-			for(int j=0;j<width;j++) {
-				image[i*width+j] = image2D[i][j];
-			}
-		}*/
 		return wm.toString();	
 	}
 	
@@ -377,5 +323,5 @@ public class WatermarkUtils {
 		else {			
 			wm.append(0);
 		}
-	}
+	}*/
 }

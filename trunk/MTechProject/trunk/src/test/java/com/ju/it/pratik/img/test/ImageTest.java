@@ -68,11 +68,11 @@ public class ImageTest implements WMConsts {
 	public void testDCT() {
 		
 		//double input[][] =  new double[][] {{1d,2d,3d,4d},{5d,6d,7d,8d},{9d,10d,11d,12d},{13d,14d,15d,16d}};
-		double input[][] =  new double[][] {{54,35},{128,185}};
+		int input[][] =  new int[][] {{54,35},{128,185}};
 		double output[][];
 		output = util.applyDCTImproved(input);
 		printArr(output);
-		double idct[][];
+		int idct[][];
 		idct = util.applyIDCTImproved(output);
 		printArr(idct);
 	}
@@ -353,5 +353,14 @@ public class ImageTest implements WMConsts {
 		System.out.println();
 	}
 	
-	
+	private void printArr(int[][] arr) {
+		DecimalFormat df = new DecimalFormat("#.##");
+		for(int i=0;i<arr.length;i++) {
+			for(int j=0;j<arr.length;j++) {
+				System.out.print(df.format(arr[i][j])+"\t");
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
 }

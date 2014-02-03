@@ -1,7 +1,11 @@
 package com.ju.it.pratik.img.util;
 
+import java.util.logging.Logger;
+
 public class DCTTransformUtil {
 
+	private static final Logger LOG = Logger.getLogger(DCTTransformUtil.class.getName());
+	
     private double[] c;
     
     private double[][] DCT_TABLE;
@@ -31,7 +35,30 @@ public class DCTTransformUtil {
           }
     }
     
-    public double[][] applyDCTImproved(double[][] f) {
+    public double[][] applyDCTImproved(int[][] f, int width, int height) {
+    	int[][] temp = new int[N][N];
+    	double[][] tempResult = new double[N][N];
+    	double[][] result = new double[width][height];
+		for(int i=0;i<height;i=i+8) {
+			for(int j=0;j<width;j=j+8) {
+				//LOG.fine("applyDCTImproved for i="+i+",j="+j);
+				for(int k=0;k<N;k++) {
+					for(int l=0;l<N;l++) {
+						temp[k][l] = f[i+k][j+l];						
+					}
+				}
+				tempResult = applyDCTImproved(temp);
+				for(int k=0;k<N;k++) {
+					for(int l=0;l<N;l++) {
+						result[i+k][j+l] = tempResult[k][l];						
+					}
+				}
+			}
+		}
+		return result;
+    }
+    
+    public double[][] applyDCTImproved(int[][] f) {
         double[][] F = new double[N][N];
         for (int u=0;u<N;u++) {
           for (int v=0;v<N;v++) {
@@ -85,8 +112,31 @@ public class DCTTransformUtil {
         return f;
     }
     
-    public double[][] applyIDCTImproved(double[][] F) {
-        double[][] f = new double[N][N];
+    public int[][] applyIDCTImproved(double[][] f, int width, int height) {
+    	double[][] temp = new double[N][N];
+    	int[][] tempResult = new int[N][N];
+    	int[][] result = new int[width][height];
+		for(int i=0;i<height;i=i+8) {
+			for(int j=0;j<width;j=j+8) {
+				//LOG.fine("applyIDCTImproved for i="+i+",j="+j);
+				for(int k=0;k<N;k++) {
+					for(int l=0;l<N;l++) {
+						temp[k][l] = f[i+k][j+l];						
+					}
+				}
+				tempResult = applyIDCTImproved(temp);
+				for(int k=0;k<N;k++) {
+					for(int l=0;l<N;l++) {
+						result[i+k][j+l] = tempResult[k][l];						
+					}
+				}
+			}
+		}
+		return result;
+    }
+    
+    public int[][] applyIDCTImproved(double[][] F) {
+        int[][] f = new int[N][N];
         for (int i=0;i<N;i++) {
           for (int j=0;j<N;j++) {
             double sum = 0.0;
@@ -95,9 +145,22 @@ public class DCTTransformUtil {
                 sum += ((2*c[u]*c[v])/Math.sqrt(N*N)) * DCT_TABLE[i][u] * DCT_TABLE[j][v] * F[u][v];
               }
             }
-            f[i][j]=Math.round(sum);
+            f[i][j]=(int)Math.round(sum);
           }
         }
         return f;
+    }
+    
+    public static double computeMiddleBandAvg(double[][] F, int startX, int startY) {
+    	double avg = 0;
+    	int ctr = 0;
+    	for(int i=startY;i<startY+8;i++) {
+    		for(int j=startX;j<startX+8-i;j++) {
+    			avg += F[i][j];
+    			ctr++;
+    		}
+    	}
+    	avg = avg - F[startY + 0][startX + 1] - F[startY + 0][startX + 2] - F[startY + 1][startX + 0] - F[startY + 1][startX + 1] - F[startY + 2][startX + 0];
+    	return avg/(ctr - 5);
     }
 }

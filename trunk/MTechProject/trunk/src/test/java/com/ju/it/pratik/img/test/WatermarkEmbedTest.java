@@ -11,8 +11,10 @@ import javax.imageio.ImageIO;
 
 import org.junit.Test;
 
+import com.ju.it.pratik.img.ICARWatermarker;
 import com.ju.it.pratik.img.Location;
 import com.ju.it.pratik.img.WMConsts;
+import com.ju.it.pratik.img.util.DCTTransformUtil;
 import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.NoiseAnalysisResult;
 import com.ju.it.pratik.img.util.NoiseAnalysisUtil;
@@ -159,8 +161,8 @@ public class WatermarkEmbedTest implements WMConsts {
 	
 	@Test
 	public void testAvgBlockWatermark() throws IOException {
-		String inputImage = SHIP;
-		String outputImage = "output/" + inputImage.substring(0, inputImage.lastIndexOf("."))+"_rgb_wmavg.bmp";
+		String inputImage = LENA;
+		String outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm";
 		
 		
 		BufferedImage wmImage = ImageIO.read(new File(WMConsts.WATERMARK_LOGO));
@@ -192,8 +194,14 @@ public class WatermarkEmbedTest implements WMConsts {
 		
 		/** converting U channel's DWT */
 		double[] dwt = TransformUtils.discreteWaveletTransform(u);
+		/*int[][] dct = ImageUtils.to2D(u, imageHeight, imageWidth);
+		DCTTransformUtil dctTransformUtil = new DCTTransformUtil(8);
+		dtc = dctTransformUtil.applyDCTImproved(dct);
+		double[][] dct2D = ImageUtils.to2D(dwt, imageHeight, imageWidth);		
+		dwt = ImageUtils.to1D(dwt2D, imageHeight, imageWidth);*/
 		/** adding watermark to U channel's DWT co-efficients */
-		double[] wdwt = watermarkUtils.watermarkBlock1(dwt,imageHeight, imageWidth, watermarkStr, policy);
+		ICARWatermarker icarWatermarker = new ICARWatermarker();
+		double[] wdwt = icarWatermarker.watermarkBlock(dwt,imageHeight, imageWidth, watermarkStr, policy);
 		/** inverse DWT of U channel */
 		int[] idwt = TransformUtils.inverseDiscreteWaveletTransform(wdwt);
 		
@@ -209,37 +217,11 @@ public class WatermarkEmbedTest implements WMConsts {
 		
 		/** saving the image */
 		//String outputFileName = inputImage.substring(0, inputImage.lastIndexOf("."))+"_rgb_wmavg.bmp";
+		BufferedImage outputBufferedImage = ImageUtils.toBufferedImage(convertedRgb, imageWidth, imageHeight);
+		ImageIO.write(outputBufferedImage, "jpg", new File(WATERMARKED_IMAGES + outputImage + ".jpg"));
+		ImageIO.write(outputBufferedImage, "bmp", new File(WATERMARKED_IMAGES + outputImage + ".bmp"));
 		LOG.info("saving watermarked file to "+outputImage);
-		ImageUtils.saveRGBImage(imageWidth, imageHeight, convertedRgb, RESOURCE_IMAGES + outputImage);
-		
-		
-		
-		// RECOVERY
-		//read image
-		init(outputImage);
-		
-		/** converting RGB to YUV starts */
-		yuv = new int[r.length];
-		for(int i=0;i<rgb.length;i++) {
-			yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
-		}
-		/** converting RGB to YUV ends */
-		
-		/** getting seperate Y, U, V channels */
-		y = new int[rgb.length];
-		u = new int[rgb.length];
-		v = new int[rgb.length];
-		ImageUtils.getChannels(yuv, y, u, v);
-		/** getting seperate Y, U, V channels ends */
-		
-		/** converting U channel's DWT */
-		dwt = TransformUtils.discreteWaveletTransform(u);
-		String recoveredWatermark = watermarkUtils.recWatermarkBlock1(dwt,imageHeight, imageWidth, policy, watermarkStr);
-		LOG.info("watermarkStr len: "+recoveredWatermark.length()+"\t watermarkStr: "+recoveredWatermark);
-		watermarkUtils.writeWatermark(recoveredWatermark);
-		
-		NoiseAnalysisUtil noiseAnalysisUtil = new NoiseAnalysisUtil();
-		NoiseAnalysisResult noiseAnalysisResult = noiseAnalysisUtil.calculatePSNR(RESOURCE_IMAGES + inputImage, RESOURCE_IMAGES + outputImage);
-		LOG.info("noiseAnalysisResult: "+noiseAnalysisResult);
 	}
+	
+	
 }
