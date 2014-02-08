@@ -151,16 +151,14 @@ public class DCTTransformUtil {
         return f;
     }
     
-    public static double computeMiddleBandAvg(double[][] F, int startX, int startY) {
-    	double avg = 0;
-    	int ctr = 0;
+    public static double computeMiddleBandSum(double[][] F, int startX, int startY) {
+    	double sum = 0;
     	for(int i=startY;i<startY+8;i++) {
-    		for(int j=startX;j<startX+8-i;j++) {
-    			avg += F[i][j];
-    			ctr++;
+    		for(int j=startX;j<startX+8-(i-startY)-1;j++) {
+    			sum += F[i][j];
     		}
     	}
-    	avg = avg - F[startY + 0][startX + 1] - F[startY + 0][startX + 2] - F[startY + 1][startX + 0] - F[startY + 1][startX + 1] - F[startY + 2][startX + 0];
-    	return avg/(ctr - 5);
+    	sum = sum - F[startY + 0][startX + 0] - F[startY + 0][startX + 1] - F[startY + 0][startX + 2] - F[startY + 1][startX + 0] - F[startY + 1][startX + 1] - F[startY + 2][startX + 0];
+    	return sum;
     }
 }

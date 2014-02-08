@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 import org.junit.Test;
 
-import com.ju.it.pratik.img.ICARWatermarker;
+import com.ju.it.pratik.img.DCTWatermarker;
 import com.ju.it.pratik.img.Location;
 import com.ju.it.pratik.img.WMConsts;
 import com.ju.it.pratik.img.util.DCTTransformUtil;
@@ -29,6 +29,14 @@ public class DCTWatermarkTester implements WMConsts {
 	private int r[];
 	private int g[];
 	private int b[];
+	//set the policy
+	private Location[] policy = new Location[] {
+		new Location(3,0), new Location(2,1), 
+		new Location(1,2), new Location(0,3),
+		new Location(5,0), new Location(4,1),
+		new Location(3,2), new Location(2,3),
+		new Location(1,4), new Location(0,5)
+	};
 	
 	public void init(String fileName) throws IOException {
 		LOG.info("inputFile: "+fileName);
@@ -46,7 +54,7 @@ public class DCTWatermarkTester implements WMConsts {
 	@Test
 	public void testEmbedDCTWatermark() throws IOException {
 		String inputImage = RESOURCE_IMAGES + LENA;
-		String outputImage = WATERMARKED_IMAGES + LENA.substring(0, LENA.lastIndexOf("."))+"_wm";		
+		String outputImage = WATERMARKED_IMAGES + LENA.substring(0, SHIP.lastIndexOf("."))+"_wm";		
 		
 		BufferedImage wmImage = ImageIO.read(new File(WMConsts.WATERMARK_LOGO));
 		int[] watermark = new int[wmImage.getHeight()*wmImage.getWidth()];
@@ -54,9 +62,6 @@ public class DCTWatermarkTester implements WMConsts {
 		String watermarkStr = watermarkUtils.readWatermark(watermark);
 		LOG.info("watermarkStr len: "+watermarkStr.length()+"\twatermarkStr: "+watermarkStr);
 		//we would consider watermark length as power of 2 only
-		
-		//set the policy
-		Location[] policy = new Location[] {new Location(5,1), new Location(4,2), new Location(1,4), new Location(1,2)};
 		
 		//read image
 		init(inputImage);
@@ -81,7 +86,7 @@ public class DCTWatermarkTester implements WMConsts {
 		double[][] dctResult = dctTransformUtil.applyDCTImproved(dct, imageWidth, imageHeight);		
 		double[] dctResult1D = ImageUtils.to1D(dctResult, imageHeight, imageWidth);
 		/** adding watermark to U channel's DWT co-efficients */
-		ICARWatermarker icarWatermarker = new ICARWatermarker();
+		DCTWatermarker icarWatermarker = new DCTWatermarker();
 		double[] wdct = icarWatermarker.watermarkBlock(dctResult1D,imageHeight, imageWidth, watermarkStr, policy);
 		/** inverse DWT of U channel */
 		int[] idct = ImageUtils.to1D(dctTransformUtil.applyIDCTImproved(ImageUtils.to2D(wdct, imageWidth, imageHeight), imageWidth, imageHeight), imageWidth, imageHeight);
@@ -108,7 +113,8 @@ public class DCTWatermarkTester implements WMConsts {
 	
 	@Test
 	public void testRecoverDCTWatermark() throws IOException {
-		String outputImage = WATERMARKED_IMAGES + LENA.replaceFirst(".bmp", "_wm.jpg");		
+		//String outputImage = RESOURCE_IMAGES + SHIP;
+		String outputImage = WATERMARKED_IMAGES + LENA.replaceFirst(".bmp", "_wm_40.jpg");
 		
 		BufferedImage wmImage = ImageIO.read(new File(WMConsts.WATERMARK_LOGO));
 		int[] watermark = new int[wmImage.getHeight()*wmImage.getWidth()];
@@ -118,7 +124,7 @@ public class DCTWatermarkTester implements WMConsts {
 		//we would consider watermark length as power of 2 only
 		
 		//set the policy
-		Location[] policy = new Location[] {new Location(5,1), new Location(4,2), new Location(1,4), new Location(1,2)};
+		
 		// RECOVERY
 		// read image
 		init(outputImage);
@@ -145,7 +151,7 @@ public class DCTWatermarkTester implements WMConsts {
 		double[] dctResult1D = ImageUtils.to1D(dctResult, imageHeight, imageWidth);
 		/** adding watermark to U channel's DWT co-efficients */
 
-		ICARWatermarker icarWatermarker = new ICARWatermarker();
+		DCTWatermarker icarWatermarker = new DCTWatermarker();
 		String recoveredWatermark = icarWatermarker.recoverWatermark(dctResult1D, imageHeight, imageWidth, policy, watermarkStr);
 		LOG.info("watermarkStr len: " + recoveredWatermark.length() + "\t watermarkStr: " + recoveredWatermark);
 		watermarkUtils.writeWatermark(recoveredWatermark);

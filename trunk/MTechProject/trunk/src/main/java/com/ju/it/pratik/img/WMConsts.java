@@ -27,5 +27,6 @@ public interface WMConsts {
 	
 	public static final String WATER_MARK = "This is abc test";
 	
-	public static final int WM_THRESHOLD = 30;
+	public static final int WM_STRENGTH = 25;
+	public static final int WM_THRESHOLD = 2;
 }

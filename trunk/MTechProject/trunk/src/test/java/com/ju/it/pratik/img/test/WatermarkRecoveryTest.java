@@ -3,23 +3,17 @@ package com.ju.it.pratik.img.test;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import com.ju.it.pratik.img.ICARWatermarker;
+import com.ju.it.pratik.img.DCTWatermarker;
 import com.ju.it.pratik.img.Location;
 import com.ju.it.pratik.img.WMConsts;
 import com.ju.it.pratik.img.util.CorrelationCalculator;
-import com.ju.it.pratik.img.util.DCTTransformUtil;
 import com.ju.it.pratik.img.util.ImageUtils;
-import com.ju.it.pratik.img.util.NoiseAnalysisResult;
-import com.ju.it.pratik.img.util.NoiseAnalysisUtil;
 import com.ju.it.pratik.img.util.TransformUtils;
 import com.ju.it.pratik.img.util.WatermarkUtils;
 
@@ -35,177 +29,6 @@ public class WatermarkRecoveryTest extends DefaultImageLoader {
 	public void init() throws IOException {
 		super.init(OUTPUT_FOLDER + LENA_CROPPED_WM);
 	}*/
-
-	@Test
-	public void testRecoverWatermark() {
-		int[] watermark = new int[WatermarkEmbedTest.WATER_MARK.getBytes().length];
-		double maxCorrelationRatio = 0;
-		int ctr = 0;
-		for (byte b : WatermarkEmbedTest.WATER_MARK.getBytes()) {
-			watermark[ctr++] = b;
-		}
-		// we would consider watermark length as power of 2 only
-
-		/** converting RGB to YUV starts */
-		int yuv[] = new int[r.length];
-		for (int i = 0; i < rgb.length; i++) {
-			yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
-		}
-		/** converting RGB to YUV ends */
-
-		/** getting seperate Y, U, V channels */
-		int y[] = new int[rgb.length];
-		int u[] = new int[rgb.length];
-		int v[] = new int[rgb.length];
-		ImageUtils.getChannels(yuv, y, u, v);
-		/** getting seperate Y, U, V channels ends */
-		/** converting U channel's DWT */
-		double[] dwt = TransformUtils.discreteWaveletTransform(u);
-		/** adding watermark to U channel's DWT co-efficients */
-		int[] wdwt = watermarkUtils.recoverBlockWatermark(dwt, imageHeight, imageWidth, watermark);
-		double correlationRatio = calculator.getCorrelationCoefficient(wdwt, watermark);
-		LOG.fine("Correlation Ratio: " + correlationRatio);
-		maxCorrelationRatio = correlationRatio;
-
-		/** first rotation */
-		double transformedU[] = utils.rotate(dwt, imageWidth, imageHeight);
-		wdwt = watermarkUtils.recoverBlockWatermark(transformedU, imageHeight, imageWidth, watermark);
-		correlationRatio = calculator.getCorrelationCoefficient(wdwt, watermark);
-		LOG.fine("Correlation Ratio: " + correlationRatio);
-		if (maxCorrelationRatio < correlationRatio)
-			maxCorrelationRatio = correlationRatio;
-
-		/** second rotation */
-		transformedU = utils.rotateInvert(dwt);
-		wdwt = watermarkUtils.recoverBlockWatermark(transformedU, imageHeight, imageWidth, watermark);
-		correlationRatio = calculator.getCorrelationCoefficient(wdwt, watermark);
-		LOG.fine("Correlation Ratio: " + correlationRatio);
-		if (maxCorrelationRatio < correlationRatio)
-			maxCorrelationRatio = correlationRatio;
-
-		/** third rotation */
-		transformedU = utils.rotate(transformedU, imageWidth, imageHeight);
-		wdwt = watermarkUtils.recoverBlockWatermark(transformedU, imageHeight, imageWidth, watermark);
-		correlationRatio = calculator.getCorrelationCoefficient(wdwt, watermark);
-		LOG.fine("Correlation Ratio: " + correlationRatio);
-		if (maxCorrelationRatio < correlationRatio)
-			maxCorrelationRatio = correlationRatio;
-
-		LOG.fine("Max Correlation Ratio: " + maxCorrelationRatio);
-
-		// for(int i=0;i<64;i++) { System.out.println((char)wdwt[i]); }
-
-	}
-
-	@Test
-	public void testCheckWatermarkRecovery() throws IOException {
-
-		/*
-		 * BufferedImage orig = ImageIO.read(new
-		 * java.io.File(OUTPUT_FOLDER+LENA_WM)); int origData[] = new
-		 * int[orig.getHeight()*orig.getWidth()]; orig.getRGB(0, 0, 512, 512,
-		 * origData, 0, 512); for(int i=0;i<512-imageHeight+1;i++) { for(int
-		 * j=0;j<512-imageWidth+1;j++) { boolean match = true; for(int
-		 * k=0;k<imageHeight;k++) { for(int l=0;l<imageHeight;l++) {
-		 * if(orig.getRGB(j+l, i+k) != bufferedImage.getRGB(l, k)) { match =
-		 * false; break; } else { //LOG.fine(match+" ("+i+","+j+")"); } }
-		 * if(!match) break; } if(match) { LOG.fine("matched at "+i); break; } }
-		 * }
-		 */
-
-		int[] watermark = new int[WatermarkEmbedTest.WATER_MARK.getBytes().length];
-		double maxCorrelationRatio = 0;
-		int ctr = 0;
-		for (byte b : WatermarkEmbedTest.WATER_MARK.getBytes()) {
-			watermark[ctr++] = b;
-		}
-		// we would consider watermark length as power of 2 only
-
-		/** converting RGB to YUV starts */
-		int yuv[] = new int[r.length];
-		for (int i = 0; i < rgb.length; i++) {
-			yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
-		}
-		/** converting RGB to YUV ends */
-
-		/** getting seperate Y, U, V channels */
-		int y[] = new int[rgb.length];
-		int u[] = new int[rgb.length];
-		int v[] = new int[rgb.length];
-		ImageUtils.getChannels(yuv, y, u, v);
-		/** getting seperate Y, U, V channels ends */
-		/** converting U channel's DWT */
-		double[] dwt = TransformUtils.discreteWaveletTransform(u);
-		/** adding watermark to U channel's DWT co-efficients */
-		// int[] wdwt = watermarkUtils.recoverBlockWatermark(dwt, imageHeight,
-		// imageWidth, watermark);
-		double finalRes = 0f;
-		double interRes = 0f;
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				interRes = watermarkUtils.checkWatermarkRecovery(dwt, imageHeight, imageWidth, watermark, i, j);
-				LOG.fine("(" + i + "," + j + ") interRes: " + interRes);
-				if (interRes > finalRes) {
-					finalRes = interRes;
-				}
-			}
-		}
-		LOG.fine("finalRes: " + finalRes);
-	}
-
-	@Test
-	public void testCompareTransforDimaonCroppedImage() throws IOException {
-		BufferedImage img = ImageIO.read(new File(OUTPUT_FOLDER + "lena_256_cropped_rgb_wm2.bmp"));
-		int h1 = img.getHeight(), w1 = img.getWidth();
-		int[] rgb = new int[img.getHeight() * img.getWidth()];
-		img.getRGB(0, 0, img.getWidth(), img.getHeight(), rgb, 0, img.getWidth());
-		int yuv[] = new int[rgb.length];
-		for (int i = 0; i < rgb.length; i++) {
-			yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
-		}
-		/** getting seperate Y, U, V channels */
-		int y[] = new int[rgb.length];
-		int u[] = new int[rgb.length];
-		int v[] = new int[rgb.length];
-		ImageUtils.getChannels(yuv, y, u, v);
-		double[] dwt1 = TransformUtils.discreteWaveletTransform(u);
-
-		img = ImageIO.read(new File(OUTPUT_FOLDER + "lena_512_rgb_wm.bmp"));
-		int h2 = img.getHeight(), w2 = img.getWidth();
-		rgb = new int[img.getHeight() * img.getWidth()];
-		yuv = new int[rgb.length];
-		y = new int[rgb.length];
-		u = new int[rgb.length];
-		v = new int[rgb.length];
-		img.getRGB(0, 0, img.getWidth(), img.getHeight(), rgb, 0, img.getWidth());
-		for (int i = 0; i < rgb.length; i++) {
-			yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
-		}
-		/** getting seperate Y, U, V channels */
-		ImageUtils.getChannels(yuv, y, u, v);
-		double[] dwt2 = TransformUtils.discreteWaveletTransform(u);
-		// DecimalFormat format = new DecimalFormat("####.##");
-		double sum_product = 0;
-		double max_sum_product = 0;
-		int x1 = 0, y1 = 0;
-		for (int k = 0; k < h2 - h1; k++) {
-			for (int l = 0; l < w2 - w1; l++) {
-				sum_product = 0;
-				for (int i = 0; i < h1; i++) {
-					for (int j = 0; j < w1; j++) {
-						sum_product += dwt1[i * w1 + j] * dwt2[(i + k) * w2 + (j + l)];
-					}
-				}
-				if (sum_product > max_sum_product) {
-					LOG.fine(" x1: " + l + ", y1: " + k + "\tsum_product: " + sum_product);
-					max_sum_product = sum_product;
-					x1 = l;
-					y1 = k;
-				}
-			}
-		}
-		System.out.println(x1 + "," + y1);
-	}
 
 	@Test
 	public void compareYChannel() throws IOException {
@@ -362,50 +185,6 @@ public class WatermarkRecoveryTest extends DefaultImageLoader {
 			System.err.println(y1[i] + "\t" + y2[i] + "\t\t" + u1[i] + "\t" + u2[i] + "\t\t" + v1[i] + "\t" + v2[i]);
 			// }
 		}
-	}
-
-	@Test
-	public void testRecoverICARWatermark() throws IOException {
-		String outputImage = WATERMARKED_IMAGES + LENA.replaceFirst(".bmp", "_wm_40.jpg");		
-		
-		BufferedImage wmImage = ImageIO.read(new File(WMConsts.WATERMARK_LOGO));
-		int[] watermark = new int[wmImage.getHeight()*wmImage.getWidth()];
-		wmImage.getRGB(0, 0, wmImage.getWidth(), wmImage.getHeight(), watermark, 0, wmImage.getWidth());
-		String watermarkStr = watermarkUtils.readWatermark(watermark);
-		LOG.info("watermarkStr len: "+watermarkStr.length()+"\twatermarkStr: "+watermarkStr);
-		//we would consider watermark length as power of 2 only
-		
-		//set the policy
-		Location[] policy = new Location[] {new Location(5,1), new Location(4,2), new Location(1,4), new Location(1,2)};
-		// RECOVERY
-		// read image
-		init(outputImage);
-
-		/** converting RGB to YUV starts */
-		int[] yuv = new int[r.length];
-		for (int i = 0; i < rgb.length; i++) {
-			yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
-		}
-		/** converting RGB to YUV ends */
-
-		/** getting seperate Y, U, V channels */
-		int[] y = new int[rgb.length];
-		int[] u = new int[rgb.length];
-		int[] v = new int[rgb.length];
-		ImageUtils.getChannels(yuv, y, u, v);
-		/** getting seperate Y, U, V channels ends */
-
-		/** converting U channel's DWT */
-		double[] dwt = TransformUtils.discreteWaveletTransform(u);
-		ICARWatermarker icarWatermarker = new ICARWatermarker();
-		String recoveredWatermark = icarWatermarker.recoverWatermark(dwt, imageHeight, imageWidth, policy, watermarkStr);
-		LOG.info("watermarkStr len: " + recoveredWatermark.length() + "\t watermarkStr: " + recoveredWatermark);
-		watermarkUtils.writeWatermark(recoveredWatermark);
-
-		/*NoiseAnalysisUtil noiseAnalysisUtil = new NoiseAnalysisUtil();
-		NoiseAnalysisResult noiseAnalysisResult = noiseAnalysisUtil.calculatePSNR(RESOURCE_IMAGES + inputImage, RESOURCE_IMAGES
-				+ outputImage);
-		LOG.info("noiseAnalysisResult: " + noiseAnalysisResult);*/
 	}
 	
 	
