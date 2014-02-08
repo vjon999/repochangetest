@@ -91,29 +91,6 @@ public class ImageTest implements WMConsts {
 	}
 	
 	@Test
-	public void testWaveletTransform() throws IOException {
-		//int[] inputImg = new int[]{56,40,8,24,48,48,40,16};		
-				
-		double[] inputImgTmp = new double[rgb.length];
-		double[] dwt = TransformUtils.discreteWaveletTransform(rgb);
-		System.arraycopy(dwt, 0, inputImgTmp, 0, rgb.length);
-		int invDWT[] = TransformUtils.inverseDiscreteWaveletTransform(inputImgTmp);
-		write("Original,InverDWT,DWT\r\n");
-		boolean error = false;
-		for(int i=0;i<rgb.length;i++) {
-			/*System.out.print(inputImg[i]+" - "+output[i]);
-			if(inputImg[i] != output[i]) {
-				throw new IOException("no match");
-			}*/
-			write(rgb[i]+","+invDWT[i]+","+dwt[i]+",=A"+(i+2)+"-B"+(i+2)+"\r\n");
-			if(rgb[i] != invDWT[i]) {
-				error=true;
-			}
-		}
-		System.err.print(error);
-	}
-	
-	@Test
 	public void testDFT() throws IOException {
 		File input = new File("resources/images/Desert_crop.jpg");
 		BufferedImage bufferedImage = ImageIO.read(input);

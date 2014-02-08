@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 
 import com.ju.it.pratik.img.util.DCTTransformUtil;
 
-public class ICARWatermarker {
+public class DCTWatermarker {
 	
 	public DecimalFormat format = new DecimalFormat("##.##");
 
@@ -49,26 +49,33 @@ public class ICARWatermarker {
 				boolean escape = false;
 				for(int k=0;k<policy.length;k++) {
 					if(policy[k].getY() == i && policy[k].getX() == j) {
-						escape = true;
+						escape = true;avg+=block[i][j];
 						break;
 					}
 				}
 				if(!escape) {
-					avg += block[i][j];
+					//avg += block[i][j];
 				}
 			}
 		}
-		avg = avg/((WMConsts.BLOCK_SIZE*WMConsts.BLOCK_SIZE)-4);
-		midBandAvg = DCTTransformUtil.computeMiddleBandAvg(block, startX, startY);
-		if(wBit == 0) {
-			for(int i=0;i<policy.length;i++) {
-				block[startY+policy[i].getY()][startX+policy[i].getX()] = Math.round(midBandAvg - WMConsts.WM_THRESHOLD);
+		//avg = avg/((WMConsts.BLOCK_SIZE*WMConsts.BLOCK_SIZE)-4);
+		midBandAvg = (DCTTransformUtil.computeMiddleBandSum(block, startX, startY) - avg)/18;
+		//System.out.println("midBandAvg: "+midBandAvg);
+		for (int i = 0; i < policy.length; i++) {
+			if (wBit == 0) {
+				if (i % 2 == 0) {
+					block[startY + policy[i].getY()][startX + policy[i].getX()] = Math.round(midBandAvg - WMConsts.WM_STRENGTH);
+				} else {
+					block[startY + policy[i].getY()][startX + policy[i].getX()] = Math.round(midBandAvg + WMConsts.WM_STRENGTH);
+				}
 			}
-		}
-		else {
-			for(int i=0;i<policy.length;i++) {
-				block[startY+policy[i].getY()][startX+policy[i].getX()] = Math.round(midBandAvg + WMConsts.WM_THRESHOLD); 
-			}
+			else {
+				if (i % 2 == 0) {
+					block[startY + policy[i].getY()][startX + policy[i].getX()] = Math.round(midBandAvg + WMConsts.WM_STRENGTH);
+				} else {
+					block[startY + policy[i].getY()][startX + policy[i].getX()] = Math.round(midBandAvg - WMConsts.WM_STRENGTH);
+				}
+			}	
 		}
 	}
 	
@@ -103,46 +110,15 @@ public class ICARWatermarker {
 	}
 	
 	public void recoverWatermarkBlock(double[][] block, int startX, int startY, Location[] policy, StringBuilder wm, int expectedBit) {
-		double avg = 0;
-		for(int i=startX;i<startX+WMConsts.BLOCK_SIZE;i++) {
-			for(int j=startY;j<startY+WMConsts.BLOCK_SIZE;j++) {
-				boolean escape = false;
-				for(int k=0;k<policy.length;k++) {
-					if(policy[k].getY() == i && policy[k].getX() == j) {
-						escape = true;
-						break;
-					}
-				}
-				if(!escape) {
-					avg += block[i][j];
-				}
-				if(i<8&&j<8 && startY<8 && startX<8)
-					System.out.print(format.format(block[i][j])+"\t");
-			}
-			if(i<8&startX<8&&startY<8)
-				System.out.println();
-		}
-		avg = avg/((WMConsts.BLOCK_SIZE*WMConsts.BLOCK_SIZE)-4);
-		double midBandAvg = DCTTransformUtil.computeMiddleBandAvg(block, startX, startY);
 		int posCounter = 0, zeroCounter = 0;
-		for(int i=0;i<policy.length;i++) {
-			if(expectedBit == 0) {
-				if((midBandAvg - block[startY+policy[i].getY()][startX+policy[i].getX()]) > 0) {
-					zeroCounter++;
-				}
+		for (int i = 0; i < policy.length / 2; i++) {
+			if (block[startY + policy[i].getY()][startX + policy[i].getX()]
+					- block[startY + policy[i + 1].getY()][startX + policy[i + 1].getX()] > 1) {
+				posCounter++;
+			} else {
+				zeroCounter++;
 			}
-			else {
-				if((block[startY+policy[i].getY()][startX+policy[i].getX()]) - midBandAvg > 0) {
-					posCounter++;
-				}
-			}	
 		}
-		/*if(posCounter > zeroCounter) {
-			wm.append(1);
-		}
-		else {			
-			wm.append(0);
-		}*/
 		if(expectedBit == 0 && zeroCounter > 0) {
 			wm.append(0);
 		}
