@@ -1,14 +1,20 @@
 package com.ju.it.pratik.img;
 
 import java.text.DecimalFormat;
+import java.util.logging.Logger;
 
+import com.ju.it.pratik.img.test.DCTWatermarkTester;
 import com.ju.it.pratik.img.util.DCTTransformUtil;
 
 public class DCTWatermarker {
 	
+	private static final Logger LOG = Logger.getLogger(DCTWatermarker.class.getName());
+	
 	public DecimalFormat format = new DecimalFormat("##.##");
 
 	public double[] watermarkBlock(double[] image, int width, int height, String watermarkBits, Location[] policy) {
+		int len = watermarkBits.length();
+		LOG.fine("watermar bit length: "+len);
 		double[][] image2D = new double[height][width];
 		for(int i=0;i<height;i++) {
 			for(int j=0;j<width;j++) {
@@ -24,7 +30,7 @@ public class DCTWatermarker {
 		int n = width/WMConsts.BLOCK_SIZE;;
 		for(int y=0;y<m;y++) {
 			for(int x=0;x<n;x++) {
-				int num = Character.getNumericValue(watermarkBits.charAt(y*m+x)); 
+				int num = Character.getNumericValue(watermarkBits.charAt((y*m+x)%len)); 
 				watermarkBlock(image2D, x*WMConsts.BLOCK_SIZE, y*WMConsts.BLOCK_SIZE, num, policy);			
 			}
 		}
@@ -85,6 +91,7 @@ public class DCTWatermarker {
 	
 	
 	public String recoverWatermark(double[] image, int width, int height, Location[] policy, String watermarkStr) {
+		int len = watermarkStr.length(); 
 		StringBuilder wm = new StringBuilder();
 		double[][] image2D = new double[height][width];
 		for(int i=0;i<height;i++) {
@@ -103,7 +110,7 @@ public class DCTWatermarker {
 		System.out.println("\nAfter\n");
 		for(int y=0;y<m;y++) {
 			for(int x=0;x<n;x++) {
-				recoverWatermarkBlock(image2D, x*WMConsts.BLOCK_SIZE, y*WMConsts.BLOCK_SIZE, policy, wm, Character.getNumericValue(watermarkStr.charAt(ctr++)));
+				recoverWatermarkBlock(image2D, x*WMConsts.BLOCK_SIZE, y*WMConsts.BLOCK_SIZE, policy, wm, Character.getNumericValue(watermarkStr.charAt(ctr++%len)));
 			}
 		}
 		return wm.toString();	

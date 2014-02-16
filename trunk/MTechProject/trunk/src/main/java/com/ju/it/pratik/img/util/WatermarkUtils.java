@@ -3,9 +3,6 @@ package com.ju.it.pratik.img.util;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import javax.imageio.ImageIO;
-
-import com.ju.it.pratik.img.Location;
 import com.ju.it.pratik.img.WMConsts;
 
 public class WatermarkUtils {
@@ -245,6 +242,34 @@ public class WatermarkUtils {
 		return sb.toString();
 	}
 	
+	public String readBinaryWatermark(int[] watermark) {
+		StringBuilder sb = new StringBuilder();
+		for(int i=0;i<watermark.length;i++) {
+			int avg = ((watermark[i] & 0xFF) + (watermark[i]>>8 & 0xFF) + (watermark[i]>>16 & 0xFF))/3;
+			if(avg>=128) {
+				sb.append(1);
+			}
+			else {
+				sb.append(0);
+			}
+		}
+		return sb.toString();
+	}
+	
+	public int[] readBinaryWatermark1(int[] watermark) {
+		int[] result = new int[watermark.length];
+		for(int i=0;i<watermark.length;i++) {
+			int avg = ((watermark[i] & 0xFF) + (watermark[i]>>8 & 0xFF) + (watermark[i]>>16 & 0xFF))/3;
+			if(avg>=128) {
+				result[i] = 1;
+			}
+			else {
+				result[i] = 0;
+			}
+		}
+		return result;
+	}
+	
 	public void writeWatermark(String str) {
 		int[] image = new int[str.length()/8];
 		int ctr = 0, tmp;		
@@ -259,69 +284,57 @@ public class WatermarkUtils {
 		}
 	}
 	
+	public void writeBinaryWatermark(String str) {
+		int[] image = new int[str.length()];
+		int ctr = 0;		
+		for(int i=0;i<str.length();i++) {
+			if(Character.getNumericValue(str.charAt(i)) == 1) {
+				image[ctr++] = 0xFFFFFF;
+			}
+			else {
+				image[ctr++] = 0;
+			}
+		}
+		try {
+			ImageUtils.saveRGBImage(16, 32, image, WMConsts.RESOURCE_IMAGES + "output/" + "recoveredWatermark.bmp");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void writeBinaryWatermark(String str, int width, int height) {
+		int[] image = new int[str.length()];
+		int ctr = 0;		
+		for(int i=0;i<str.length();i++) {
+			if(Character.getNumericValue(str.charAt(i)) == 1) {
+				image[ctr++] = 0xFFFFFF;
+			}
+			else {
+				image[ctr++] = 0;
+			}
+		}
+		try {
+			ImageUtils.saveRGBImage(width, height, image, WMConsts.RESOURCE_IMAGES + "output/" + "recoveredWatermark.bmp");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int[] toBWImageArray(String str, int width, int height) {
+		int[] image = new int[str.length()];
+		int ctr = 0;		
+		for(int i=0;i<str.length();i++) {
+			if(Character.getNumericValue(str.charAt(i)) == 1) {
+				image[ctr++] = 0xFFFFFF;
+			}
+			else {
+				image[ctr++] = 0;
+			}
+		}
+		return image;
+	}
+	
 	public String byteToBinaryString(byte byt) {
 		return String.format("%8s", Integer.toBinaryString(byt & 0xFF)).replace(' ', '0');
 	}
-	
-	/*public String recWatermarkBlock1(double[] image, int width, int height, Location[] policy, String watermarkStr) {
-		StringBuilder wm = new StringBuilder();
-		double[][] image2D = new double[height][width];
-		for(int i=0;i<height;i++) {
-			for(int j=0;j<width;j++) {
-				image2D[i][j] = image[i*width+j];	
-				if(i<8&&j<8)
-					System.out.print(image2D[i][j]+"\t");
-			}
-			if(i<8)
-				System.out.println();
-		}
-		
-		int m = height/WMConsts.BLOCK_SIZE;
-		int n = width/WMConsts.BLOCK_SIZE;
-		int ctr = 0;
-		for(int y=0;y<m;y++) {
-			for(int x=0;x<n;x++) {
-				recWatermarkBlock1(image2D, x*WMConsts.BLOCK_SIZE, y*WMConsts.BLOCK_SIZE, policy, wm, Character.getNumericValue(watermarkStr.charAt(ctr++)));
-			}
-		}
-		return wm.toString();	
-	}
-	
-	public void recWatermarkBlock1(double[][] block, int startX, int startY, Location[] policy, StringBuilder wm, int expectedBit) {
-		double avg = 0;
-		for(int i=startX;i<startX+WMConsts.BLOCK_SIZE;i++) {
-			for(int j=startY;j<startY+WMConsts.BLOCK_SIZE;j++) {
-				boolean escape = false;
-				for(int k=0;k<policy.length;k++) {
-					if(policy[k].getY() == i && policy[k].getX() == j) {
-						escape = true;
-						break;
-					}
-				}
-				if(!escape) {
-					avg += block[i][j];
-				}
-			}
-		}
-		avg = avg/((WMConsts.BLOCK_SIZE*WMConsts.BLOCK_SIZE)-4);
-		int posCounter = 0, zeroCounter = 0;
-		for(int i=0;i<policy.length;i++) {
-			if(expectedBit == 0) {
-				if((avg - block[startY+policy[i].getY()][startX+policy[i].getX()]) > WMConsts.WM_THRESHOLD-2) {
-					zeroCounter++;
-				}
-			}
-			else {
-				if((block[startY+policy[i].getY()][startX+policy[i].getX()]) - avg > WMConsts.WM_THRESHOLD-2) {
-					posCounter++;
-				}
-			}	
-		}
-		if(posCounter > zeroCounter) {
-			wm.append(1);
-		}
-		else {			
-			wm.append(0);
-		}
-	}*/
 }
