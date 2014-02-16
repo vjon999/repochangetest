@@ -1,0 +1,177 @@
+package com.ju.it.pratik.img.test;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import com.ju.it.pratik.img.WMConsts;
+import com.ju.it.pratik.img.WaveletWatermarker;
+import com.ju.it.pratik.img.util.ImageUtils;
+import com.ju.it.pratik.img.util.TransformUtils;
+import com.ju.it.pratik.img.util.WatermarkUtils;
+import com.ju.it.pratik.img.util.WaveletTransformer;
+
+public class WaveletWatermarkTester implements WMConsts {
+
+	private static final Logger LOG = Logger.getLogger(WaveletWatermarkTester.class.getName());
+	
+	private String inputImage;
+	private String outputImage;
+	private WatermarkUtils watermarkUtils;
+	private String watermarkStr;
+	private WaveletWatermarker watermarker;
+	int level = 1;
+	double strength = 1.05;
+	double dwt2Doriginal[][];
+	int height;
+	int width;
+	int watermarkHeight;
+	int watermarkWidth;
+	int y[], u[], v[];
+	
+	@Before
+	public void setUp() {
+		inputImage = LENA;
+		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm";
+		watermarkUtils = new WatermarkUtils();
+		watermarker = new WaveletWatermarker(2, strength, level);
+		BufferedImage wmImage;
+		try {
+			wmImage = ImageIO.read(new File(WMConsts.WATERMARK_LOGO));
+			watermarkHeight = wmImage.getHeight();
+			watermarkWidth = wmImage.getWidth();
+			int[] watermark = new int[wmImage.getHeight()*wmImage.getWidth()];
+			wmImage.getRGB(0, 0, wmImage.getWidth(), wmImage.getHeight(), watermark, 0, wmImage.getWidth());
+			WatermarkUtils watermarkUtils = new WatermarkUtils();
+			watermarkStr = watermarkUtils.readBinaryWatermark(watermark);
+			LOG.info("watermarkStr len: "+watermarkStr.length()+"\twatermarkStr: "+watermarkStr);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		LOG.info("inputFile: "+inputImage);
+		BufferedImage bufferedImage;
+		try {
+			bufferedImage = ImageIO.read(new File(RESOURCE_IMAGES + inputImage));
+			height = bufferedImage.getHeight();
+			width = bufferedImage.getWidth();
+			int[] rgb = new int[bufferedImage.getWidth() * bufferedImage.getHeight()];
+			int[] r = new int[rgb.length];
+			int g[] = new int[rgb.length];
+			int b[] = new int[rgb.length];
+			bufferedImage.getRGB(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), rgb, 0, bufferedImage.getHeight());
+			ImageUtils.getChannels(rgb, r, g, b);
+			
+			/** converting RGB to YUV starts */
+			int yuv[] = new int[r.length];
+			for(int i=0;i<rgb.length;i++) {
+				yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
+			}
+			/** converting RGB to YUV ends */
+			
+			/** getting seperate Y, U, V channels */
+			y = new int[rgb.length];
+			u = new int[rgb.length];
+			v = new int[rgb.length];
+			ImageUtils.getChannels(yuv, y, u, v);
+			/** getting seperate Y, U, V channels ends */
+			
+			int[][] u2D = ImageUtils.to2D(u, height, width);
+			dwt2Doriginal = WaveletTransformer.discreteWaveletTransform(u2D, level);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Test
+	public void testWaveletWatermark() throws IOException {
+		inputImage = RESOURCE_IMAGES + inputImage;
+		//read image
+		
+		double[][] wmdwt2D = new double[dwt2Doriginal.length][];
+		for(int i=0;i<dwt2Doriginal.length;i++) {
+			wmdwt2D[i] = new double[dwt2Doriginal[i].length];
+			for(int j=0;j<dwt2Doriginal[i].length;j++) {
+				wmdwt2D[i][j] = dwt2Doriginal[i][j];
+			}
+		}
+		watermarker.waveletWatermark(wmdwt2D, watermarkStr);
+		
+		int[][] idwt2D = WaveletTransformer.inverseDiscreteWaveletTransform(wmdwt2D, level);
+		int[] idwt = ImageUtils.to1D(idwt2D, height, width);
+		
+		/** merging 3 seperate Y, U, V channels to one single int array */
+		int[] resYUV = ImageUtils.mergeChannels(y, idwt, v);
+		
+		/** converting YUV to RGB starts */
+		int convertedRgb[] = new int[y.length];
+		for(int i=0;i<convertedRgb.length;i++) {
+			convertedRgb[i] = TransformUtils.yuv2rgb(resYUV[i]);
+		}
+		/** converting YUV to RGB ends */
+		
+		/** saving the image */
+		//String outputFileName = inputImage.substring(0, inputImage.lastIndexOf("."))+"_rgb_wmavg.bmp";
+		new File(WATERMARKED_IMAGES + "wavelet/"+outputImage + ".jpg").delete();
+		new File(WATERMARKED_IMAGES + "wavelet/"+outputImage + ".bmp").delete();
+		BufferedImage outputBufferedImage = ImageUtils.toBufferedImage(convertedRgb, width, height);
+		ImageIO.write(outputBufferedImage, "jpg", new File(WATERMARKED_IMAGES + "wavelet/"+outputImage + ".jpg"));
+		ImageIO.write(outputBufferedImage, "BMP", new File(WATERMARKED_IMAGES + "wavelet/"+outputImage + ".bmp"));
+		LOG.info("saving watermarked file to "+WATERMARKED_IMAGES + "wavelet/"+outputImage + ".bmp");		
+	}
+	
+	@Test
+	public void testRecoverWaveletWatermark() throws IOException {
+		/** RECOVERY STEP */
+		//BufferedImage bufferedImage2 = ImageIO.read(new File(RESOURCE_IMAGES + LENA));
+		outputImage = outputImage + ".jpg";
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		BufferedImage bufferedImage2 = ImageIO.read(new File(WATERMARKED_IMAGES+"wavelet/"+outputImage));
+		int height = bufferedImage2.getHeight();
+		int width = bufferedImage2.getWidth();
+		int[] rgb = new int[width * height];
+		int[] r = new int[rgb.length];
+		int[] g = new int[rgb.length];
+		int[] b = new int[rgb.length];
+		bufferedImage2.getRGB(0, 0, width, height, rgb, 0, height);
+		ImageUtils.getChannels(rgb, r, g, b);
+		
+		/** converting RGB to YUV starts */
+		int[] yuv = new int[r.length];
+		for(int i=0;i<rgb.length;i++) {
+			yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
+		}
+		/** converting RGB to YUV ends */
+		
+		/** getting seperate Y, U, V channels */
+		int[] y = new int[rgb.length];
+		int[] u = new int[rgb.length];
+		int[] v = new int[rgb.length];
+		ImageUtils.getChannels(yuv, y, u, v);
+		/** getting seperate Y, U, V channels ends */
+		
+		int[][] u2D = ImageUtils.to2D(u, height, width);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(u2D, level);
+		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+		LOG.info("recoveredWatermark: "+recoveredWatermark);
+		LOG.info("original watermark: "+watermarkStr);
+		watermarkUtils.writeBinaryWatermark(recoveredWatermark, watermarkWidth, watermarkHeight);
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp")), "bmp");
+	}
+
+	@Test
+	public void testWaveletWatermarkAndRecovery() throws IOException {
+		testWaveletWatermark();
+		testRecoverWaveletWatermark();
+	}
+}

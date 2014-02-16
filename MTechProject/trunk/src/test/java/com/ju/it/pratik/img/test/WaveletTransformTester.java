@@ -15,10 +15,13 @@ import javax.imageio.ImageIO;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ju.it.pratik.img.Location;
 import com.ju.it.pratik.img.WMConsts;
+import com.ju.it.pratik.img.WaveletWatermarker;
 import com.ju.it.pratik.img.util.DCTTransformUtil;
 import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.TransformUtils;
+import com.ju.it.pratik.img.util.WatermarkUtils;
 import com.ju.it.pratik.img.util.WaveletTransformer;
 
 public class WaveletTransformTester implements WMConsts{

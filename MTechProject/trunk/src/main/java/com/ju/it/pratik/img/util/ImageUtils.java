@@ -64,6 +64,15 @@ public class ImageUtils {
 		}
 		return image;
 	}
+	public static void saveImage(int[] pixels, int width, int height, File file, String format) throws IOException {
+		boolean success = ImageIO.write(toBufferedImage(pixels, width, height), format, file);
+		if(success) {
+			LOG.info("Saving file: "+file);
+		}
+		else {
+			LOG.severe("cannot save image at "+file);
+		}
+	}
 	
 	public static void getChannels(int rgb[], int r[], int[] g, int[] b) {
 		for(int i=0;i<rgb.length;i++) {

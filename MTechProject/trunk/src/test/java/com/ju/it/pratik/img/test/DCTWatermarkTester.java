@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.ju.it.pratik.img.DCTWatermarker;
@@ -22,9 +23,12 @@ public class DCTWatermarkTester implements WMConsts {
 	private static final Logger LOG = Logger.getLogger(DCTWatermarkTester.class.getName());
 	
 	private WatermarkUtils watermarkUtils = new WatermarkUtils();
+	private String inputImageName;
 	private BufferedImage bufferedImage;
 	private int imageHeight;
 	private int imageWidth;
+	private int watermarkWidth;
+	private int watermarkHeight;
 	private int[] rgb;
 	private int r[];
 	private int g[];
@@ -35,8 +39,13 @@ public class DCTWatermarkTester implements WMConsts {
 		new Location(1,2), new Location(0,3),
 		new Location(5,0), new Location(4,1),
 		new Location(3,2), new Location(2,3),
-		new Location(1,4), new Location(0,5)
+		//new Location(1,4), new Location(0,5)
 	};
+	
+	@Before
+	public void setUp() {
+		inputImageName = LENA;
+	}
 	
 	public void init(String fileName) throws IOException {
 		LOG.info("inputFile: "+fileName);
@@ -53,13 +62,13 @@ public class DCTWatermarkTester implements WMConsts {
 	
 	@Test
 	public void testEmbedDCTWatermark() throws IOException {
-		String inputImage = RESOURCE_IMAGES + LENA;
-		String outputImage = WATERMARKED_IMAGES + LENA.substring(0, SHIP.lastIndexOf("."))+"_wm";		
+		String inputImage = RESOURCE_IMAGES + inputImageName;
+		String outputImage = WATERMARKED_IMAGES +"dct/"+ inputImageName.substring(0, inputImageName.lastIndexOf("."))+"_wm";		
 		
 		BufferedImage wmImage = ImageIO.read(new File(WMConsts.WATERMARK_LOGO));
 		int[] watermark = new int[wmImage.getHeight()*wmImage.getWidth()];
 		wmImage.getRGB(0, 0, wmImage.getWidth(), wmImage.getHeight(), watermark, 0, wmImage.getWidth());
-		String watermarkStr = watermarkUtils.readWatermark(watermark);
+		String watermarkStr = watermarkUtils.readBinaryWatermark(watermark);
 		LOG.info("watermarkStr len: "+watermarkStr.length()+"\twatermarkStr: "+watermarkStr);
 		//we would consider watermark length as power of 2 only
 		
@@ -103,8 +112,8 @@ public class DCTWatermarkTester implements WMConsts {
 		
 		/** saving the image */
 		//String outputFileName = inputImage.substring(0, inputImage.lastIndexOf("."))+"_rgb_wmavg.bmp";
-		new File(WATERMARKED_IMAGES + outputImage + ".jpg").delete();
-		new File(WATERMARKED_IMAGES + outputImage + ".bmp").delete();
+		new File(WATERMARKED_IMAGES +"dct/"+ outputImage + ".jpg").delete();
+		new File(WATERMARKED_IMAGES +"dct/"+ outputImage + ".bmp").delete();
 		BufferedImage outputBufferedImage = ImageUtils.toBufferedImage(convertedRgb, imageWidth, imageHeight);
 		ImageIO.write(outputBufferedImage, "jpg", new File(outputImage + ".jpg"));
 		ImageIO.write(outputBufferedImage, "BMP", new File(outputImage + ".bmp"));
@@ -114,12 +123,14 @@ public class DCTWatermarkTester implements WMConsts {
 	@Test
 	public void testRecoverDCTWatermark() throws IOException {
 		//String outputImage = RESOURCE_IMAGES + SHIP;
-		String outputImage = WATERMARKED_IMAGES + LENA.replaceFirst(".bmp", "_wm_40.jpg");
+		String outputImage = WATERMARKED_IMAGES +"dct/"+ inputImageName.replaceFirst(".bmp", "_wm.jpg");
 		
 		BufferedImage wmImage = ImageIO.read(new File(WMConsts.WATERMARK_LOGO));
+		watermarkWidth = wmImage.getWidth();
+		watermarkHeight = wmImage.getHeight();
 		int[] watermark = new int[wmImage.getHeight()*wmImage.getWidth()];
 		wmImage.getRGB(0, 0, wmImage.getWidth(), wmImage.getHeight(), watermark, 0, wmImage.getWidth());
-		String watermarkStr = watermarkUtils.readWatermark(watermark);
+		String watermarkStr = watermarkUtils.readBinaryWatermark(watermark);
 		LOG.info("watermarkStr len: "+watermarkStr.length()+"\twatermarkStr: "+watermarkStr);
 		//we would consider watermark length as power of 2 only
 		
@@ -154,6 +165,6 @@ public class DCTWatermarkTester implements WMConsts {
 		DCTWatermarker icarWatermarker = new DCTWatermarker();
 		String recoveredWatermark = icarWatermarker.recoverWatermark(dctResult1D, imageHeight, imageWidth, policy, watermarkStr);
 		LOG.info("watermarkStr len: " + recoveredWatermark.length() + "\t watermarkStr: " + recoveredWatermark);
-		watermarkUtils.writeWatermark(recoveredWatermark);
+		watermarkUtils.writeBinaryWatermark(recoveredWatermark, watermarkWidth, watermarkHeight);
 	}
 }
