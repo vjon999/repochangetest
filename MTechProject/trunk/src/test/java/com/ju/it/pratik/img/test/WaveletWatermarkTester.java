@@ -13,6 +13,8 @@ import org.junit.Test;
 import com.ju.it.pratik.img.WMConsts;
 import com.ju.it.pratik.img.WaveletWatermarker;
 import com.ju.it.pratik.img.util.ImageUtils;
+import com.ju.it.pratik.img.util.NoiseAnalysisResult;
+import com.ju.it.pratik.img.util.NoiseAnalysisUtil;
 import com.ju.it.pratik.img.util.TransformUtils;
 import com.ju.it.pratik.img.util.WatermarkUtils;
 import com.ju.it.pratik.img.util.WaveletTransformer;
@@ -26,6 +28,7 @@ public class WaveletWatermarkTester implements WMConsts {
 	private WatermarkUtils watermarkUtils;
 	private String watermarkStr;
 	private WaveletWatermarker watermarker;
+	private NoiseAnalysisUtil noiseAnalysisUtil;
 	int level = 1;
 	double strength = 1.05;
 	double dwt2Doriginal[][];
@@ -40,6 +43,7 @@ public class WaveletWatermarkTester implements WMConsts {
 		inputImage = LENA;
 		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm";
 		watermarkUtils = new WatermarkUtils();
+		noiseAnalysisUtil = new NoiseAnalysisUtil();
 		watermarker = new WaveletWatermarker(2, strength, level);
 		BufferedImage wmImage;
 		try {
@@ -50,6 +54,7 @@ public class WaveletWatermarkTester implements WMConsts {
 			wmImage.getRGB(0, 0, wmImage.getWidth(), wmImage.getHeight(), watermark, 0, wmImage.getWidth());
 			WatermarkUtils watermarkUtils = new WatermarkUtils();
 			watermarkStr = watermarkUtils.readBinaryWatermark(watermark);
+			//watermarkUtils.writeBinaryWatermark(watermarkStr, watermarkWidth, watermarkHeight);
 			LOG.info("watermarkStr len: "+watermarkStr.length()+"\twatermarkStr: "+watermarkStr);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -131,7 +136,7 @@ public class WaveletWatermarkTester implements WMConsts {
 	public void testRecoverWaveletWatermark() throws IOException {
 		/** RECOVERY STEP */
 		//BufferedImage bufferedImage2 = ImageIO.read(new File(RESOURCE_IMAGES + LENA));
-		outputImage = outputImage + ".jpg";
+		outputImage = outputImage + "_crop_recovered.bmp";
 		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
 		BufferedImage bufferedImage2 = ImageIO.read(new File(WATERMARKED_IMAGES+"wavelet/"+outputImage));
 		int height = bufferedImage2.getHeight();
@@ -164,14 +169,35 @@ public class WaveletWatermarkTester implements WMConsts {
 		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
 		LOG.info("recoveredWatermark: "+recoveredWatermark);
 		LOG.info("original watermark: "+watermarkStr);
-		watermarkUtils.writeBinaryWatermark(recoveredWatermark, watermarkWidth, watermarkHeight);
+		/*watermarkUtils.writeBinaryWatermark(recoveredWatermark, watermarkWidth, watermarkHeight);*/
 		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
-		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp")), "bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
 	}
 
 	@Test
 	public void testWaveletWatermarkAndRecovery() throws IOException {
 		testWaveletWatermark();
 		testRecoverWaveletWatermark();
+	}
+
+	@Test
+	public void doNoiseAnalysisOfImage() throws IOException {
+		String inputImagePath = RESOURCE_IMAGES+inputImage;
+		String outputImagePath = WATERMARKED_IMAGES+"wavelet/"+outputImage+".bmp";
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(outputImagePath, inputImagePath);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void doNoiseAnalysisOfWatermark() throws IOException {
+		String inputImagePath = "src/test/resources/images/ju_logo_bw.bmp";
+		String outputImagePath = WATERMARKED_IMAGES+"wavelet/recovered/lena_512_wm.bmp";
+		System.out.println(outputImagePath);
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(inputImagePath, outputImagePath);
+		LOG.info(result+"");
 	}
 }

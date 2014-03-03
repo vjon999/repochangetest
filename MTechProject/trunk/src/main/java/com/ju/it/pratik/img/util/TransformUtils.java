@@ -70,6 +70,16 @@ public class TransformUtils {
 		yuv[1] = u;
 		yuv[2] = v;
 	}*/
+	
+	public static void rgb2yuv(int[] rgb, int[] y, int[] u, int[] v) {
+		int temp;
+		for(int i=0;i<rgb.length;i++) {
+			temp = rgb2yuv(rgb[i]);
+			y[i] = getChannelValue(temp, CHANNEL_TYPE.Y);
+			u[i] = getChannelValue(temp, CHANNEL_TYPE.U);
+			v[i] = getChannelValue(temp, CHANNEL_TYPE.V);
+		}
+	}
 
 	public static int rgb2yuv(int rgb) {
 		int r = TransformUtils.getChannelValue(rgb, CHANNEL_TYPE.RED_CHANNEL);

@@ -110,65 +110,6 @@ public class ImageUtils {
 		return rgb;
 	}
 	
-	public static double[] lineWatermark(double[] input, int[] watermark, int bitLen) {
-		int tmpIntVal;// int variable to store convert the float bits to int bits and do XOR operation
-		double[] output = new double[input.length]; // output variable to store the result
-		
-		/* looping input array's length divided by 4 as we plan to XOR Least Significant 2 bits of input with watermark's last 2 bits  */
-		for(int i=0;i<input.length;i=i+8/bitLen) {
-			for(int k=0;k<(8/bitLen);k++) {
-				//converting float bits to int bits so that we can do XOR operation
-				tmpIntVal = (int) Double.doubleToLongBits(input[i+k]);
-				//doing XOR operation with last 2 bits of input and watermark
-				switch(bitLen) {
-					case 1: tmpIntVal = tmpIntVal ^ ((watermark[i%watermark.length]>>(k*bitLen)) & 0x1);
-					break;
-					case 2: tmpIntVal = tmpIntVal ^ ((watermark[i%watermark.length]>>(k*bitLen)) & 0x3);
-					break;
-					case 3: tmpIntVal = tmpIntVal ^ ((watermark[i%watermark.length]>>(k*bitLen)) & 0x7);
-					break;
-					case 4: tmpIntVal = tmpIntVal ^ ((watermark[i%watermark.length]>>(k*bitLen)) & 0xF);
-					break;
-					case 5: tmpIntVal = tmpIntVal ^ ((watermark[i%watermark.length]>>(k*bitLen)) & 0xF1);
-					break;
-					case 6: tmpIntVal = tmpIntVal ^ ((watermark[i%watermark.length]>>(k*bitLen)) & 0xF3);
-					break;
-					case 7: tmpIntVal = tmpIntVal ^ ((watermark[i%watermark.length]>>(k*bitLen)) & 0xF7);
-					break;
-					case 8: tmpIntVal = tmpIntVal ^ ((watermark[i%watermark.length]>>(k*bitLen)) & 0xFF);
-					break;
-				}
-				//converting int bits to float and store in output variable
-				output[i+k] = Float.intBitsToFloat(tmpIntVal);
-			}
-		}
-		//return the watermarked result
-		return output;
-	}
-	
-	public static String recoverLineWatermark(float[] input, int[] watermark, int bitLen) {
-		int in;// int variable to store convert the float bits to int bits and do XOR operation
-		float[] output = new float[input.length]; // output variable to store the result
-		int[] extractedWatermark = new int[watermark.length];
-		StringBuilder sb = new StringBuilder();
-		int rc=0,w;
-		int pLen = watermark.length*8/bitLen;
-		for(int i=0;i<pLen;i++) {
-			int byt = 0;
-			for(int k=0;k<8;k++) {
-				in = Float.floatToIntBits(input[i+k]);
-				w = watermark[i];
-				byt = (in ^ ((w>>k) & 0x1));
-				byt = ((byt <<31-k)>>31-k);
-				System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(in)) +" ---- "+ Integer.toBinaryString(byt));
-				byt = byt <<1;
-			}
-			sb.append((char)byt);
-		}
-		System.out.print(sb.toString());
-		return sb.toString();
-	}
-	
 	public static String recoverLineWatermark(float[] input, int bitLen) {
 		return null;
 	}
