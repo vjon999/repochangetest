@@ -15,6 +15,8 @@ import com.ju.it.pratik.img.Location;
 import com.ju.it.pratik.img.WMConsts;
 import com.ju.it.pratik.img.util.DCTTransformUtil;
 import com.ju.it.pratik.img.util.ImageUtils;
+import com.ju.it.pratik.img.util.NoiseAnalysisResult;
+import com.ju.it.pratik.img.util.NoiseAnalysisUtil;
 import com.ju.it.pratik.img.util.TransformUtils;
 import com.ju.it.pratik.img.util.WatermarkUtils;
 
@@ -25,6 +27,7 @@ public class DCTWatermarkTester implements WMConsts {
 	private WatermarkUtils watermarkUtils = new WatermarkUtils();
 	private String inputImageName;
 	private BufferedImage bufferedImage;
+	private NoiseAnalysisUtil noiseAnalysisUtil = new NoiseAnalysisUtil();
 	private int imageHeight;
 	private int imageWidth;
 	private int watermarkWidth;
@@ -33,6 +36,8 @@ public class DCTWatermarkTester implements WMConsts {
 	private int r[];
 	private int g[];
 	private int b[];
+	private String inputImage;
+	private String outputImage;
 	//set the policy
 	private Location[] policy = new Location[] {
 		new Location(3,0), new Location(2,1), 
@@ -45,6 +50,8 @@ public class DCTWatermarkTester implements WMConsts {
 	@Before
 	public void setUp() {
 		inputImageName = LENA;
+		inputImage = LENA;
+		outputImage = WATERMARKED_IMAGES +"dct/"+ inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm_crop_recovered.bmp";
 	}
 	
 	public void init(String fileName) throws IOException {
@@ -57,7 +64,7 @@ public class DCTWatermarkTester implements WMConsts {
 		g = new int[rgb.length];
 		b = new int[rgb.length];
 		bufferedImage.getRGB(0, 0, imageWidth, imageHeight, rgb, 0, imageWidth);
-		ImageUtils.getChannels(rgb, r, g, b);
+		ImageUtils.getChannels(rgb, r, g, b);		
 	}
 	
 	@Test
@@ -112,18 +119,18 @@ public class DCTWatermarkTester implements WMConsts {
 		
 		/** saving the image */
 		//String outputFileName = inputImage.substring(0, inputImage.lastIndexOf("."))+"_rgb_wmavg.bmp";
-		new File(WATERMARKED_IMAGES +"dct/"+ outputImage + ".jpg").delete();
-		new File(WATERMARKED_IMAGES +"dct/"+ outputImage + ".bmp").delete();
+		File jpg = new File(outputImage + ".jpg");jpg.delete();
+		File bmp = new File(outputImage + ".bmp");bmp.delete();
 		BufferedImage outputBufferedImage = ImageUtils.toBufferedImage(convertedRgb, imageWidth, imageHeight);
-		ImageIO.write(outputBufferedImage, "jpg", new File(outputImage + ".jpg"));
-		ImageIO.write(outputBufferedImage, "BMP", new File(outputImage + ".bmp"));
-		LOG.info("saving watermarked file to "+outputImage);
+		ImageIO.write(outputBufferedImage, "jpg", jpg);
+		ImageIO.write(outputBufferedImage, "BMP", bmp);
+		LOG.info("saving watermarked file to "+outputImage+".bmp");
 	}
 	
 	@Test
 	public void testRecoverDCTWatermark() throws IOException {
 		//String outputImage = RESOURCE_IMAGES + SHIP;
-		String outputImage = WATERMARKED_IMAGES +"dct/"+ inputImageName.replaceFirst(".bmp", "_wm.jpg");
+		//String outputImage = WATERMARKED_IMAGES +"dct/"+ inputImageName.replaceFirst(".bmp", "_wm.jpg");
 		
 		BufferedImage wmImage = ImageIO.read(new File(WMConsts.WATERMARK_LOGO));
 		watermarkWidth = wmImage.getWidth();
@@ -165,6 +172,12 @@ public class DCTWatermarkTester implements WMConsts {
 		DCTWatermarker icarWatermarker = new DCTWatermarker();
 		String recoveredWatermark = icarWatermarker.recoverWatermark(dctResult1D, imageHeight, imageWidth, policy, watermarkStr);
 		LOG.info("watermarkStr len: " + recoveredWatermark.length() + "\t watermarkStr: " + recoveredWatermark);
-		watermarkUtils.writeBinaryWatermark(recoveredWatermark, watermarkWidth, watermarkHeight);
+		//watermarkUtils.writeBinaryWatermark(recoveredWatermark, watermarkWidth, watermarkHeight);
+		File recoveredWatermarkFile = new File(outputImage.replace("dct/", "dct/recovered/").replace(".jpg", ".bmp"));
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, recoveredWatermarkFile, "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WMConsts.WATERMARK_LOGO, recoveredWatermarkFile.getAbsolutePath());
+		LOG.info(result+"");
 	}
 }

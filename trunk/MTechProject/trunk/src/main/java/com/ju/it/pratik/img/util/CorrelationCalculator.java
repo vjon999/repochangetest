@@ -1,5 +1,11 @@
 package com.ju.it.pratik.img.util;
 
+import java.awt.image.BufferedImage;
+
+/**
+ * @author pratik
+ *
+ */
 public class CorrelationCalculator {
 
 	public float getCorrelationCoefficient(int[] x, int[] y) {
@@ -38,12 +44,51 @@ public class CorrelationCalculator {
 		return (float)(numerator/denominator);
 	}
 	
+	/**
+	 * This method returns the Normalized Cross Correlation (NCC) 
+	 * which is used for template matching and can be used for measuring 
+	 * the similarities of 2 images 
+	 * @param src image array
+	 * @param dest image array
+	 * @return normalized cross correlation value
+	 */
 	public double calcNormalizedCrossCorrelation(int[] arr1, int[] arr2) {
 		double numerator = 0, d1=0, d2=0, res=0;
 		for(int i=0;i<arr1.length;i++) {
 			numerator += arr1[i]*arr2[i];
 			d1 += arr1[i]*arr1[i];
 			d2 += arr2[i]*arr2[i];
+		}
+		res = numerator/Math.sqrt(d1*d2);
+		return res;
+	}
+	
+	public double calcNormalizedCrossCorrelation(int[][] arr1, int[][] arr2) {
+		double numerator = 0, d1=0, d2=0, res=0;
+		for(int i=0;i<arr1.length;i++) {
+			for(int j=0;j<arr1.length;j++) {
+				numerator += arr1[i][j]*arr2[i][j];
+				d1 += arr1[i][j]*arr1[i][j];
+				d2 += arr2[i][j]*arr2[i][j];
+			}
+		}
+		res = numerator/Math.sqrt(d1*d2);
+		return res;
+	}
+	
+	public double calcNormalizedCrossCorrelation(BufferedImage src, BufferedImage target, int startY, int startX) {
+		double numerator = 0, d1=0, d2=0, res=0;
+		int srcRed, targetRed;
+		for(int y=0;y<target.getHeight();y++) {
+			for(int x=0;x<target.getWidth();x++) {
+				//System.out.println((y+startX)+","+(x+startY));
+				srcRed = (src.getRGB(x+startY, y+startY)&0xFF0000)>>16;
+				targetRed = (target.getRGB(x, y)&0xFF0000)>>16;
+				//System.out.println("srcRed: "+srcRed+" targetRed: "+targetRed );
+				numerator += srcRed*targetRed;
+				d1 += Math.pow(srcRed, 2);
+				d2 += Math.pow(targetRed, 2);
+			}
 		}
 		res = numerator/Math.sqrt(d1*d2);
 		return res;

@@ -7,6 +7,7 @@ public class NoiseAnalysisResult {
 	private double psnrMax;
 	private double snr;
 	private double peak;
+	private double ncc;
 	
 	public double getSnr() {
 		return snr;
@@ -33,7 +34,15 @@ public class NoiseAnalysisResult {
 		this.psnrMax = psnrMax;
 	}
 	
+	
+	public double getNcc() {
+		return ncc;
+	}
+	public void setNcc(double ncc) {
+		this.ncc = ncc;
+	}
+	@Override
 	public String toString() {
-		return "MSE: " + mse +"\tSNR: " + snr + "\tPSNR: " + psnr + "\tPSNR(max=" + peak +") "+ psnrMax;
+		return "NoiseAnalysisResult [mse=" + mse + ", psnr=" + psnr + ", psnrMax=" + psnrMax + ", snr=" + snr + ", NCC: " + ncc + "]";
 	}
 }
