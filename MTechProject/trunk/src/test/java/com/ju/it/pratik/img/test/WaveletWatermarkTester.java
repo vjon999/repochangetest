@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import com.ju.it.pratik.img.WMConsts;
 import com.ju.it.pratik.img.WaveletWatermarker;
+import com.ju.it.pratik.img.util.ImageRotationUtil;
 import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.NoiseAnalysisResult;
 import com.ju.it.pratik.img.util.NoiseAnalysisUtil;
@@ -40,7 +41,8 @@ public class WaveletWatermarkTester implements WMConsts {
 	
 	@Before
 	public void setUp() {
-		inputImage = LENA;
+		//inputImage = LENA;
+		inputImage = MANDRILL;
 		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm";
 		watermarkUtils = new WatermarkUtils();
 		noiseAnalysisUtil = new NoiseAnalysisUtil();
@@ -136,7 +138,7 @@ public class WaveletWatermarkTester implements WMConsts {
 	public void testRecoverWaveletWatermark() throws IOException {
 		/** RECOVERY STEP */
 		//BufferedImage bufferedImage2 = ImageIO.read(new File(RESOURCE_IMAGES + LENA));
-		outputImage = outputImage + "_crop_recovered.bmp";
+		outputImage = outputImage + "_rotate_5.jpg";
 		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
 		BufferedImage bufferedImage2 = ImageIO.read(new File(WATERMARKED_IMAGES+"wavelet/"+outputImage));
 		int height = bufferedImage2.getHeight();
@@ -146,6 +148,7 @@ public class WaveletWatermarkTester implements WMConsts {
 		int[] g = new int[rgb.length];
 		int[] b = new int[rgb.length];
 		bufferedImage2.getRGB(0, 0, width, height, rgb, 0, height);
+		//rgb =  new ImageRotationUtil(rgb, height, width).rotate(-5);
 		ImageUtils.getChannels(rgb, r, g, b);
 		
 		/** converting RGB to YUV starts */
