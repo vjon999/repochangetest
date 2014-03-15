@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.ju.it.pratik.img.util.ImageRotationUtil;
+import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.TransformUtils;
 
 public class Image {
@@ -18,32 +20,52 @@ public class Image {
 	private int rgb2D[][];
 	private int height;
 	private int width;
-	int[][] y;
-	int[][] u;
-	int[][] v;
+	private int[][] y;
+	private int[][] u;
+	private int[][] v;
 	
 	public Image(String path) throws IOException {
 		File in = new File(path);
 		if(!in.exists())
 			throw new FileNotFoundException("file not found: "+path);
 		BufferedImage bufImg = ImageIO.read(in);
+		rgb = bufImg.getRGB(0, 0, bufImg.getWidth(), bufImg.getHeight(), rgb, 0, bufImg.getWidth());
 		height = bufImg.getHeight();
 		width = bufImg.getWidth();
-		rgb = bufImg.getRGB(0, 0, width, height, rgb, 0, width);
+		init();
+	}
+	
+	public Image(String path, int startX, int startY, int endX, int endY) throws IOException {
+		File in = new File(path);
+		if(!in.exists())
+			throw new FileNotFoundException("file not found: "+path);
+		BufferedImage bufImg = ImageIO.read(in);
+		height = endY - startY;
+		width = endX - startX;
+		rgb = new int[height*width];
+		bufImg.getRGB(startX, startY, width, height, rgb, 0, width);
+		init();
+	}
+	
+	public Image(int[] arr, int height, int width) {
+		rgb = arr;
+		this.height = height;
+		this.width = width;
+		init();
+	}
+	
+	private void init() {
 		rgb2D = new int[height][];
-		
-		int center_x = width/2;
-		int center_y = height/2;
-		/*for(int i=0;i<height;i++) {
+		red = new int[width*height];
+		green = new int[width*height];
+		blue = new int[width*height];
+		for(int i=0;i<height;i++) {
 			rgb2D[i] = new int[width];
 			for(int j=0;j<width;j++) {
 				rgb2D[i][j] = rgb[i*width+j];
-			}
-		}*/
-		for(int i=128;i<center_y+128;i++) {
-			rgb2D[i-128] = new int[256];
-			for(int j=128;j<center_x+128;j++) {
-				rgb2D[i-128][j-128] = rgb[i*width+j];
+				red[i*width+j] = (rgb[i*width+j] >> 16) & 0xFF;
+				green[i*width+j] = (rgb[i*width+j] >> 8) & 0xFF;
+				blue[i*width+j] = (rgb[i*width+j]) & 0xFF;
 			}
 		}
 		int[] y2 = new int[width*height];
@@ -51,7 +73,7 @@ public class Image {
 		int[] v2 = new int[width*height];
 		TransformUtils.rgb2yuv(rgb, y2, u2, v2);
 		
-		/*y = new int[height][];
+		y = new int[height][];
 		u = new int[height][];
 		v = new int[height][];
 		for(int i=0;i<height;i++) {
@@ -63,19 +85,6 @@ public class Image {
 				u[i][j] = u2[i*width+j];
 				v[i][j] = v2[i*width+j];
 			}
-		}*/
-		y = new int[height/2][];
-		u = new int[height/2][];
-		v = new int[height/2][];
-		for(int i=128;i<center_y+128;i++) {
-			y[i-128] = new int[width/2];
-			u[i-128] = new int[width/2];
-			v[i-128] = new int[width/2];
-			for(int j=128;j<center_x+128;j++) {
-				y[i-128][j-128] = y2[i*width+j];
-				u[i-128][j-128] = u2[i*width+j];
-				v[i-128][j-128] = v2[i*width+j];
-			}
 		}
 	}
 
@@ -83,6 +92,15 @@ public class Image {
 		red = new int[len];
 		green = new int[len];
 		blue = new int[len];
+	}
+	
+	public void save(File file, String format) throws IOException {
+		ImageUtils.saveImage(rgb, width, height, file, format);
+	}
+	
+	public void rotate(int angle) {
+		rgb = new ImageRotationUtil(this).rotate(angle);
+		init();
 	}
 	
 	public int[] getRed() {

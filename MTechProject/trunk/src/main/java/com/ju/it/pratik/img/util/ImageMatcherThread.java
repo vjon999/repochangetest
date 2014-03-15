@@ -24,6 +24,26 @@ public class ImageMatcherThread implements Runnable {
 		imageMatcher.setLocation(location);
 		//System.out.println(Thread.currentThread().getName()+" location: "+location);
 	}
+	
+	public double calcNormalizedCrossCorrelation(int[] src, int h1, int w1, int[] target, int h2, int w2) {
+		double numerator = 0, d1=0, d2=0, res=0;
+		int srcRed, targetRed, rgbSrc, rgbTarget;
+		for(int y=0;y<h2;y++) {
+			for(int x=0;x<w2;x++) {
+				rgbSrc = src[y*w1+x];
+				rgbTarget = target[y*w2+x];
+				srcRed = Math.round(((rgbSrc&0xFF0000>>16) + (rgbSrc&0xFF00>>8) + (rgbSrc&0xFF))/3);
+				targetRed = Math.round(((rgbTarget&0xFF0000>>16) + (rgbTarget&0xFF00>>8) + (rgbTarget&0xFF))/3);
+				numerator += srcRed*targetRed;
+				d1 += Math.pow(srcRed, 2);
+				d2 += Math.pow(targetRed, 2);
+			}
+		}
+		res = numerator/Math.sqrt(d1*d2);
+		numerator = 0;d1=0;d2=0;
+		return res;
+	}
+	
 	int windowWidth = 64;
 	public double calcNormalizedCrossCorrelation(BufferedImage src, BufferedImage target, int startY, int startX) {
 		double numerator = 0, d1=0, d2=0, res=0;

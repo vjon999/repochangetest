@@ -40,10 +40,10 @@ public class Location implements Comparable<Location> {
 	}
 	@Override
 	public int compareTo(Location o) {
-		if(Math.abs(value) < Math.abs(o.getValue())) {
+		if(value < o.getValue()) {
 			return 1;
 		}
-		else if(Math.abs(value) > Math.abs(o.getValue())) {
+		else if(value > o.getValue()) {
 			return -1;
 		}
 		return 0;
