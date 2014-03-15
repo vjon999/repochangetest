@@ -33,7 +33,7 @@ public class ImageMatcher implements WMConsts {
 		Long startTime = new Date().getTime();
 		Location loc = new Location();
 		ExecutorService executor = Executors.newFixedThreadPool(12);
-		/*for(int y=0;y<heightDiff;y++) {
+		for(int y=0;y<heightDiff;y++) {
 			for(int x=0;x<widthDiff;x++) {
 				Location l = new Location(y, x);
 				locations.add(l);
@@ -51,7 +51,7 @@ public class ImageMatcher implements WMConsts {
 				loc = location2;
 			}
 		}
-		System.out.println(this.location);*/
+		System.out.println(this.location);
 		
 		loc = new Location(46, 45);
 		
@@ -70,6 +70,26 @@ public class ImageMatcher implements WMConsts {
 		new File(WATERMARKED_IMAGES+"wavelet/extracted.bmp").delete();
 		int[] pixels = ImageUtils.to1D(arr, srcBufImg.getHeight(), srcBufImg.getWidth());
 		ImageUtils.saveImage(pixels, srcBufImg.getWidth(), srcBufImg.getHeight(), new File(WATERMARKED_IMAGES+"wavelet/extracted.bmp"), "bmp");
+	}
+	
+	public int getBestRotationMatch(int[] arr1, int h1, int w1, int[] arr2, int h2, int w2) {
+		int bestAngle = 0;
+		double bestNCC = 0;
+		for(int i=-10;i<=10;i++) {
+			ImageRotationUtil rotationUtil = new ImageRotationUtil(arr2, h2, w2);
+			int[] result = rotationUtil.rotate(i);
+			double ncc = CorrelationCalculator.calcNormalizedCrossCorrelation(arr1, h1, w1, result, h2, w2);
+			if(ncc > 0.95) {
+				//System.out.println(ncc+" - "+i);
+				if(ncc > bestNCC) {
+					bestNCC = ncc;
+					bestAngle = i;
+				}
+				
+			}
+		}
+		//System.out.println(bestAngle+"\tNCC: "+bestNCC);
+		return bestAngle;
 	}
 	
 	public static void main(String[] args) throws IOException, InterruptedException {

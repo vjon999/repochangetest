@@ -93,4 +93,23 @@ public class CorrelationCalculator {
 		res = numerator/Math.sqrt(d1*d2);
 		return res;
 	}
+	
+	public static double calcNormalizedCrossCorrelation(int[] src, int h1, int w1, int[] target, int h2, int w2) {
+		double numerator = 0, d1=0, d2=0, res=0;
+		int pixelSrc, pixelTarget;
+		for(int y=0;y<h2;y++) {
+			for(int x=0;x<w2;x++) {
+				pixelSrc = src[y*w1+x]&0xFF;
+				pixelTarget = target[y*w2+x]&0xFF;
+				if(pixelSrc <= 1 || pixelTarget <= 1) {
+					continue;
+				}
+				numerator += pixelSrc*pixelTarget;
+				d1 += Math.pow(pixelSrc, 2);
+				d2 += Math.pow(pixelTarget, 2);
+			}
+		}
+		res = numerator/Math.sqrt(d1*d2);
+		return res;
+	}
 }

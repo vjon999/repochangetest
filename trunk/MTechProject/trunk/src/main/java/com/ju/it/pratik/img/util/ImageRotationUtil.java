@@ -1,19 +1,20 @@
 package com.ju.it.pratik.img.util;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
-import com.ju.it.pratik.img.WMConsts;
+import com.ju.it.pratik.img.Image;
 
 public class ImageRotationUtil {
 
-	public ImageRotationUtil(int[] pixels, int height, int width) {
-		this.pixels = pixels;
+	public ImageRotationUtil(int[] input, int height, int width) {
+		this.pixels = new int[input.length];
+		System.arraycopy(input, 0, this.pixels, 0, input.length);
 		this.height = height;
 		this.width = width;
+	}
+	
+	public ImageRotationUtil(Image image) {
+		this(image.getRgb(), image.getHeight(), image.getWidth());
 	}
 
 	private final int width, height;
@@ -24,9 +25,13 @@ public class ImageRotationUtil {
 		final int[] pixels2 = new int[pixels.length];
 		for (int x = 0; x < width; x++)
 			for (int y = 0; y < height; y++) {
-				final int centerx = this.width / 2, centery = this.height / 2, m = x - centerx, n = y - centery, j = ((int) (m * cos + n
-						* sin))
-						+ centerx, k = ((int) (n * cos - m * sin)) + centery;
+				final int centerx = this.width / 2;
+				final int centery = this.height / 2;
+				final int m = x - centerx;
+				final int n = y - centery;
+				final int j = ((int) (m * cos + n * sin)) + centerx;
+				final int k = ((int) (n * cos - m * sin)) + centery;
+				
 				if (j >= 0 && j < width && k >= 0 && k < this.height)
 					pixels2[(y * width + x)] = pixels[(k * width + j)];
 			}
@@ -45,13 +50,14 @@ public class ImageRotationUtil {
 	}*/
 
 	public static void main(String[] args) throws IOException {
-		BufferedImage bufImg = ImageIO.read(new File(WMConsts.WATERMARKED_IMAGES + "wavelet/lena_512_wm.bmp"));
+		System.out.println(Math.atan2(2.5, 5)*360/Math.PI);
+		/*BufferedImage bufImg = ImageIO.read(new File(WMConsts.WATERMARKED_IMAGES + "wavelet/lena_512_wm.bmp"));
 		int pixels[] = new int[bufImg.getHeight() * bufImg.getWidth()];
 		int h = bufImg.getHeight();
 		int w = bufImg.getWidth();
 		bufImg.getRGB(0, 0, w, h, pixels, 0, w);
 		ImageRotationUtil i = new ImageRotationUtil(pixels, h, w);
 		i.rotate(10);
-		ImageUtils.saveImage(i.pixels, w, h, new File("test.bmp"), "bmp");
+		ImageUtils.saveImage(i.pixels, w, h, new File("test.bmp"), "bmp");*/
 	}
 }

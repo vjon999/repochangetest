@@ -111,7 +111,7 @@ public class WaveletTransformer {
 
 	
 	
-	/** Wavelet transform based ono level */
+	/** Wavelet transform based on level */
 	
 	public static double[] discreteWaveletTransform(int[] input, int level) {
 		double[] output = new double[input.length];

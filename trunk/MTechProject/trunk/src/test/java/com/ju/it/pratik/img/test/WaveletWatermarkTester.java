@@ -10,12 +10,14 @@ import javax.imageio.ImageIO;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ju.it.pratik.img.Image;
 import com.ju.it.pratik.img.WMConsts;
 import com.ju.it.pratik.img.WaveletWatermarker;
-import com.ju.it.pratik.img.util.ImageRotationUtil;
+import com.ju.it.pratik.img.util.ImageMatcher;
 import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.NoiseAnalysisResult;
 import com.ju.it.pratik.img.util.NoiseAnalysisUtil;
+import com.ju.it.pratik.img.util.Sobel;
 import com.ju.it.pratik.img.util.TransformUtils;
 import com.ju.it.pratik.img.util.WatermarkUtils;
 import com.ju.it.pratik.img.util.WaveletTransformer;
@@ -41,8 +43,8 @@ public class WaveletWatermarkTester implements WMConsts {
 	
 	@Before
 	public void setUp() {
-		//inputImage = LENA;
-		inputImage = MANDRILL;
+		inputImage = LENA;
+		//inputImage = MANDRILL;
 		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm";
 		watermarkUtils = new WatermarkUtils();
 		noiseAnalysisUtil = new NoiseAnalysisUtil();
@@ -182,25 +184,238 @@ public class WaveletWatermarkTester implements WMConsts {
 	}
 
 	@Test
-	public void testWaveletWatermarkAndRecovery() throws IOException {
-		testWaveletWatermark();
-		testRecoverWaveletWatermark();
+	public void testRecoverJPEG85Attack() throws IOException {
+		/** RECOVERY STEP */
+		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm.jpg";
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+		LOG.info("recoveredWatermark: "+recoveredWatermark);
+		LOG.info("original watermark: "+watermarkStr);
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");	
+	}
+	
+	@Test
+	public void testRecoverJPEG50Attack() throws IOException {
+		/** RECOVERY STEP */
+		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm_50.jpg";
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+		LOG.info("recoveredWatermark: "+recoveredWatermark);
+		LOG.info("original watermark: "+watermarkStr);
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverJPEG30Attack() throws IOException {
+		/** RECOVERY STEP */
+		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm_30.jpg";
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+		LOG.info("recoveredWatermark: "+recoveredWatermark);
+		LOG.info("original watermark: "+watermarkStr);
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverJPEG20Attack() throws IOException {
+		/** RECOVERY STEP */
+		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm_20.jpg";
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+		LOG.info("recoveredWatermark: "+recoveredWatermark);
+		LOG.info("original watermark: "+watermarkStr);
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverRotationAttack() throws IOException {
+		outputImage = inputImage.replace(".bmp", "_wm_rotate_7.jpg");
+		int threshold = 100;
+		Image imgSrc = new Image(RESOURCE_IMAGES+inputImage, 64, 64, 448, 448);
+		Image rotatedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage, 64, 64, 448, 448);
+		Sobel edgeDetector = new Sobel();		
+		edgeDetector.setThreshold(threshold);
+		
+		int[] gradImgSrc = new int[imgSrc.getWidth()*imgSrc.getHeight()];
+		edgeDetector.init(imgSrc.getBlue(), imgSrc.getWidth(), imgSrc.getHeight());
+		gradImgSrc = edgeDetector.process();
+		ImageUtils.saveImage(gradImgSrc, imgSrc.getWidth(), imgSrc.getWidth(), new File("src/test/resources/test1.bmp"), "BMP");
+		edgeDetector.init(rotatedImage.getBlue(), rotatedImage.getWidth(), rotatedImage.getHeight());
+		int[] gradImgTarget = edgeDetector.process();
+		ImageUtils.saveImage(gradImgTarget, rotatedImage.getWidth(), rotatedImage.getWidth(), new File("src/test/resources/test2.bmp"), "BMP");		
+		int angle = new ImageMatcher().getBestRotationMatch(gradImgSrc, imgSrc.getHeight(), imgSrc.getWidth(), gradImgTarget, rotatedImage.getHeight(), rotatedImage.getWidth());
+		System.out.println("angle: "+angle);
+		
+		rotatedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		rotatedImage.rotate(angle);
+		rotatedImage.save(new File("src/test/resources/test3.jpg"), "jpg");
+		
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(rotatedImage.getU(), level);
+		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+		LOG.info("recoveredWatermark: "+recoveredWatermark);
+		LOG.info("original watermark: "+watermarkStr);
+		watermarkUtils.writeBinaryWatermark(recoveredWatermark, watermarkWidth, watermarkHeight);
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverCroppingAttack() throws IOException {
+		/** RECOVERY STEP */
+		//BufferedImage bufferedImage2 = ImageIO.read(new File(RESOURCE_IMAGES + LENA));
+		outputImage = outputImage + "_crop_recovered.bmp";
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+		LOG.info("recoveredWatermark: "+recoveredWatermark);
+		LOG.info("original watermark: "+watermarkStr);
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverSharpenAttack() throws IOException {
+		/** RECOVERY STEP */
+		outputImage = outputImage + "_sharpened.jpg";
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+		LOG.info("recoveredWatermark: "+recoveredWatermark);
+		LOG.info("original watermark: "+watermarkStr);
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverBlurAttack() throws IOException {
+		/** RECOVERY STEP */
+		outputImage = outputImage + "_blur.jpg";
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+		LOG.info("recoveredWatermark: "+recoveredWatermark);
+		LOG.info("original watermark: "+watermarkStr);
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverNoiseAttack() throws IOException {
+		/** RECOVERY STEP */
+		outputImage = outputImage + "_noise.jpg";
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+		LOG.info("recoveredWatermark: "+recoveredWatermark);
+		LOG.info("original watermark: "+watermarkStr);
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverNoiseBlurAttack() throws IOException {
+		/** RECOVERY STEP */
+		outputImage = outputImage + "_noise_blur.jpg";
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+		LOG.info("recoveredWatermark: "+recoveredWatermark);
+		LOG.info("original watermark: "+watermarkStr);
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+		
+		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
 	}
 
-	@Test
+	/*@Test
 	public void doNoiseAnalysisOfImage() throws IOException {
 		String inputImagePath = RESOURCE_IMAGES+inputImage;
 		String outputImagePath = WATERMARKED_IMAGES+"wavelet/"+outputImage+".bmp";
 		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(outputImagePath, inputImagePath);
 		LOG.info(result+"");
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	public void doNoiseAnalysisOfWatermark() throws IOException {
 		String inputImagePath = "src/test/resources/images/ju_logo_bw.bmp";
 		String outputImagePath = WATERMARKED_IMAGES+"wavelet/recovered/lena_512_wm.bmp";
 		System.out.println(outputImagePath);
 		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(inputImagePath, outputImagePath);
 		LOG.info(result+"");
-	}
+	}*/
 }
