@@ -1,4 +1,4 @@
-package com.ju.it.pratik.img.test;
+package com.ju.it.pratik.img.test.watermark;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

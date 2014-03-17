@@ -1,4 +1,4 @@
-package com.ju.it.pratik.img.test;
+package com.ju.it.pratik.img.test.watermark;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -33,7 +33,7 @@ public class WaveletWatermarkTester implements WMConsts {
 	private WaveletWatermarker watermarker;
 	private NoiseAnalysisUtil noiseAnalysisUtil;
 	int level = 1;
-	double strength = 1.05;
+	double strength = 1.07;
 	double dwt2Doriginal[][];
 	int height;
 	int width;
@@ -43,8 +43,8 @@ public class WaveletWatermarkTester implements WMConsts {
 	
 	@Before
 	public void setUp() {
-		inputImage = LENA;
-		//inputImage = MANDRILL;
+		//inputImage = LENA;
+		inputImage = MANDRILL;
 		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm";
 		watermarkUtils = new WatermarkUtils();
 		noiseAnalysisUtil = new NoiseAnalysisUtil();
@@ -325,7 +325,7 @@ public class WaveletWatermarkTester implements WMConsts {
 	@Test
 	public void testRecoverSharpenAttack() throws IOException {
 		/** RECOVERY STEP */
-		outputImage = outputImage + "_sharpened.jpg";
+		outputImage = outputImage + "_sharpen.jpg";
 		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+outputImage);
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
