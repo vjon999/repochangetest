@@ -7,10 +7,10 @@ public interface WMConsts {
 	public static final String OUTPUT_FOLDER = RESOURCE_IMAGES + "output/";
 	public static final String DEFAULT_WATERMARK_INPUT_FILE_NAME = "lena_512.bmp";//"Hydrangeas_512.jpg";
 	public static final String DEFAULT_WATERMARKED_IMAGE = "lena_512_rgb_wm.bmp";
-	public static final String WATERMARK_LOGO = RESOURCE_IMAGES + "ju_logo_bw.bmp";
+	public static final String WATERMARK_LOGO = RESOURCE_IMAGES + "bmw_logo_bw.bmp";
 	
 	public static final String LENA = "lena_512.bmp";
-	public static final String MANDRILL = "mandrill_512.tiff";
+	public static final String MANDRILL = "mandrill_512.bmp";
 	public static final String LENA_WM = "lena_512_rgb_wm.bmp";
 	public static final String LENA_CROPPED_WM = "lena_256_cropped_rgb_wm2.bmp";	
 	public static final String LENA_ROTATED_WM = "lena_512_rotated_rgb_wm.bmp";

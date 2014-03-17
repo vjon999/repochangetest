@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
+import com.ju.it.pratik.img.Image;
 import com.ju.it.pratik.img.Location;
 import com.ju.it.pratik.img.WMConsts;
 
@@ -70,6 +71,10 @@ public class ImageMatcher implements WMConsts {
 		new File(WATERMARKED_IMAGES+"wavelet/extracted.bmp").delete();
 		int[] pixels = ImageUtils.to1D(arr, srcBufImg.getHeight(), srcBufImg.getWidth());
 		ImageUtils.saveImage(pixels, srcBufImg.getWidth(), srcBufImg.getHeight(), new File(WATERMARKED_IMAGES+"wavelet/extracted.bmp"), "bmp");
+	}
+	
+	public int getBestRotationMatch(Image img1, Image img2) {
+		return getBestRotationMatch(img1.getRed(), img1.getHeight(), img1.getWidth(), img2.getRed(), img2.getHeight(), img2.getWidth());
 	}
 	
 	public int getBestRotationMatch(int[] arr1, int h1, int w1, int[] arr2, int h2, int w2) {

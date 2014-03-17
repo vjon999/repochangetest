@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -12,6 +13,8 @@ import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.TransformUtils;
 
 public class Image {
+	
+	private static Logger LOG = Logger.getLogger(Image.class.getName());
 
 	private int[] red;
 	private int[] green;
@@ -28,6 +31,7 @@ public class Image {
 		File in = new File(path);
 		if(!in.exists())
 			throw new FileNotFoundException("file not found: "+path);
+		LOG.fine("Reading Image: "+in);
 		BufferedImage bufImg = ImageIO.read(in);
 		rgb = bufImg.getRGB(0, 0, bufImg.getWidth(), bufImg.getHeight(), rgb, 0, bufImg.getWidth());
 		height = bufImg.getHeight();
