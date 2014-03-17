@@ -1,4 +1,4 @@
-package com.ju.it.pratik.img.test;
+package com.ju.it.pratik.img.test.watermark;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -52,7 +52,7 @@ public class DCTWatermarkTester implements WMConsts {
 	public void setUp() {
 		inputImageName = LENA;
 		inputImage = LENA;
-		outputImage = WATERMARKED_IMAGES +"dct/"+ inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm_rotate_5.jpg";
+		outputImage = WATERMARKED_IMAGES +"dct/"+ inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm.jpg";
 	}
 	
 	public void init(String fileName) throws IOException {
@@ -65,7 +65,7 @@ public class DCTWatermarkTester implements WMConsts {
 		g = new int[rgb.length];
 		b = new int[rgb.length];
 		bufferedImage.getRGB(0, 0, imageWidth, imageHeight, rgb, 0, imageWidth);
-		rgb =  new ImageRotationUtil(rgb, imageHeight, imageWidth).rotate(-5);
+		//rgb =  new ImageRotationUtil(rgb, imageHeight, imageWidth).rotate(-5);
 		ImageUtils.getChannels(rgb, r, g, b);		
 	}
 	

@@ -1,4 +1,4 @@
-package com.ju.it.pratik.img.test;
+package com.ju.it.pratik.img.test.watermark;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,7 +18,6 @@ import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.NoiseAnalysisResult;
 import com.ju.it.pratik.img.util.NoiseAnalysisUtil;
 import com.ju.it.pratik.img.util.Sobel;
-import com.ju.it.pratik.img.util.TransformUtils;
 import com.ju.it.pratik.img.util.WatermarkUtils;
 import com.ju.it.pratik.img.util.WaveletTransformer;
 
@@ -35,16 +34,13 @@ public class WatermarkRecoveryTest implements WMConsts {
 	int level = 1;
 	double strength = 1.05;
 	double dwt2Doriginal[][];
-	int height;
-	int width;
 	int watermarkHeight;
 	int watermarkWidth;
-	int y[], u[], v[];
+	private Image srcImg; 
 	
 	@Before
 	public void setUp() {
-		inputImage = LENA;
-		watermarkedImageName = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm";
+		inputImage = MANDRILL;
 		watermarkUtils = new WatermarkUtils();
 		noiseAnalysisUtil = new NoiseAnalysisUtil();
 		watermarker = new WaveletWatermarker(2, strength, level);
@@ -61,36 +57,10 @@ public class WatermarkRecoveryTest implements WMConsts {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		LOG.info("inputFile: "+inputImage);
-		BufferedImage bufferedImage;
 		try {
-			bufferedImage = ImageIO.read(new File(RESOURCE_IMAGES + inputImage));
-			height = bufferedImage.getHeight();
-			width = bufferedImage.getWidth();
-			int[] rgb = new int[bufferedImage.getWidth() * bufferedImage.getHeight()];
-			int[] r = new int[rgb.length];
-			int g[] = new int[rgb.length];
-			int b[] = new int[rgb.length];
-			bufferedImage.getRGB(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), rgb, 0, bufferedImage.getHeight());
-			ImageUtils.getChannels(rgb, r, g, b);
-			
-			/** converting RGB to YUV starts */
-			int yuv[] = new int[r.length];
-			for(int i=0;i<rgb.length;i++) {
-				yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
-			}
-			/** converting RGB to YUV ends */
-			
-			/** getting seperate Y, U, V channels */
-			y = new int[rgb.length];
-			u = new int[rgb.length];
-			v = new int[rgb.length];
-			ImageUtils.getChannels(yuv, y, u, v);
-			/** getting seperate Y, U, V channels ends */
-			
-			int[][] u2D = ImageUtils.to2D(u, height, width);
-			dwt2Doriginal = WaveletTransformer.discreteWaveletTransform(u2D, level);
+			LOG.info("inputFile: "+inputImage);
+			srcImg = new Image(RESOURCE_IMAGES + inputImage);
+			dwt2Doriginal = WaveletTransformer.discreteWaveletTransform(srcImg.getU(), level);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -243,7 +213,7 @@ public class WatermarkRecoveryTest implements WMConsts {
 	@Test
 	public void testRecoverSharpenAttack() throws IOException {
 		/** RECOVERY STEP */
-		watermarkedImageName = inputImage.replace(".bmp", "_wm_sharpened.jpg");
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_sharpen.jpg");
 		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+watermarkedImageName);
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+watermarkedImageName);
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
