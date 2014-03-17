@@ -3,7 +3,7 @@ package com.ju.it.pratik.img;
 import java.text.DecimalFormat;
 import java.util.logging.Logger;
 
-import com.ju.it.pratik.img.test.DCTWatermarkTester;
+import com.ju.it.pratik.img.test.watermark.DCTWatermarkTester;
 import com.ju.it.pratik.img.util.DCTTransformUtil;
 
 public class DCTWatermarker {
