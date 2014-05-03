@@ -107,6 +107,27 @@ public class Image {
 		init();
 	}
 	
+	public int[][] getBinaryImage() {
+		int[][] binImg = new int[y.length][];
+		for(int i=0;i<y.length;i++) {
+			binImg[i] = new int[y[i].length];
+			for(int j=0;j<y[i].length;j++) {
+				binImg[i][j] = (y[i][j]>128)?1:0;
+			}
+		}
+		return binImg;
+	}
+	
+	public int[] getBinaryImage1D() {
+		int[] binImg = new int[y.length*y[0].length];
+		for(int i=0;i<y.length;i++) {
+			for(int j=0;j<y[i].length;j++) {
+				binImg[i*y[i].length+j] = (y[i][j]>128)?1:0;
+			}
+		}
+		return binImg;
+	}
+	
 	public int[] getRed() {
 		return red;
 	}
