@@ -28,8 +28,7 @@ public class ImageMatcher implements WMConsts {
 		int widthDiff = srcBufImg.getWidth() - targetBufImg.getWidth();
 		System.out.println("heightDiff: "+heightDiff);
 		System.out.println("widthDiff: "+widthDiff);
-		CorrelationCalculator calculator = new CorrelationCalculator();
-		double max = 0, ncc;
+		double max = 0;
 		List<Location> locations = new ArrayList<Location>();
 		Long startTime = new Date().getTime();
 		Location loc = new Location();
@@ -54,7 +53,7 @@ public class ImageMatcher implements WMConsts {
 		}
 		System.out.println(this.location);
 		
-		loc = new Location(46, 45);
+		loc = this.location;
 		
 		//save n extract
 		int arr[][] = new int[srcBufImg.getHeight()][srcBufImg.getWidth()];
@@ -68,9 +67,9 @@ public class ImageMatcher implements WMConsts {
 					arr[y][x] = 0;
 			}
 		}
-		new File(WATERMARKED_IMAGES+"wavelet/extracted.bmp").delete();
+		new File(target.replace(".jpg", "_recovered.bmp")).delete();
 		int[] pixels = ImageUtils.to1D(arr, srcBufImg.getHeight(), srcBufImg.getWidth());
-		ImageUtils.saveImage(pixels, srcBufImg.getWidth(), srcBufImg.getHeight(), new File(WATERMARKED_IMAGES+"wavelet/extracted.bmp"), "bmp");
+		ImageUtils.saveImage(pixels, srcBufImg.getWidth(), srcBufImg.getHeight(), new File(target.replace(".jpg", "_recovered.bmp")), "bmp");
 	}
 	
 	public int getBestRotationMatch(Image img1, Image img2) {
@@ -99,8 +98,8 @@ public class ImageMatcher implements WMConsts {
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		ImageMatcher m = new ImageMatcher();
-		String src = WMConsts.WATERMARKED_IMAGES+"wavelet/lena_512_wm.jpg";
-		String target = WMConsts.WATERMARKED_IMAGES+"wavelet/lena_512_wm_crop.jpg";
+		String src = WMConsts.WATERMARKED_IMAGES+"hybrid/lena_512_wm.jpg";
+		String target = WMConsts.WATERMARKED_IMAGES+"hybrid/lena_512_wm_crop.jpg";
 		System.out.println(src);
 		System.out.println(target);
 		m.getStartingPixel(src, target);

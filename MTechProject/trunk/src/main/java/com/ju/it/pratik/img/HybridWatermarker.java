@@ -3,7 +3,6 @@ package com.ju.it.pratik.img;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
-import com.ju.it.pratik.img.test.PrintUtil;
 import com.ju.it.pratik.img.util.DCTTransformUtil;
 
 public class HybridWatermarker {
