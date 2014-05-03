@@ -1,5 +1,7 @@
 package com.ju.it.pratik.img.util;
 
+import java.text.DecimalFormat;
+
 public class NoiseAnalysisResult {
 
 	private double mse;
@@ -8,6 +10,8 @@ public class NoiseAnalysisResult {
 	private double snr;
 	private double peak;
 	private double ncc;
+	private double ber;
+	private DecimalFormat df = new DecimalFormat("##.##");
 	
 	public double getSnr() {
 		return snr;
@@ -41,8 +45,16 @@ public class NoiseAnalysisResult {
 	public void setNcc(double ncc) {
 		this.ncc = ncc;
 	}
+	
+	public double getBer() {
+		return ber;
+	}
+	public void setBer(double ber) {
+		this.ber = ber;
+	}
 	@Override
 	public String toString() {
-		return "NoiseAnalysisResult [mse=" + mse + ", psnr=" + psnr + ", psnrMax=" + psnrMax + ", snr=" + snr + ", NCC: " + ncc + "]";
+		return "NoiseAnalysisResult [NCC: " + df.format(ncc) + " mse=" + df.format(mse) + ", "
+				+ "psnr=" + df.format(psnr) + ", psnrMax=" + df.format(psnrMax) + ", snr=" + df.format(snr) + " ber: " + df.format(ber) + "]";
 	}
 }
