@@ -29,7 +29,7 @@ public class PrintUtil {
 		StringBuilder sb = new StringBuilder();
 		for(int i=0;i<arr.length;i++) {
 			for(int j=0;j<arr[0].length;j++) {
-				sb.append(arr[i][j]+"\t");
+				sb.append(Math.round(arr[i][j]*100)/100+"\t");
 			}
 			sb.append("\n");
 		}
