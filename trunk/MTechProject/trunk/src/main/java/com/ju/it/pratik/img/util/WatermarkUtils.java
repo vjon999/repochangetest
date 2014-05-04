@@ -334,6 +334,19 @@ public class WatermarkUtils {
 		return image;
 	}
 	
+	public int[] toBWImageArray(int[] arr, int width, int height) {
+		int ctr = 0;		
+		for(int i=0;i<arr.length;i++) {
+			if(arr[i] == 1) {
+				arr[ctr++] = 0xFFFFFF;
+			}
+			else {
+				arr[ctr++] = 0;
+			}
+		}
+		return arr;
+	}
+	
 	public String byteToBinaryString(byte byt) {
 		return String.format("%8s", Integer.toBinaryString(byt & 0xFF)).replace(' ', '0');
 	}

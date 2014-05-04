@@ -57,4 +57,8 @@ public class NoiseAnalysisResult {
 		return "NoiseAnalysisResult [NCC: " + df.format(ncc) + " mse=" + df.format(mse) + ", "
 				+ "psnr=" + df.format(psnr) + ", psnrMax=" + df.format(psnrMax) + ", snr=" + df.format(snr) + " ber: " + df.format(ber) + "]";
 	}
+	
+	public String toHTML() {
+		return "<tr><td>" + df.format(ncc) + "</td><td>" + df.format(mse) + "</td><td>" + df.format(psnr) + "</td><td>" + df.format(psnrMax) + "</td><td>" + df.format(snr) + "</td><td>" + df.format(ber) + "</td></tr>";
+	}
 }

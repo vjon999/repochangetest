@@ -1,6 +1,7 @@
 package com.ju.it.pratik.img.util;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.ju.it.pratik.img.Image;
 
@@ -18,8 +19,8 @@ public class NoiseAnalysisUtil {
 		int error = 0;
 		NoiseAnalysisResult result = new NoiseAnalysisResult();
 
-		for (int i = 0; i < nrows; i++) {
-			for (int j = 0; j < ncols; j++) {
+		for (int i = 0; i < ncols; i++) {
+			for (int j = 0; j < nrows; j++) {
 				//System.out.println(originalImage[i][j]+"\t"+watermarkedImage[i][j]);
 				signal += originalImage[i][j] * originalImage[i][j];
 				if(originalImage[i][j] != watermarkedImage[i][j]) {
@@ -68,5 +69,14 @@ public class NoiseAnalysisUtil {
 		result.setSnr(10*Math.log10(signal/noise));
 		
 		return result;
+	}
+	
+	public String generateHTMLReport(List<NoiseAnalysisResult> list) {
+		StringBuilder html = new StringBuilder("<table><thead><tr><th>NCC</th><th>MSE</th><th>PSNR</th><th>PSNR Max</th><th>SNR</th><th>BER</th></thead><tbody>");
+		for(NoiseAnalysisResult result : list) {
+			html.append(result.toHTML());
+		}
+		html.append("</tbody></table>");
+		return html.toString();
 	}
 }

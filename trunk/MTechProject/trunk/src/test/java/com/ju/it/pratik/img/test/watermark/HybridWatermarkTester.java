@@ -2,8 +2,11 @@ package com.ju.it.pratik.img.test.watermark;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -34,6 +37,7 @@ public class HybridWatermarkTester implements WMConsts {
 	private String watermarkStr;
 	private HybridWatermarker watermarker;
 	private NoiseAnalysisUtil noiseAnalysisUtil;
+	private NoiseAnalysisResult result;
 	int level = 2;
 	double strength = 50;
 	double dwt2Doriginal[][];
@@ -44,7 +48,7 @@ public class HybridWatermarkTester implements WMConsts {
 	
 	@Before
 	public void setUp() {
-		inputImage = LENA;
+		inputImage = MANDRILL;
 		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm";
 		watermarkUtils = new WatermarkUtils();
 		noiseAnalysisUtil = new NoiseAnalysisUtil();
@@ -144,8 +148,55 @@ public class HybridWatermarkTester implements WMConsts {
 		String recWMFileName = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(recWMFileName), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, recWMFileName);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, recWMFileName);
 		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverJPEGAttacks() throws IOException {
+		List<NoiseAnalysisResult> noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();
+		testRecoverJPEG100Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG90Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG80Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG70Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG60Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG50Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG40Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG30Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG20Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG10Attack();noiseAnalysisResults.add(result);
+		FileOutputStream fos = new FileOutputStream(new File("report.html"));
+		fos.write(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults).getBytes());
+		fos.close();
+	}
+	
+	@Test
+	public void testRecoverRotationAttacks() throws IOException {
+		List<NoiseAnalysisResult> noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();
+		testRecoverRotationAttackM7();noiseAnalysisResults.add(result);
+		testRecoverRotationAttackM5();noiseAnalysisResults.add(result);
+		testRecoverRotationAttackM3();noiseAnalysisResults.add(result);
+		testRecoverRotationAttackM1();noiseAnalysisResults.add(result);
+		testRecoverRotationAttack1();noiseAnalysisResults.add(result);
+		testRecoverRotationAttack3();noiseAnalysisResults.add(result);
+		testRecoverRotationAttack5();noiseAnalysisResults.add(result);
+		testRecoverRotationAttack7();noiseAnalysisResults.add(result);
+		FileOutputStream fos = new FileOutputStream(new File("report.html"));
+		fos.write(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults).getBytes());
+		fos.close();
+	}
+	
+	@Test
+	public void testRecoverBlurAttacks() throws IOException {
+		List<NoiseAnalysisResult> noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();
+		testRecoverGaussianBlur1Attack();noiseAnalysisResults.add(result);
+		testRecoverGaussianBlur2Attack();noiseAnalysisResults.add(result);
+		testRecoverGaussianBlur3Attack();noiseAnalysisResults.add(result);
+		testRecoverGaussianBlur4Attack();noiseAnalysisResults.add(result);
+		testRecoverGaussianBlur5Attack();noiseAnalysisResults.add(result);
+		FileOutputStream fos = new FileOutputStream(new File("report.html"));
+		fos.write(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults).getBytes());
+		fos.close();
 	}
 
 	@Test
@@ -160,7 +211,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -176,7 +227,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -192,7 +243,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -208,7 +259,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -224,7 +275,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -240,7 +291,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -256,7 +307,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -272,7 +323,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -288,7 +339,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -304,12 +355,243 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
 	@Test
-	public void testRecoverRotationAttack() throws IOException {
+	public void testRecoverRotationAttackM7() throws IOException {
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_rotate_-7.jpg");
+		int threshold = 100;
+		Image imgSrc = new Image(RESOURCE_IMAGES+inputImage, 64, 64, 448, 448);
+		Image rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName, 64, 64, 448, 448);
+		Sobel edgeDetector = new Sobel();		
+		edgeDetector.setThreshold(threshold);
+		
+		int[] gradImgSrc = new int[imgSrc.getWidth()*imgSrc.getHeight()];
+		edgeDetector.init(imgSrc.getBlue(), imgSrc.getWidth(), imgSrc.getHeight());
+		gradImgSrc = edgeDetector.process();
+		ImageUtils.saveImage(gradImgSrc, imgSrc.getWidth(), imgSrc.getWidth(), new File("src/test/resources/test1.bmp"), "BMP");
+		edgeDetector.init(rotatedImage.getBlue(), rotatedImage.getWidth(), rotatedImage.getHeight());
+		int[] gradImgTarget = edgeDetector.process();
+		ImageUtils.saveImage(gradImgTarget, rotatedImage.getWidth(), rotatedImage.getWidth(), new File("src/test/resources/test2.bmp"), "BMP");		
+		int angle = new ImageMatcher().getBestRotationMatch(gradImgSrc, imgSrc.getHeight(), imgSrc.getWidth(), gradImgTarget, rotatedImage.getHeight(), rotatedImage.getWidth());
+		System.out.println("angle: "+angle);
+		
+		rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		rotatedImage.rotate(angle);
+		rotatedImage.save(new File("src/test/resources/test3.jpg"), "jpg");
+		
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(rotatedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverRotationAttackM5() throws IOException {
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_rotate_-5.jpg");
+		int threshold = 100;
+		Image imgSrc = new Image(RESOURCE_IMAGES+inputImage, 64, 64, 448, 448);
+		Image rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName, 64, 64, 448, 448);
+		Sobel edgeDetector = new Sobel();		
+		edgeDetector.setThreshold(threshold);
+		
+		int[] gradImgSrc = new int[imgSrc.getWidth()*imgSrc.getHeight()];
+		edgeDetector.init(imgSrc.getBlue(), imgSrc.getWidth(), imgSrc.getHeight());
+		gradImgSrc = edgeDetector.process();
+		ImageUtils.saveImage(gradImgSrc, imgSrc.getWidth(), imgSrc.getWidth(), new File("src/test/resources/test1.bmp"), "BMP");
+		edgeDetector.init(rotatedImage.getBlue(), rotatedImage.getWidth(), rotatedImage.getHeight());
+		int[] gradImgTarget = edgeDetector.process();
+		ImageUtils.saveImage(gradImgTarget, rotatedImage.getWidth(), rotatedImage.getWidth(), new File("src/test/resources/test2.bmp"), "BMP");		
+		int angle = new ImageMatcher().getBestRotationMatch(gradImgSrc, imgSrc.getHeight(), imgSrc.getWidth(), gradImgTarget, rotatedImage.getHeight(), rotatedImage.getWidth());
+		System.out.println("angle: "+angle);
+		
+		rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		rotatedImage.rotate(angle);
+		rotatedImage.save(new File("src/test/resources/test3.jpg"), "jpg");
+		
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(rotatedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverRotationAttackM3() throws IOException {
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_rotate_-3.jpg");
+		int threshold = 100;
+		Image imgSrc = new Image(RESOURCE_IMAGES+inputImage, 64, 64, 448, 448);
+		Image rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName, 64, 64, 448, 448);
+		Sobel edgeDetector = new Sobel();		
+		edgeDetector.setThreshold(threshold);
+		
+		int[] gradImgSrc = new int[imgSrc.getWidth()*imgSrc.getHeight()];
+		edgeDetector.init(imgSrc.getBlue(), imgSrc.getWidth(), imgSrc.getHeight());
+		gradImgSrc = edgeDetector.process();
+		ImageUtils.saveImage(gradImgSrc, imgSrc.getWidth(), imgSrc.getWidth(), new File("src/test/resources/test1.bmp"), "BMP");
+		edgeDetector.init(rotatedImage.getBlue(), rotatedImage.getWidth(), rotatedImage.getHeight());
+		int[] gradImgTarget = edgeDetector.process();
+		ImageUtils.saveImage(gradImgTarget, rotatedImage.getWidth(), rotatedImage.getWidth(), new File("src/test/resources/test2.bmp"), "BMP");		
+		int angle = new ImageMatcher().getBestRotationMatch(gradImgSrc, imgSrc.getHeight(), imgSrc.getWidth(), gradImgTarget, rotatedImage.getHeight(), rotatedImage.getWidth());
+		System.out.println("angle: "+angle);
+		
+		rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		rotatedImage.rotate(angle);
+		rotatedImage.save(new File("src/test/resources/test3.jpg"), "jpg");
+		
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(rotatedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverRotationAttackM1() throws IOException {
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_rotate_-1.jpg");
+		int threshold = 100;
+		Image imgSrc = new Image(RESOURCE_IMAGES+inputImage, 64, 64, 448, 448);
+		Image rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName, 64, 64, 448, 448);
+		Sobel edgeDetector = new Sobel();		
+		edgeDetector.setThreshold(threshold);
+		
+		int[] gradImgSrc = new int[imgSrc.getWidth()*imgSrc.getHeight()];
+		edgeDetector.init(imgSrc.getBlue(), imgSrc.getWidth(), imgSrc.getHeight());
+		gradImgSrc = edgeDetector.process();
+		ImageUtils.saveImage(gradImgSrc, imgSrc.getWidth(), imgSrc.getWidth(), new File("src/test/resources/test1.bmp"), "BMP");
+		edgeDetector.init(rotatedImage.getBlue(), rotatedImage.getWidth(), rotatedImage.getHeight());
+		int[] gradImgTarget = edgeDetector.process();
+		ImageUtils.saveImage(gradImgTarget, rotatedImage.getWidth(), rotatedImage.getWidth(), new File("src/test/resources/test2.bmp"), "BMP");		
+		int angle = new ImageMatcher().getBestRotationMatch(gradImgSrc, imgSrc.getHeight(), imgSrc.getWidth(), gradImgTarget, rotatedImage.getHeight(), rotatedImage.getWidth());
+		System.out.println("angle: "+angle);
+		
+		rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		rotatedImage.rotate(angle);
+		rotatedImage.save(new File("src/test/resources/test3.jpg"), "jpg");
+		
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(rotatedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverRotationAttack1() throws IOException {
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_rotate_1.jpg");
+		int threshold = 100;
+		Image imgSrc = new Image(RESOURCE_IMAGES+inputImage, 64, 64, 448, 448);
+		Image rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName, 64, 64, 448, 448);
+		Sobel edgeDetector = new Sobel();		
+		edgeDetector.setThreshold(threshold);
+		
+		int[] gradImgSrc = new int[imgSrc.getWidth()*imgSrc.getHeight()];
+		edgeDetector.init(imgSrc.getBlue(), imgSrc.getWidth(), imgSrc.getHeight());
+		gradImgSrc = edgeDetector.process();
+		ImageUtils.saveImage(gradImgSrc, imgSrc.getWidth(), imgSrc.getWidth(), new File("src/test/resources/test1.bmp"), "BMP");
+		edgeDetector.init(rotatedImage.getBlue(), rotatedImage.getWidth(), rotatedImage.getHeight());
+		int[] gradImgTarget = edgeDetector.process();
+		ImageUtils.saveImage(gradImgTarget, rotatedImage.getWidth(), rotatedImage.getWidth(), new File("src/test/resources/test2.bmp"), "BMP");		
+		int angle = new ImageMatcher().getBestRotationMatch(gradImgSrc, imgSrc.getHeight(), imgSrc.getWidth(), gradImgTarget, rotatedImage.getHeight(), rotatedImage.getWidth());
+		System.out.println("angle: "+angle);
+		
+		rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		rotatedImage.rotate(angle);
+		rotatedImage.save(new File("src/test/resources/test3.jpg"), "jpg");
+		
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(rotatedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverRotationAttack3() throws IOException {
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_rotate_3.jpg");
+		int threshold = 100;
+		Image imgSrc = new Image(RESOURCE_IMAGES+inputImage, 64, 64, 448, 448);
+		Image rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName, 64, 64, 448, 448);
+		Sobel edgeDetector = new Sobel();		
+		edgeDetector.setThreshold(threshold);
+		
+		int[] gradImgSrc = new int[imgSrc.getWidth()*imgSrc.getHeight()];
+		edgeDetector.init(imgSrc.getBlue(), imgSrc.getWidth(), imgSrc.getHeight());
+		gradImgSrc = edgeDetector.process();
+		ImageUtils.saveImage(gradImgSrc, imgSrc.getWidth(), imgSrc.getWidth(), new File("src/test/resources/test1.bmp"), "BMP");
+		edgeDetector.init(rotatedImage.getBlue(), rotatedImage.getWidth(), rotatedImage.getHeight());
+		int[] gradImgTarget = edgeDetector.process();
+		ImageUtils.saveImage(gradImgTarget, rotatedImage.getWidth(), rotatedImage.getWidth(), new File("src/test/resources/test2.bmp"), "BMP");		
+		int angle = new ImageMatcher().getBestRotationMatch(gradImgSrc, imgSrc.getHeight(), imgSrc.getWidth(), gradImgTarget, rotatedImage.getHeight(), rotatedImage.getWidth());
+		System.out.println("angle: "+angle);
+		
+		rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		rotatedImage.rotate(angle);
+		rotatedImage.save(new File("src/test/resources/test3.jpg"), "jpg");
+		
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(rotatedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverRotationAttack5() throws IOException {
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_rotate_5.jpg");
+		int threshold = 100;
+		Image imgSrc = new Image(RESOURCE_IMAGES+inputImage, 64, 64, 448, 448);
+		Image rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName, 64, 64, 448, 448);
+		Sobel edgeDetector = new Sobel();		
+		edgeDetector.setThreshold(threshold);
+		
+		int[] gradImgSrc = new int[imgSrc.getWidth()*imgSrc.getHeight()];
+		edgeDetector.init(imgSrc.getBlue(), imgSrc.getWidth(), imgSrc.getHeight());
+		gradImgSrc = edgeDetector.process();
+		ImageUtils.saveImage(gradImgSrc, imgSrc.getWidth(), imgSrc.getWidth(), new File("src/test/resources/test1.bmp"), "BMP");
+		edgeDetector.init(rotatedImage.getBlue(), rotatedImage.getWidth(), rotatedImage.getHeight());
+		int[] gradImgTarget = edgeDetector.process();
+		ImageUtils.saveImage(gradImgTarget, rotatedImage.getWidth(), rotatedImage.getWidth(), new File("src/test/resources/test2.bmp"), "BMP");		
+		int angle = new ImageMatcher().getBestRotationMatch(gradImgSrc, imgSrc.getHeight(), imgSrc.getWidth(), gradImgTarget, rotatedImage.getHeight(), rotatedImage.getWidth());
+		System.out.println("angle: "+angle);
+		
+		rotatedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		rotatedImage.rotate(angle);
+		rotatedImage.save(new File("src/test/resources/test3.jpg"), "jpg");
+		
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(rotatedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverRotationAttack7() throws IOException {
 		watermarkedImageName = inputImage.replace(".bmp", "_wm_rotate_7.jpg");
 		int threshold = 100;
 		Image imgSrc = new Image(RESOURCE_IMAGES+inputImage, 64, 64, 448, 448);
@@ -337,7 +619,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -358,7 +640,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -374,7 +656,23 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverGaussianBlur1Attack() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_blur_1.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -390,7 +688,39 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverGaussianBlur3Attack() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_blur_3.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverGaussianBlur4Attack() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_blur_4.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -406,7 +736,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -422,7 +752,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 	
@@ -438,7 +768,7 @@ public class HybridWatermarkTester implements WMConsts {
 		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
 	}
 }

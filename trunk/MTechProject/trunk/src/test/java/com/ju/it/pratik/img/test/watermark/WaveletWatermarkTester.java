@@ -32,8 +32,8 @@ public class WaveletWatermarkTester implements WMConsts {
 	private String watermarkStr;
 	private WaveletWatermarker watermarker;
 	private NoiseAnalysisUtil noiseAnalysisUtil;
-	int level = 1;
-	double strength = 1.07;
+	int level = 2;
+	double strength = 1.025;
 	double dwt2Doriginal[][];
 	int height;
 	int width;
@@ -133,54 +133,29 @@ public class WaveletWatermarkTester implements WMConsts {
 		BufferedImage outputBufferedImage = ImageUtils.toBufferedImage(convertedRgb, width, height);
 		ImageIO.write(outputBufferedImage, "jpg", new File(WATERMARKED_IMAGES + "wavelet/"+outputImage + ".jpg"));
 		ImageIO.write(outputBufferedImage, "BMP", new File(WATERMARKED_IMAGES + "wavelet/"+outputImage + ".bmp"));
-		LOG.info("saving watermarked file to "+WATERMARKED_IMAGES + "wavelet/"+outputImage + ".bmp");		
+		LOG.info("saving watermarked file to "+WATERMARKED_IMAGES + "wavelet/"+outputImage + ".bmp");
+		
+		NoiseAnalysisResult noiseAnalysisResult = noiseAnalysisUtil.calculatePSNR(RESOURCE_IMAGES + outputImage.replace("_wm", "")+".bmp", WATERMARKED_IMAGES + "wavelet/"+outputImage + ".bmp");
+		LOG.info("noiseAnalysisResult: "+noiseAnalysisResult);
 	}
 	
 	@Test
 	public void testRecoverWaveletWatermark() throws IOException {
-		/** RECOVERY STEP */
-		//BufferedImage bufferedImage2 = ImageIO.read(new File(RESOURCE_IMAGES + LENA));
-		outputImage = outputImage + "_rotate_5.jpg";
-		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+outputImage);
-		BufferedImage bufferedImage2 = ImageIO.read(new File(WATERMARKED_IMAGES+"wavelet/"+outputImage));
-		int height = bufferedImage2.getHeight();
-		int width = bufferedImage2.getWidth();
-		int[] rgb = new int[width * height];
-		int[] r = new int[rgb.length];
-		int[] g = new int[rgb.length];
-		int[] b = new int[rgb.length];
-		bufferedImage2.getRGB(0, 0, width, height, rgb, 0, height);
-		//rgb =  new ImageRotationUtil(rgb, height, width).rotate(-5);
-		ImageUtils.getChannels(rgb, r, g, b);
-		
-		/** converting RGB to YUV starts */
-		int[] yuv = new int[r.length];
-		for(int i=0;i<rgb.length;i++) {
-			yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
-		}
-		/** converting RGB to YUV ends */
-		
-		/** getting seperate Y, U, V channels */
-		int[] y = new int[rgb.length];
-		int[] u = new int[rgb.length];
-		int[] v = new int[rgb.length];
-		ImageUtils.getChannels(yuv, y, u, v);
-		/** getting seperate Y, U, V channels ends */
-		
-		int[][] u2D = ImageUtils.to2D(u, height, width);
-		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(u2D, level);
-		String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
-		LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
-		recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
-		LOG.info("recoveredWatermark: "+recoveredWatermark);
-		LOG.info("original watermark: "+watermarkStr);
-		/*watermarkUtils.writeBinaryWatermark(recoveredWatermark, watermarkWidth, watermarkHeight);*/
-		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
-		String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
-		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
-		
-		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
-		LOG.info(result+"");
+	String watermarkedImageName = inputImage.replace(".bmp", "_wm_100.jpg");
+	LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"wavelet/"+watermarkedImageName);
+	Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+watermarkedImageName);
+	double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+	String recoveredWatermark = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, watermarkStr);
+	LOG.info("recoveredWatermark len: "+recoveredWatermark.length());
+	recoveredWatermark = recoveredWatermark.substring(0, watermarkStr.length());
+	LOG.info("recoveredWatermark: "+recoveredWatermark);
+	LOG.info("original watermark: "+watermarkStr);
+	int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
+	String generatedWatermark = WATERMARKED_IMAGES+"wavelet/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+	ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, new File(generatedWatermark), "bmp");
+	
+	NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+	LOG.info(result+"");
 	}
 
 	@Test

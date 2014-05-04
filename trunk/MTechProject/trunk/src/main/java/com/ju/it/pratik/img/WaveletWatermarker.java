@@ -17,7 +17,7 @@ public class WaveletWatermarker {
 	public WaveletWatermarker(int windowSize, double strength, int level) {
 		this.windowSize = windowSize;
 		this.strength = strength;
-		this.level = level+1;
+		this.level = (int) Math.pow(2, level);
 		this.threshold = (strength+(1/strength))*0.5;
 		LOG.info("windowSize: "+windowSize+"\tStrength: "+strength+"\tthreshold: "+threshold+"\tlevel: "+level);
 	}
@@ -30,28 +30,28 @@ public class WaveletWatermarker {
 		boolean exit = false;
 		for(int i=0;i<ywindows/4 && !exit;i++) {
 			for(int j=xwindows/4;j<xwindows*3/4;j++) {
-				if(i<=monitorY && j<=xwindows/4+monitorX) {
+				/*if(i<=monitorY && j<=xwindows/4+monitorX) {
 					System.out.println(i*windowSize+","+ j*windowSize);
 					System.out.println(PrintUtil.print2DArray(input, i*windowSize, j*windowSize, windowSize));
-				}
+				}*/
 				waveletWatermark(input, i*windowSize, j*windowSize, Character.getNumericValue(watermarkStr.charAt(wlenCtr++%watermarkStr.length())));
-				if(i<=monitorY && j<=xwindows/4+monitorX) {
+				/*if(i<=monitorY && j<=xwindows/4+monitorX) {
 					System.out.println(i*windowSize+","+ j*windowSize);
 					System.out.println(PrintUtil.print2DArray(input, i*windowSize, j*windowSize, windowSize));
-				}
+				}*/
 			}
 		}
 		for(int i=ywindows/4;i<ywindows*3/4 && !exit;i++) {
 			for(int j=0;j<xwindows/4;j++) {
-				if(i<=ywindows/4+monitorY && j<=monitorX) {
+				/*if(i<=ywindows/4+monitorY && j<=monitorX) {
 					System.out.println(i*windowSize+","+ j*windowSize);
 					System.out.println(PrintUtil.print2DArray(input, i*windowSize, j*windowSize, windowSize));
-				}
+				}*/
 				waveletWatermark(input, i*windowSize, j*windowSize, Character.getNumericValue(watermarkStr.charAt(wlenCtr++%watermarkStr.length())));
-				if(i<=ywindows/4+monitorY && j<=monitorX) {
+				/*if(i<=ywindows/4+monitorY && j<=monitorX) {
 					System.out.println(i*windowSize+","+ j*windowSize);
 					System.out.println(PrintUtil.print2DArray(input, i*windowSize, j*windowSize, windowSize));
-				}
+				}*/
 			}
 		}
 	}
@@ -78,28 +78,28 @@ public class WaveletWatermarker {
 		StringBuilder recoveredWatermark = new StringBuilder();
 		for(int i=0;i<ywindows/4 && !exit;i++) {
 			for(int j=xwindows/4;j<xwindows*3/4;j++) {
-				if(i<=monitorY && j<=xwindows/4+monitorX) {
+				/*if(i<=monitorY && j<=xwindows/4+monitorX) {
 					System.out.println(i*windowSize+","+ j*windowSize);
 					System.out.println(PrintUtil.print2DArray(input, i*windowSize, j*windowSize, windowSize));
-				}
+				}*/
 				retrieveWaveletWatermark(input, original, i*windowSize, j*windowSize, Character.getNumericValue(watermarkStr.charAt(wlenCtr++%watermarkStr.length())), watermarkStr.length(), recoveredWatermark);
-				if(i<=monitorY && j<=xwindows/4+monitorX) {
+				/*if(i<=monitorY && j<=xwindows/4+monitorX) {
 					System.out.println(PrintUtil.print2DArray(input, i*windowSize, j*windowSize, windowSize));
-				}
+				}*/
 			}
 			if(exit)
 				break;
 		}
 		for(int i=ywindows/4;i<ywindows*3/4 && !exit;i++) {
 			for(int j=0;j<xwindows/4;j++) {
-				if(i<=ywindows/4+monitorY && j<=monitorX) {
+				/*if(i<=ywindows/4+monitorY && j<=monitorX) {
 					System.out.println(i*windowSize+","+ j*windowSize);
 					System.out.println(PrintUtil.print2DArray(input, i*windowSize, j*windowSize, windowSize));
-				}
+				}*/
 				retrieveWaveletWatermark(input, original, i*windowSize, j*windowSize, Character.getNumericValue(watermarkStr.charAt(wlenCtr++%watermarkStr.length())), watermarkStr.length(), recoveredWatermark);
-				if(i<=ywindows/4+monitorY && j<=monitorX) {
+				/*if(i<=ywindows/4+monitorY && j<=monitorX) {
 					System.out.println(PrintUtil.print2DArray(input, i*windowSize, j*windowSize, windowSize));
-				}
+				}*/
 			}
 			if(exit)
 				break;
