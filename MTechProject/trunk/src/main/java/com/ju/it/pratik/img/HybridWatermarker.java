@@ -110,11 +110,12 @@ public class HybridWatermarker {
 				ctr += 4;
 			}
 		}
-		/*for(int i=input.length/(level*2);i<input.length/level;i=i+4) {
+		for(int i=input.length/(level*2);i<input.length/level;i=i+4) {
 			for(int j=0;j<input[0].length/(level*2);j=j+4) {
-				recoveredLogo[ctr] = retrieveWaveletWatermark(input, i, j, watermarkLogo[ctr++]);
+				retrieveWaveletWatermark(input, i, j, recoveredLogo, ctr, watermarkLogo[ctr]);
+				ctr += 4;
 			}
-		}*/
+		}
 		return recoveredLogo;
 	}
 	
