@@ -34,17 +34,14 @@ public class HybridWatermarkTester implements WMConsts {
 	private String outputImage;
 	private String watermarkedImageName;
 	private WatermarkUtils watermarkUtils;
-	private String watermarkStr;
 	private HybridWatermarker watermarker;
 	private NoiseAnalysisUtil noiseAnalysisUtil;
 	private NoiseAnalysisResult result;
 	int level = 2;
 	double strength = 50;
 	double dwt2Doriginal[][];
-	int height;
-	int width;
-	int y[], u[], v[];
 	Image origLogo;
+	Image src;
 	
 	@Before
 	public void setUp() {
@@ -55,48 +52,14 @@ public class HybridWatermarkTester implements WMConsts {
 		watermarker = new HybridWatermarker(4, strength, level);
 		try {
 			origLogo = new Image(WMConsts.WATERMARK_LOGO);
-			WatermarkUtils watermarkUtils = new WatermarkUtils();
-			watermarkStr = watermarkUtils.readBinaryWatermark(origLogo.getRgb());
+			src = new Image(RESOURCE_IMAGES + inputImage);
+			dwt2Doriginal = WaveletTransformer.discreteWaveletTransform(src.getU(), level);
 			//int[] recoveredImage = watermarkUtils.toBWImageArray(watermarkStr, origLogo.getWidth(), origLogo.getHeight());
 			//ImageUtils.saveImage(recoveredImage, origLogo.getWidth(), origLogo.getHeight(), new File(WMConsts.WATERMARK_LOGO.replace(".bmp", "1.bmp")), "bmp");
-			LOG.info("watermarkStr len: "+watermarkStr.length()+"\twatermarkStr: "+watermarkStr);
+			LOG.info("watermarkStr len: "+origLogo.getBinaryImage1D().length+"\twatermarkStr: "+Arrays.toString(origLogo.getBinaryImage1D()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		LOG.info("inputFile: "+inputImage);
-		BufferedImage bufferedImage;
-		try {
-			bufferedImage = ImageIO.read(new File(RESOURCE_IMAGES + inputImage));
-			height = bufferedImage.getHeight();
-			width = bufferedImage.getWidth();
-			int[] rgb = new int[bufferedImage.getWidth() * bufferedImage.getHeight()];
-			int[] r = new int[rgb.length];
-			int g[] = new int[rgb.length];
-			int b[] = new int[rgb.length];
-			bufferedImage.getRGB(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), rgb, 0, bufferedImage.getHeight());
-			ImageUtils.getChannels(rgb, r, g, b);
-			
-			/** converting RGB to YUV starts */
-			int yuv[] = new int[r.length];
-			for(int i=0;i<rgb.length;i++) {
-				yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
-			}
-			/** converting RGB to YUV ends */
-			
-			/** getting seperate Y, U, V channels */
-			y = new int[rgb.length];
-			u = new int[rgb.length];
-			v = new int[rgb.length];
-			ImageUtils.getChannels(yuv, y, u, v);
-			/** getting seperate Y, U, V channels ends */
-			
-			int[][] u2D = ImageUtils.to2D(u, height, width);
-			dwt2Doriginal = WaveletTransformer.discreteWaveletTransform(u2D, level);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 	}
 	
 	@Test
@@ -109,24 +72,22 @@ public class HybridWatermarkTester implements WMConsts {
 			}
 		}
 		watermarker.hybridWatermark(wmdwt2D, origLogo.getBinaryImage1D());
-		
 		int[][] idwt2D = WaveletTransformer.inverseDiscreteWaveletTransform(wmdwt2D, level);
-		int[] idwt = ImageUtils.to1D(idwt2D, height, width);
-		
 		/** merging 3 seperate Y, U, V channels to one single int array */
-		int[] resYUV = ImageUtils.mergeChannels(y, idwt, v);
+		int[][] resYUV = ImageUtils.mergeChannels(src.getY(), idwt2D, src.getV());
+		int[] resYUV1D = ImageUtils.to1D(resYUV, resYUV.length, resYUV[0].length);
 		
 		/** converting YUV to RGB starts */
-		int convertedRgb[] = new int[y.length];
+		int convertedRgb[] = new int[resYUV1D.length];
 		for(int i=0;i<convertedRgb.length;i++) {
-			convertedRgb[i] = TransformUtils.yuv2rgb(resYUV[i]);
+			convertedRgb[i] = TransformUtils.yuv2rgb(resYUV1D[i]);
 		}
 		/** converting YUV to RGB ends */
 		
 		/** saving the image */
 		new File(WATERMARKED_IMAGES + "hybrid/"+outputImage + ".jpg").delete();
 		new File(WATERMARKED_IMAGES + "hybrid/"+outputImage + ".bmp").delete();
-		BufferedImage outputBufferedImage = ImageUtils.toBufferedImage(convertedRgb, width, height);
+		BufferedImage outputBufferedImage = ImageUtils.toBufferedImage(convertedRgb, src.getWidth(), src.getHeight());
 		ImageIO.write(outputBufferedImage, "jpg", new File(WATERMARKED_IMAGES + "hybrid/"+outputImage + ".jpg"));
 		ImageIO.write(outputBufferedImage, "BMP", new File(WATERMARKED_IMAGES + "hybrid/"+outputImage + ".bmp"));
 		LOG.info("saving watermarked file to "+WATERMARKED_IMAGES + "hybrid/"+outputImage + ".bmp");
@@ -144,7 +105,7 @@ public class HybridWatermarkTester implements WMConsts {
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		System.out.println(Arrays.toString(origLogo.getBinaryImage1D()));
 		System.out.println(Arrays.toString(recoveredLogo));
-		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());		
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
 		String recWMFileName = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(recWMFileName), "bmp");
 		
