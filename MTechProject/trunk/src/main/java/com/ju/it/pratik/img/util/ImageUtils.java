@@ -3,9 +3,6 @@ package com.ju.it.pratik.img.util;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -106,6 +103,17 @@ public class ImageUtils {
 		int rgb[] = new int[r.length];
 		for(int i=0;i<r.length;i++) {
 			rgb[i] = (r[i]<<16) | (g[i]<<8) | b[i];
+		}
+		return rgb;
+	}
+	
+	public static int[][] mergeChannels(int r[][], int[][] g, int[][] b) {
+		int rgb[][] = new int[r.length][];
+		for(int i=0;i<r.length;i++) {
+			rgb[i] = new int[r[i].length];
+			for(int j=0;j<r[i].length;j++) {
+				rgb[i][j] = (r[i][j]<<16) | (g[i][j]<<8) | b[i][j];
+			}
 		}
 		return rgb;
 	}
