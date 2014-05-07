@@ -43,7 +43,6 @@ public class HybridWatermarker {
 		}
 	}
 	
-	int str =  10;
 	public void hybridWatermark(double[][] input, int startY, int startX, int[] watermarkLogo, int index) {
 		DCTTransformUtil dctTransformUtil = new DCTTransformUtil(windowSize);
 		double[][] tmp = new double[windowSize][windowSize];
@@ -62,29 +61,29 @@ public class HybridWatermarker {
 			if(watermarkLogo[index++] == 1) {
 				double diff = dct[2] - dct[3];
 				if(diff < 0) {
-					if(Math.abs(diff) > str) {
+					if(Math.abs(diff) > strength) {
 						System.out.println();
 					}
-					dct[2] = dct[2] - ((diff-str)/2);
-					dct[3] = dct[3] + ((diff-str)/2);
+					dct[2] = dct[2] - ((diff-strength)/2);
+					dct[3] = dct[3] + ((diff-strength)/2);
 				}
 				else {
-					if(diff < str) {
-						dct[2] = dct[2] + ((diff+str)/2);
-						dct[3] = dct[3] - ((diff+str)/2);
+					if(diff < strength) {
+						dct[2] = dct[2] + ((diff+strength)/2);
+						dct[3] = dct[3] - ((diff+strength)/2);
 					}
 				}
 			}
 			else {// bit is 0
 				double diff = dct[3] - dct[2];				
 				if(diff < 0) {
-					dct[2] = dct[2] + ((diff-str)/2);
-					dct[3] = dct[3] - ((diff-str)/2);
+					dct[2] = dct[2] + ((diff-strength)/2);
+					dct[3] = dct[3] - ((diff-strength)/2);
 				}
 				else {
-					if(diff < str) {
-						dct[2] = dct[2] - ((diff+str)/2);
-						dct[3] = dct[3] + ((diff+str)/2);
+					if(diff < strength) {
+						dct[2] = dct[2] - ((diff+strength)/2);
+						dct[3] = dct[3] + ((diff+strength)/2);
 					}
 					
 				}
@@ -94,6 +93,169 @@ public class HybridWatermarker {
 			double[] idct = dctTransformUtil.applyIDCT(dct);
 			System.out.println("After Inverse DCT");
 			System.out.println(Arrays.toString(idct));
+			for(int j=startX;j<startX+windowSize;j++) {
+				input[i][j] = idct[j-startX];
+			}
+		}
+	}
+	
+	public void hybridWatermark2(double[][] input, int startY, int startX, int[] watermarkLogo, int index) {
+		DCTTransformUtil dctTransformUtil = new DCTTransformUtil(windowSize);
+		double[][] tmp = new double[windowSize][windowSize];
+		
+		for(int i=startY;i<startY+windowSize;i++) {
+			for(int j=startX;j<startX+windowSize;j++) {
+				tmp[i-startY][j-startX] = input[i][j];
+			}
+			double[] dct = dctTransformUtil.applyDCT(tmp[i-startY]);
+			int sign1 = (int) Math.signum(dct[2]);
+			int sign2 = (int) Math.signum(dct[3]);
+			dct[2] = Math.abs(dct[2]);
+			dct[3] = Math.abs(dct[3]);
+			double absDiff = dct[2] - dct[3];
+			double change = 0;
+			//watermarking
+			if(watermarkLogo[index++] == 1) {
+				//bit is 1
+				if(absDiff > 0) {
+					if(absDiff > strength) {
+						//do nothing
+					}
+					else {
+						change = (strength-absDiff)/2d;
+						if(dct[3] > (change/2d)) {
+							dct[3] = dct[3] - change;
+							dct[2] = dct[2] + change;
+						}
+						else {
+							dct[2] = dct[2] + 2*change;
+						}						
+					}
+					
+				}
+				else {
+					change = (strength-absDiff)/2d;
+					
+					//dct[3] = (dct[3] - change < 0)?0:dct[3]-change;
+					if(dct[3] > (change/2d)) {
+						dct[3] = dct[3] - change;
+						dct[2] = dct[2] + change;
+					}
+					else {
+						dct[2] = dct[2] + 2*change;
+					}
+				}
+			}
+			else {// bit is 0
+				if(absDiff > 0) {
+					change = (strength+absDiff)/2d;
+					dct[3] = dct[3] + change;
+					dct[2] = (dct[2] - change < 0)?0:dct[2]-change;
+				}
+				else {
+					if(Math.abs(absDiff) > strength) {
+						//do nothing
+					}
+					else {
+						change = (strength+absDiff)/2d;
+						
+						if(dct[2] > (change/2d)) {
+							dct[2] = dct[2] - change;
+							dct[3] = dct[3] + change;
+						}
+						else {
+							dct[3] = dct[3] + 2*change;
+						}
+					}
+				}
+			}
+			dct[2] = dct[2]*sign1;
+			dct[3] = dct[3]*sign2;
+			double[] idct = dctTransformUtil.applyIDCT(dct);
+			for(int j=startX;j<startX+windowSize;j++) {
+				input[i][j] = idct[j-startX];
+			}
+		}
+	}
+	
+	public void hybridWatermark3(double[][] input, int startY, int startX, int[] watermarkLogo, int index) {
+		DCTTransformUtil dctTransformUtil = new DCTTransformUtil(windowSize);
+		double[][] tmp = new double[windowSize][windowSize];
+		
+		for(int i=startY;i<startY+windowSize;i++) {
+			for(int j=startX;j<startX+windowSize;j++) {
+				tmp[i-startY][j-startX] = input[i][j];
+			}
+			double[] dct = dctTransformUtil.applyDCT(tmp[i-startY]);
+			int sign1 = (int) Math.signum(dct[2]);
+			int sign2 = (int) Math.signum(dct[3]);
+			dct[2] = Math.abs(dct[2]);
+			dct[3] = Math.abs(dct[3]);
+			double absDiff = dct[2] - dct[3];
+			double change = 0;
+			//watermarking
+			if(watermarkLogo[index++] == 1) {
+				//bit is 1
+				if(absDiff > 0) {
+					if(absDiff > strength) {
+						//do nothing
+					}
+					else {
+						change = (strength)/2d;
+						if(dct[3] - change < 0) {
+							dct[2] = dct[2] + 2*change;
+							dct[3] = 0;
+						}
+						else {
+							dct[2] = dct[2] + change;
+							dct[2] = dct[3] - change;
+						}						
+					}
+				}
+				else {
+					change = (strength-absDiff)/2d;					
+					if(dct[3] - change < 0) {
+						dct[2] = dct[2] + 2*change;
+						dct[3] = 0;
+					}
+					else {
+						dct[2] = dct[2] + change;
+						dct[3] = dct[3] - change;
+					}
+				}
+			}
+			else {// bit is 0
+				if(absDiff > 0) {
+					change = (strength+absDiff)/2d;
+					if(Math.abs(dct[2]-change) > dct[2]) {
+						dct[3] = dct[3] + 2*change;
+						dct[2] = 0;
+					}
+					else {
+						dct[3] = dct[3] + change;
+						dct[2] = dct[2] - change;
+					}
+				}
+				else {
+					if(Math.abs(absDiff) > strength) {
+						//do nothing
+					}
+					else {
+						change = (strength+absDiff)/2d;						
+						if(Math.abs(dct[2]-change) > dct[2]) {
+							dct[3] = dct[3] + 2*change;
+							dct[2] = 0;
+						}
+						else {
+							dct[2] = dct[2] - change;
+							dct[3] = dct[3] + change;
+						}
+					}
+				}
+			}
+			dct[2] = dct[2]*sign1;
+			dct[3] = dct[3]*sign2;
+			double[] idct = dctTransformUtil.applyIDCT(dct);
 			for(int j=startX;j<startX+windowSize;j++) {
 				input[i][j] = idct[j-startX];
 			}
@@ -132,6 +294,23 @@ public class HybridWatermarker {
 			double[] dct = dctTransformUtil.applyDCT(tmp[i-startY]);
 			//System.out.println(Arrays.toString(dct));
 			if(dct[2] > dct[3]) {
+				recoveredLogo[index++] = 1;
+			}
+			else {
+				recoveredLogo[index++] = 0;
+			}
+		}
+	}
+	
+	public void retrieveWaveletWatermark2(double[][] input, int startY, int startX, int[] recoveredLogo, int index, int expectedBit) {
+		DCTTransformUtil dctTransformUtil = new DCTTransformUtil(windowSize);
+		double[][] tmp = new double[windowSize][windowSize];
+		for(int i=startY;i<startY+windowSize;i++) {
+			for(int j=startX;j<startX+windowSize;j++) {
+				tmp[i-startY][j-startX] = input[i][j];
+			}
+			double[] dct = dctTransformUtil.applyDCT(tmp[i-startY]);
+			if(Math.abs(dct[2]) > Math.abs(dct[3])) {
 				recoveredLogo[index++] = 1;
 			}
 			else {
