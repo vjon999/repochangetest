@@ -12,7 +12,8 @@ public interface WMConsts {
 	public static final String LENA = "lena_512.bmp";
 	public static final String MANDRILL = "mandrill_512.bmp";
 	public static final String BARBARA = "barbara_512.bmp";
-	
+	public static final String GOLDHILL = "goldhill_512.bmp";
+	public static final String[] TEST_IMAGES = {LENA, MANDRILL, BARBARA, GOLDHILL};
 	
 	public static final String LENA_WM = "lena_512_rgb_wm.bmp";
 	public static final String LENA_CROPPED_WM = "lena_256_cropped_rgb_wm2.bmp";	
