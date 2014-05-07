@@ -38,14 +38,14 @@ public class HybridWatermarkTester implements WMConsts {
 	private NoiseAnalysisUtil noiseAnalysisUtil;
 	private NoiseAnalysisResult result;
 	int level = 2;
-	double strength = 50;
+	double strength = 10;
 	double dwt2Doriginal[][];
 	Image origLogo;
 	Image src;
 	
 	@Before
 	public void setUp() {
-		inputImage = MANDRILL;
+		inputImage = LENA;
 		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm";
 		watermarkUtils = new WatermarkUtils();
 		noiseAnalysisUtil = new NoiseAnalysisUtil();
@@ -63,7 +63,7 @@ public class HybridWatermarkTester implements WMConsts {
 	}
 	
 	@Test
-	public void testWaveletWatermark() throws IOException {
+	public void testHybridWatermark() throws IOException {
 		double[][] wmdwt2D = new double[dwt2Doriginal.length][];
 		for(int i=0;i<dwt2Doriginal.length;i++) {
 			wmdwt2D[i] = new double[dwt2Doriginal[i].length];
@@ -98,7 +98,7 @@ public class HybridWatermarkTester implements WMConsts {
 	}
 	
 	@Test
-	public void testRecoverWaveletWatermark() throws IOException {
+	public void testRecoverHybridWatermark() throws IOException {
 		watermarkedImageName = inputImage.substring(inputImage.indexOf("/")+1).replace(".bmp", "_wm.jpg");
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
@@ -259,7 +259,7 @@ public class HybridWatermarkTester implements WMConsts {
 	@Test
 	public void testRecoverJPEG40Attack() throws IOException {
 		/** RECOVERY STEP */
-		watermarkedImageName = inputImage.replace(".bmp", "_wm_40.jpg");
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_40_1.jpg");
 		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
@@ -640,7 +640,7 @@ public class HybridWatermarkTester implements WMConsts {
 	@Test
 	public void testRecoverGaussianBlur2Attack() throws IOException {
 		/** RECOVERY STEP */
-		watermarkedImageName = inputImage.replace(".bmp", "_wm_blur_2.jpg");
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_blur_2_1.jpg");
 		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
@@ -721,6 +721,22 @@ public class HybridWatermarkTester implements WMConsts {
 	public void testRecoverNoiseBlurAttack() throws IOException {
 		/** RECOVERY STEP */
 		watermarkedImageName = inputImage.replace(".bmp", "_wm_noise_15_blur_2.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testEqualizationAttack() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_equalize.jpg");
 		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
