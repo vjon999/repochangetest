@@ -45,7 +45,7 @@ public class HybridWatermarkTester implements WMConsts {
 	
 	@Before
 	public void setUp() {
-		inputImage = LENA;
+		inputImage = BARBARA;
 		outputImage = inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm";
 		watermarkUtils = new WatermarkUtils();
 		noiseAnalysisUtil = new NoiseAnalysisUtil();
@@ -259,7 +259,7 @@ public class HybridWatermarkTester implements WMConsts {
 	@Test
 	public void testRecoverJPEG40Attack() throws IOException {
 		/** RECOVERY STEP */
-		watermarkedImageName = inputImage.replace(".bmp", "_wm_40_1.jpg");
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_40.jpg");
 		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
@@ -606,9 +606,73 @@ public class HybridWatermarkTester implements WMConsts {
 	}
 	
 	@Test
-	public void testRecoverSharpen10Attack() throws IOException {
+	public void testRecoverSharpen4Attack() throws IOException {
 		/** RECOVERY STEP */
-		watermarkedImageName = inputImage.replace(".bmp", "_wm_sharpen_10.jpg");
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_sharpen_4.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverSharpen8Attack() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_sharpen_8.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverSharpen12Attack() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_sharpen_12.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverSharpen16Attack() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_sharpen_16.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverSharpen20Attack() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_sharpen_20.jpg");
 		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
@@ -640,7 +704,7 @@ public class HybridWatermarkTester implements WMConsts {
 	@Test
 	public void testRecoverGaussianBlur2Attack() throws IOException {
 		/** RECOVERY STEP */
-		watermarkedImageName = inputImage.replace(".bmp", "_wm_blur_2_1.jpg");
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_blur_2.jpg");
 		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
@@ -704,7 +768,87 @@ public class HybridWatermarkTester implements WMConsts {
 	@Test
 	public void testRecoverNoiseAttack() throws IOException {
 		/** RECOVERY STEP */
-		watermarkedImageName = inputImage.replace(".bmp", "_wm_noise_50.jpg");
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_noise_10.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverHurlNoiseAttack5() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_hurl_noise_5.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverHurlNoiseAttack10() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_hurl_noise_10.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverHurlNoiseAttack15() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_hurl_noise_15.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverHurlNoiseAttack20() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_hurl_noise_20.jpg");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
+		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
+		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverHurlNoiseAttack25() throws IOException {
+		/** RECOVERY STEP */
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_hurl_noise_25.jpg");
 		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"hybrid/"+watermarkedImageName);
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
@@ -747,5 +891,75 @@ public class HybridWatermarkTester implements WMConsts {
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
 		LOG.info(result+"");
+	}
+	
+	@Test
+	public void testRecoverySuite() throws IOException, InterruptedException {
+		StringBuilder html = new StringBuilder("<p>JPEG Compression Results</p>");
+		List<NoiseAnalysisResult> noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();
+		testRecoverJPEG100Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG90Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG80Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG70Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG60Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG50Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG40Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG30Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG20Attack();noiseAnalysisResults.add(result);
+		testRecoverJPEG10Attack();noiseAnalysisResults.add(result);
+		html.append(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults));
+		
+		html.append("<p>Rotation Attack Results</p>");
+		noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();		
+		testRecoverRotationAttackM7();noiseAnalysisResults.add(result);
+		testRecoverRotationAttackM5();noiseAnalysisResults.add(result);
+		testRecoverRotationAttackM3();noiseAnalysisResults.add(result);
+		testRecoverRotationAttackM1();noiseAnalysisResults.add(result);
+		testRecoverRotationAttack1();noiseAnalysisResults.add(result);
+		testRecoverRotationAttack3();noiseAnalysisResults.add(result);
+		testRecoverRotationAttack5();noiseAnalysisResults.add(result);
+		testRecoverRotationAttack7();noiseAnalysisResults.add(result);
+		html.append(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults));
+		
+		html.append("<p>Gaussian Blur Attack Results</p>");
+		noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();		
+		testRecoverGaussianBlur1Attack();noiseAnalysisResults.add(result);
+		testRecoverGaussianBlur2Attack();noiseAnalysisResults.add(result);
+		testRecoverGaussianBlur3Attack();noiseAnalysisResults.add(result);
+		testRecoverGaussianBlur4Attack();noiseAnalysisResults.add(result);
+		testRecoverGaussianBlur5Attack();noiseAnalysisResults.add(result);
+		html.append(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults));
+		
+		html.append("<p>Equalization Attack Results</p>");
+		noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();
+		testEqualizationAttack();noiseAnalysisResults.add(result);
+		html.append(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults));
+		
+		html.append("<p>Hurl Noise Attack Results</p>");
+		noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();
+		testRecoverHurlNoiseAttack5();noiseAnalysisResults.add(result);
+		testRecoverHurlNoiseAttack10();noiseAnalysisResults.add(result);
+		testRecoverHurlNoiseAttack15();noiseAnalysisResults.add(result);
+		testRecoverHurlNoiseAttack20();noiseAnalysisResults.add(result);
+		testRecoverHurlNoiseAttack25();noiseAnalysisResults.add(result);
+		html.append(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults));
+		
+		html.append("<p>Sharpen Attack Results</p>");
+		noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();
+		testRecoverSharpen4Attack();noiseAnalysisResults.add(result);
+		testRecoverSharpen8Attack();noiseAnalysisResults.add(result);
+		testRecoverSharpen12Attack();noiseAnalysisResults.add(result);
+		testRecoverSharpen16Attack();noiseAnalysisResults.add(result);
+		testRecoverSharpen20Attack();noiseAnalysisResults.add(result);
+		html.append(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults));
+		
+		html.append("<p>Cropping Attack Results</p>");
+		noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();
+		testRecoverCroppingAttack();noiseAnalysisResults.add(result);
+		html.append(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults));
+		
+		FileOutputStream fos = new FileOutputStream(new File("report.html"));
+		fos.write(html.toString().getBytes());
+		fos.close();
 	}
 }
