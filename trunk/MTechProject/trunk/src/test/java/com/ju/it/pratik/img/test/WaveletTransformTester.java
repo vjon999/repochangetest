@@ -15,13 +15,9 @@ import javax.imageio.ImageIO;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ju.it.pratik.img.Location;
 import com.ju.it.pratik.img.WMConsts;
-import com.ju.it.pratik.img.WaveletWatermarker;
-import com.ju.it.pratik.img.util.DCTTransformUtil;
 import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.TransformUtils;
-import com.ju.it.pratik.img.util.WatermarkUtils;
 import com.ju.it.pratik.img.util.WaveletTransformer;
 
 public class WaveletTransformTester implements WMConsts{
@@ -154,7 +150,7 @@ public class WaveletTransformTester implements WMConsts{
 			}
 		}
 		int[][] res2 = WaveletTransformer.inverseDiscreteWaveletTransform(res);		
-		int[] wy = ImageUtils.to1D(res2, height, width);
+		int[] wy = ImageUtils.to1D(res2);
 		//for U channel
 		dct = ImageUtils.to2D(u, bufferedImage.getHeight(), bufferedImage.getHeight());
 		res = WaveletTransformer.discreteWaveletTransform(dct);
@@ -164,7 +160,7 @@ public class WaveletTransformTester implements WMConsts{
 			}
 		}
 		res2 = WaveletTransformer.inverseDiscreteWaveletTransform(res);		
-		int[] wu = ImageUtils.to1D(res2, height, width);
+		int[] wu = ImageUtils.to1D(res2);
 		//for V channel
 		dct = ImageUtils.to2D(v, bufferedImage.getHeight(), bufferedImage.getHeight());
 		res = WaveletTransformer.discreteWaveletTransform(dct);
@@ -174,7 +170,7 @@ public class WaveletTransformTester implements WMConsts{
 			}
 		}
 		res2 = WaveletTransformer.inverseDiscreteWaveletTransform(res);		
-		int[] wv = ImageUtils.to1D(res2, height, width);
+		int[] wv = ImageUtils.to1D(res2);
 		
 		
 		int[] resYUV = ImageUtils.mergeChannels(wy,wu, wv);

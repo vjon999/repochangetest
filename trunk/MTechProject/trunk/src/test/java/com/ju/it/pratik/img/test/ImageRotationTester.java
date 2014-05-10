@@ -13,9 +13,7 @@ import org.junit.Test;
 
 import com.ju.it.pratik.img.FeaturePoint;
 import com.ju.it.pratik.img.Image;
-import com.ju.it.pratik.img.util.CorrelationCalculator;
 import com.ju.it.pratik.img.util.ImageMatcher;
-import com.ju.it.pratik.img.util.ImageRotationUtil;
 import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.Sobel;
 
@@ -40,7 +38,7 @@ public class ImageRotationTester extends DefaultImageLoader {
 	public void rotateImage() {
 		int[] result = utils.rotate(rgb, imageWidth, imageHeight);
 		try {
-			utils.saveRGBImage(imageHeight, imageWidth, result, OUTPUT_FOLDER+LENA_ROTATED_90_WM);
+			ImageUtils.saveRGBImage(imageHeight, imageWidth, result, OUTPUT_FOLDER+LENA_ROTATED_90_WM);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -63,7 +61,7 @@ public class ImageRotationTester extends DefaultImageLoader {
 		edgeDetector.init(imgTarget.getBlue(), imgTarget.getWidth(), imgTarget.getHeight());
 		int[] gradImgTarget = edgeDetector.process();
 		ImageUtils.saveImage(gradImgTarget, imgTarget.getWidth(), imgTarget.getWidth(), new File("src/test/resources/test2.bmp"), "BMP");		
-		int angle = new ImageMatcher().getBestRotationMatch(gradImgSrc, imgSrc.getHeight(), imgSrc.getWidth(), gradImgTarget, imgTarget.getHeight(), imgTarget.getWidth());
+		new ImageMatcher().getBestRotationMatch(gradImgSrc, imgSrc.getHeight(), imgSrc.getWidth(), gradImgTarget, imgTarget.getHeight(), imgTarget.getWidth());
 	}
 	
 	@Test

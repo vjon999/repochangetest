@@ -32,7 +32,7 @@ public class HybridWatermarkTester implements WMConsts {
 
 	private static final Logger LOG = Logger.getLogger(HybridWatermarkTester.class.getName());
 	
-	private String inputImage;
+	protected String inputImage;
 	private String outputImage;
 	private String watermarkedImageName;
 	private WatermarkUtils watermarkUtils;
@@ -83,7 +83,7 @@ public class HybridWatermarkTester implements WMConsts {
 		int[][] idwt2D = WaveletTransformer.inverseDiscreteWaveletTransform(wmdwt2D, level);
 		/** merging 3 seperate Y, U, V channels to one single int array */
 		int[][] resYUV = ImageUtils.mergeChannels(src.getY(), idwt2D, src.getV());
-		int[] resYUV1D = ImageUtils.to1D(resYUV, resYUV.length, resYUV[0].length);
+		int[] resYUV1D = ImageUtils.to1D(resYUV);
 		
 		/** converting YUV to RGB starts */
 		int convertedRgb[] = new int[resYUV1D.length];
@@ -983,7 +983,7 @@ public class HybridWatermarkTester implements WMConsts {
 		fos.write(html.toString().getBytes());
 		fos.close();
 		
-		fos = new FileOutputStream(new File("ComparativeReport.html"));
+		fos = new FileOutputStream(new File("HybridWMComparativeReport.html"));
 		fos.write(s.getBytes());
 		fos.close();
 	}

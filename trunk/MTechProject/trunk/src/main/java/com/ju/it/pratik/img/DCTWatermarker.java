@@ -12,8 +12,18 @@ public class DCTWatermarker {
 	
 	public DecimalFormat format = new DecimalFormat("##.##");
 
-	public double[] watermarkBlock(double[] image, int width, int height, String watermarkBits, Location[] policy) {
-		int len = watermarkBits.length();
+	public double[][] watermarkBlock(double[][] src, int[] watermarkBits, Location[] policy) {
+		for(int y=0;y<src.length/WMConsts.BLOCK_SIZE;y++) {
+ 			for(int x=0;x<src[y].length/WMConsts.BLOCK_SIZE;x++) {
+				int num = watermarkBits[((y*src[y].length+x))%watermarkBits.length]; 
+				watermarkBlock(src, x*WMConsts.BLOCK_SIZE, y*WMConsts.BLOCK_SIZE, num, policy);			
+			}
+		}
+		return src;
+	}
+	
+	public double[] watermarkBlock(double[] image, int width, int height, int[] watermarkBits, Location[] policy) {
+		int len = watermarkBits.length;
 		LOG.fine("watermar bit length: "+len);
 		double[][] image2D = new double[height][width];
 		for(int i=0;i<height;i++) {
@@ -30,7 +40,7 @@ public class DCTWatermarker {
 		int n = width/WMConsts.BLOCK_SIZE;;
 		for(int y=0;y<m;y++) {
 			for(int x=0;x<n;x++) {
-				int num = Character.getNumericValue(watermarkBits.charAt((y*m+x)%len)); 
+				int num = watermarkBits[(y*m+x)%len]; 
 				watermarkBlock(image2D, x*WMConsts.BLOCK_SIZE, y*WMConsts.BLOCK_SIZE, num, policy);			
 			}
 		}
@@ -90,8 +100,8 @@ public class DCTWatermarker {
 	// RECOVERY
 	
 	
-	public String recoverWatermark(double[] image, int width, int height, Location[] policy, String watermarkStr) {
-		int len = watermarkStr.length(); 
+	public String recoverWatermark(double[] image, int width, int height, Location[] policy, int[] watermarkStr) {
+		int len = watermarkStr.length; 
 		StringBuilder wm = new StringBuilder();
 		double[][] image2D = new double[height][width];
 		for(int i=0;i<height;i++) {
@@ -110,7 +120,7 @@ public class DCTWatermarker {
 		System.out.println("\nAfter\n");
 		for(int y=0;y<m;y++) {
 			for(int x=0;x<n;x++) {
-				recoverWatermarkBlock(image2D, x*WMConsts.BLOCK_SIZE, y*WMConsts.BLOCK_SIZE, policy, wm, Character.getNumericValue(watermarkStr.charAt(ctr++%len)));
+				recoverWatermarkBlock(image2D, x*WMConsts.BLOCK_SIZE, y*WMConsts.BLOCK_SIZE, policy, wm, watermarkStr[ctr++%len]);
 			}
 		}
 		return wm.toString();	

@@ -3,6 +3,7 @@ package com.ju.it.pratik.img.test.watermark;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -11,10 +12,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ju.it.pratik.img.DCTWatermarker;
+import com.ju.it.pratik.img.Image;
 import com.ju.it.pratik.img.Location;
 import com.ju.it.pratik.img.WMConsts;
 import com.ju.it.pratik.img.util.DCTTransformUtil;
-import com.ju.it.pratik.img.util.ImageRotationUtil;
 import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.NoiseAnalysisResult;
 import com.ju.it.pratik.img.util.NoiseAnalysisUtil;
@@ -27,18 +28,12 @@ public class DCTWatermarkTester implements WMConsts {
 	
 	private WatermarkUtils watermarkUtils = new WatermarkUtils();
 	private String inputImageName;
-	private BufferedImage bufferedImage;
 	private NoiseAnalysisUtil noiseAnalysisUtil = new NoiseAnalysisUtil();
-	private int imageHeight;
-	private int imageWidth;
-	private int watermarkWidth;
-	private int watermarkHeight;
-	private int[] rgb;
-	private int r[];
-	private int g[];
-	private int b[];
 	private String inputImage;
 	private String outputImage;
+	private String folderName;
+	private Image srcImg;
+	private Image origLogo;
 	//set the policy
 	private Location[] policy = new Location[] {
 		new Location(3,0), new Location(2,1), 
@@ -49,73 +44,46 @@ public class DCTWatermarkTester implements WMConsts {
 	};
 	
 	@Before
-	public void setUp() {
-		inputImageName = LENA;
-		inputImage = LENA;
-		outputImage = WATERMARKED_IMAGES +"dct/"+ inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm.jpg";
+	public void setUp() throws IOException {
+		inputImageName = GOLDHILL;
+		inputImage = GOLDHILL;
+		folderName = inputImage.substring(0, inputImage.indexOf("_"))+"/";
+		outputImage = WATERMARKED_IMAGES +"dct/"+folderName+ inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm.jpg";
+		init(RESOURCE_IMAGES+inputImageName);
 	}
 	
 	public void init(String fileName) throws IOException {
 		LOG.info("inputFile: "+fileName);
-		bufferedImage = ImageIO.read(new File(fileName));
-		imageHeight = bufferedImage.getHeight();
-		imageWidth = bufferedImage.getWidth();
-		rgb = new int[imageWidth * imageHeight];
-		r = new int[rgb.length];
-		g = new int[rgb.length];
-		b = new int[rgb.length];
-		bufferedImage.getRGB(0, 0, imageWidth, imageHeight, rgb, 0, imageWidth);
-		//rgb =  new ImageRotationUtil(rgb, imageHeight, imageWidth).rotate(-5);
-		ImageUtils.getChannels(rgb, r, g, b);		
+		srcImg = new Image(fileName);
+		origLogo = new Image(WMConsts.WATERMARK_LOGO);
 	}
 	
 	@Test
 	public void testEmbedDCTWatermark() throws IOException {
 		String inputImage = RESOURCE_IMAGES + inputImageName;
-		String outputImage = WATERMARKED_IMAGES +"dct/"+ inputImageName.substring(0, inputImageName.lastIndexOf("."))+"_wm";		
-		
-		BufferedImage wmImage = ImageIO.read(new File(WMConsts.WATERMARK_LOGO));
-		int[] watermark = new int[wmImage.getHeight()*wmImage.getWidth()];
-		wmImage.getRGB(0, 0, wmImage.getWidth(), wmImage.getHeight(), watermark, 0, wmImage.getWidth());
-		String watermarkStr = watermarkUtils.readBinaryWatermark(watermark);
-		LOG.info("watermarkStr len: "+watermarkStr.length()+"\twatermarkStr: "+watermarkStr);
+		String outputImage = WATERMARKED_IMAGES +"dct/"+folderName+ inputImageName.substring(0, inputImageName.lastIndexOf("."))+"_wm";				
+		LOG.info("watermarkStr len: "+origLogo.getBinaryImage1D().length+"\twatermarkStr: "+Arrays.toString(origLogo.getBinaryImage1D()));
 		//we would consider watermark length as power of 2 only
 		
 		//read image
 		init(inputImage);
-		
-		/** converting RGB to YUV starts */
-		int yuv[] = new int[r.length];
-		for(int i=0;i<rgb.length;i++) {
-			yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
-		}
-		/** converting RGB to YUV ends */
-		
-		/** getting seperate Y, U, V channels */
-		int y[] = new int[rgb.length];
-		int u[] = new int[rgb.length];
-		int v[] = new int[rgb.length];
-		ImageUtils.getChannels(yuv, y, u, v);
-		/** getting seperate Y, U, V channels ends */
-		
+				
 		/** converting U channel's DCT */
-		int[][] dct = ImageUtils.to2D(u, imageHeight, imageWidth);
 		DCTTransformUtil dctTransformUtil = new DCTTransformUtil(8);
-		double[][] dctResult = dctTransformUtil.applyDCTImproved(dct, imageWidth, imageHeight);		
-		double[] dctResult1D = ImageUtils.to1D(dctResult, imageHeight, imageWidth);
+		double[][] dctResult = dctTransformUtil.applyDCTImproved(srcImg.getU(), srcImg.getHeight(), srcImg.getWidth());		
 		/** adding watermark to U channel's DWT co-efficients */
 		DCTWatermarker icarWatermarker = new DCTWatermarker();
-		double[] wdct = icarWatermarker.watermarkBlock(dctResult1D,imageHeight, imageWidth, watermarkStr, policy);
+		double[][] wdct = icarWatermarker.watermarkBlock(dctResult, origLogo.getBinaryImage1D(), policy);
 		/** inverse DWT of U channel */
-		int[] idct = ImageUtils.to1D(dctTransformUtil.applyIDCTImproved(ImageUtils.to2D(wdct, imageWidth, imageHeight), imageWidth, imageHeight), imageWidth, imageHeight);
+		int[][] idct = dctTransformUtil.applyIDCTImproved(wdct, srcImg.getHeight(), srcImg.getWidth());		
 		
 		/** merging 3 seperate Y, U, V channels to one single int array */
-		int[] resYUV = ImageUtils.mergeChannels(y, idct, v);
-		
+		int[][] resYUV = ImageUtils.mergeChannels(srcImg.getY(), idct, srcImg.getV());
+		int[] resYUV1D = ImageUtils.to1D(resYUV);
 		/** converting YUV to RGB starts */
-		int convertedRgb[] = new int[r.length];
+		int convertedRgb[] = new int[resYUV1D.length];
 		for(int i=0;i<convertedRgb.length;i++) {
-			convertedRgb[i] = TransformUtils.yuv2rgb(resYUV[i]);
+			convertedRgb[i] = TransformUtils.yuv2rgb(resYUV1D[i]);
 		}
 		/** converting YUV to RGB ends */
 		
@@ -123,7 +91,7 @@ public class DCTWatermarkTester implements WMConsts {
 		//String outputFileName = inputImage.substring(0, inputImage.lastIndexOf("."))+"_rgb_wmavg.bmp";
 		File jpg = new File(outputImage + ".jpg");jpg.delete();
 		File bmp = new File(outputImage + ".bmp");bmp.delete();
-		BufferedImage outputBufferedImage = ImageUtils.toBufferedImage(convertedRgb, imageWidth, imageHeight);
+		BufferedImage outputBufferedImage = ImageUtils.toBufferedImage(convertedRgb, srcImg.getWidth(), srcImg.getHeight());
 		ImageIO.write(outputBufferedImage, "jpg", jpg);
 		ImageIO.write(outputBufferedImage, "BMP", bmp);
 		LOG.info("saving watermarked file to "+outputImage+".bmp");
@@ -131,53 +99,19 @@ public class DCTWatermarkTester implements WMConsts {
 	
 	@Test
 	public void testRecoverDCTWatermark() throws IOException {
-		//String outputImage = RESOURCE_IMAGES + SHIP;
-		//String outputImage = WATERMARKED_IMAGES +"dct/"+ inputImageName.replaceFirst(".bmp", "_wm.jpg");
-		
-		BufferedImage wmImage = ImageIO.read(new File(WMConsts.WATERMARK_LOGO));
-		watermarkWidth = wmImage.getWidth();
-		watermarkHeight = wmImage.getHeight();
-		int[] watermark = new int[wmImage.getHeight()*wmImage.getWidth()];
-		wmImage.getRGB(0, 0, wmImage.getWidth(), wmImage.getHeight(), watermark, 0, wmImage.getWidth());
-		String watermarkStr = watermarkUtils.readBinaryWatermark(watermark);
-		LOG.info("watermarkStr len: "+watermarkStr.length()+"\twatermarkStr: "+watermarkStr);
-		//we would consider watermark length as power of 2 only
-		
-		//set the policy
-		
-		// RECOVERY
-		// read image
-		init(outputImage);
-
-		/** converting RGB to YUV starts */
-		int[] yuv = new int[r.length];
-		for (int i = 0; i < rgb.length; i++) {
-			yuv[i] = TransformUtils.rgb2yuv(rgb[i]);
-		}
-		/** converting RGB to YUV ends */
-
-		/** getting seperate Y, U, V channels */
-		int[] y = new int[rgb.length];
-		int[] u = new int[rgb.length];
-		int[] v = new int[rgb.length];
-		ImageUtils.getChannels(yuv, y, u, v);
-		/** getting seperate Y, U, V channels ends */
-
-
-		/** converting U channel's DCT */
-		int[][] dct = ImageUtils.to2D(u, imageHeight, imageWidth);
+		String watermarkedImageName = inputImageName.replaceFirst(".bmp", "_wm.jpg");
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"dct/"+folderName+watermarkedImageName);
 		DCTTransformUtil dctTransformUtil = new DCTTransformUtil(8);
-		double[][] dctResult = dctTransformUtil.applyDCTImproved(dct, imageWidth, imageHeight);		
-		double[] dctResult1D = ImageUtils.to1D(dctResult, imageHeight, imageWidth);
+		double[][] dctResult = dctTransformUtil.applyDCTImproved(watermarkedImage.getU(), watermarkedImage.getWidth(), watermarkedImage.getHeight());		
+		double[] dctResult1D = ImageUtils.to1D(dctResult, watermarkedImage.getHeight(), watermarkedImage.getWidth());
 		/** adding watermark to U channel's DWT co-efficients */
-
 		DCTWatermarker icarWatermarker = new DCTWatermarker();
-		String recoveredWatermark = icarWatermarker.recoverWatermark(dctResult1D, imageHeight, imageWidth, policy, watermarkStr);
+		String recoveredWatermark = icarWatermarker.recoverWatermark(dctResult1D, watermarkedImage.getHeight(), watermarkedImage.getWidth(), policy, origLogo.getBinaryImage1D());
 		LOG.info("watermarkStr len: " + recoveredWatermark.length() + "\t watermarkStr: " + recoveredWatermark);
 		//watermarkUtils.writeBinaryWatermark(recoveredWatermark, watermarkWidth, watermarkHeight);
 		File recoveredWatermarkFile = new File(outputImage.replace("dct/", "dct/recovered/").replace(".jpg", ".bmp"));
-		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, watermarkWidth, watermarkHeight);
-		ImageUtils.saveImage(recoveredImage, watermarkWidth, watermarkHeight, recoveredWatermarkFile, "bmp");
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, origLogo.getHeight(), origLogo.getWidth());
+		ImageUtils.saveImage(recoveredImage, origLogo.getWidth(), origLogo.getHeight(), recoveredWatermarkFile, "bmp");
 		
 		NoiseAnalysisResult result = noiseAnalysisUtil.calculatePSNR(WMConsts.WATERMARK_LOGO, recoveredWatermarkFile.getAbsolutePath());
 		LOG.info(result+"");

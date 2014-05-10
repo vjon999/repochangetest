@@ -68,7 +68,7 @@ public class ImageMatcher implements WMConsts {
 			}
 		}
 		new File(target.replace(".jpg", "_recovered.bmp")).delete();
-		int[] pixels = ImageUtils.to1D(arr, srcBufImg.getHeight(), srcBufImg.getWidth());
+		int[] pixels = ImageUtils.to1D(arr);
 		ImageUtils.saveImage(pixels, srcBufImg.getWidth(), srcBufImg.getHeight(), new File(target.replace(".jpg", "_recovered.bmp")), "bmp");
 	}
 	
