@@ -218,11 +218,11 @@ public class ImageUtils {
 		return image1D;
 	}
 	
-	public static int[] to1D(int[][] image, int height, int width) {
-		int[] image1D = new int[height*width];
-		for(int i=0;i<height;i++) {
-			for(int j=0;j<width;j++) {
-				image1D[i*width+j] = image[i][j];					
+	public static int[] to1D(int[][] image) {
+		int[] image1D = new int[image.length*image[0].length];
+		for(int i=0;i<image.length;i++) {
+			for(int j=0;j<image[i].length;j++) {
+				image1D[i*image[i].length+j] = image[i][j];					
 			}
 		}
 		return image1D;

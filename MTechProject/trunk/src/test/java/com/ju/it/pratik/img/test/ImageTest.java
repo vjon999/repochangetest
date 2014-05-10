@@ -1,6 +1,5 @@
 package com.ju.it.pratik.img.test;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +15,6 @@ import javax.imageio.ImageIO;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ju.it.pratik.img.ComplexNum;
 import com.ju.it.pratik.img.WMConsts;
 import com.ju.it.pratik.img.util.DCTTransformUtil;
 import com.ju.it.pratik.img.util.ImageUtils;
@@ -88,65 +86,6 @@ public class ImageTest implements WMConsts {
 		int[] mergedRGB = ImageUtils.mergeChannels(r, g, b);
 		assert(compareArray(rgb, mergedRGB));
 		ImageUtils.saveRGBImage(imageWidth, imageHeight, mergedRGB, RESOURCE_IMAGES+"output/desert_crop_rgb.bmp");
-	}
-	
-	@Test
-	public void testDFT() throws IOException {
-		File input = new File("resources/images/Desert_crop.jpg");
-		BufferedImage bufferedImage = ImageIO.read(input);
-		int w = bufferedImage.getWidth();
-		int h = bufferedImage.getHeight();
-		System.out.print(h*w);
-		int[] imgArr = new int[h*w];
-		bufferedImage.getRGB(0, 0, w, h, imgArr, 0, w);
-		for(int i=0;i<imgArr.length;i++) {
-			imgArr[i]=new Color(imgArr[i]).getRed();
-		}
-		/*for(int x=0;x<h;x++) {
-			for(int y=0;y<w;y++) {
-				Color c = new Color(bufferedImage.getRGB(y, x));
-				//System.out.print(c.getRed()+",");
-				imgArr[y/w + (y%w)] = c.getRed();  
-			}
-		}*/
-		//System.out.println();
-		ComplexNum complexNums[] = TransformUtils.discreteFourierTransform(imgArr);	
-		System.out.print("FT complete");
-		StringBuilder sb = new StringBuilder();
-		/*for(ComplexNum c : complexNums) {
-			sb.append(c);
-		}
-		System.out.println("\n"+sb);*/
-		
-		
-		ComplexNum[] invComplexNums = TransformUtils.inverseDiscreteFourierTransform(complexNums.clone());
-		
-		/**jwave starts **/
-		/*Complex[] inputArr = new Complex[h*w];
-		for(int i=0;i<h*w;i++) {
-			inputArr[i] = new Complex();
-			inputArr[i].setReal(imgArr[i]);
-		}
-		DiscreteFourierTransform transform = new DiscreteFourierTransform();
-		Complex[] forRes = transform.forward(inputArr);
-		
-		Complex[] revRes = transform.reverse(forRes);*/
-		/** jwave ends **/
-		
-		
-		sb = new StringBuilder("Original \tFT \tFTJWAVE \tDiff\t RFT \t RTF JWAVE \tDiff\tDiffOrig\r\n");
-		int ctr=0;
-		for(ctr=0;ctr<h*w;ctr++) {
-			sb.append(imgArr[ctr]+"\t"+complexNums[ctr].getReal()+"\t=B"+(ctr+2)+"-C"+(ctr+2)
-					+"\t"+(int)invComplexNums[ctr].getReal()+"\t=D"+(ctr+2)+"-E"+(ctr+2)+"\t"+"=A"+(ctr+2)+"-E"+(ctr+2)+"\r\n");
-		}
-		
-		//System.out.println(sb);
-		
-		File f = new File("d:/temp.txt");
-		f.delete();
-		f.createNewFile();
-		new FileOutputStream(f).write(sb.toString().getBytes());
 	}
 	
 	@Test
