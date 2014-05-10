@@ -622,7 +622,7 @@ public class HybridWatermarkTester implements WMConsts {
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
-		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/"+folderName+"recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
@@ -638,7 +638,7 @@ public class HybridWatermarkTester implements WMConsts {
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
-		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/"+folderName+"recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
@@ -654,7 +654,7 @@ public class HybridWatermarkTester implements WMConsts {
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
-		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/"+folderName+"recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
@@ -670,7 +670,7 @@ public class HybridWatermarkTester implements WMConsts {
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
-		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/"+folderName+"recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
@@ -686,7 +686,7 @@ public class HybridWatermarkTester implements WMConsts {
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
-		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/"+folderName+"recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
@@ -782,7 +782,7 @@ public class HybridWatermarkTester implements WMConsts {
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
-		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/"+folderName+"recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
@@ -798,7 +798,7 @@ public class HybridWatermarkTester implements WMConsts {
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
-		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/"+folderName+"recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
@@ -814,7 +814,7 @@ public class HybridWatermarkTester implements WMConsts {
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
-		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/"+folderName+"recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
@@ -830,7 +830,7 @@ public class HybridWatermarkTester implements WMConsts {
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
-		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/"+folderName+"recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
@@ -846,7 +846,7 @@ public class HybridWatermarkTester implements WMConsts {
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
-		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/"+folderName+"recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
@@ -862,7 +862,7 @@ public class HybridWatermarkTester implements WMConsts {
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getRed());
 		recoveredLogo = watermarkUtils.toBWImageArray(recoveredLogo, origLogo.getWidth(), origLogo.getHeight());
-		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/recovered/"+outputImage.replaceFirst(".jpg",  ".bmp");
+		String generatedWatermark = WATERMARKED_IMAGES+"hybrid/"+folderName+"recovered/"+watermarkedImageName.replaceFirst(".jpg",  ".bmp");
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(generatedWatermark), "bmp");
 		
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, generatedWatermark);
