@@ -41,9 +41,37 @@ public class WaveletWatermarkTester extends AbstractWatermarkTester {
 		testRecoverWaveletWatermark(watermarkedImageName);
 	}
 	
+	@Test
+	public void testRecoverWaveletRotatedWatermark() throws IOException {
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_rotate_7.jpg");
+		testRecoverWaveletRotatedWatermark(watermarkedImageName);
+	}
+	
+	@Test
+	public void testRecoverWaveletCropWatermark() throws IOException {
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_crop.jpg");
+		testRecoverWaveletRotatedWatermark(watermarkedImageName);
+	}
+	
 	public void testRecoverWaveletWatermark(String fileName) throws IOException {
 		watermarkedImageName = fileName;
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"wavelet/"+folderName+watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getBinaryImage1D().length);
+		postWMRetrieval(recoveredLogo);
+	}
+	
+	public void testRecoverWaveletRotatedWatermark(String fileName) throws IOException {
+		watermarkedImageName = fileName;
+		Image watermarkedImage = recoverRotation(watermarkedImageName);
+		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
+		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getBinaryImage1D().length);
+		postWMRetrieval(recoveredLogo);
+	}
+	
+	public void testRecoverWaveletCropWatermark(String fileName) throws IOException, InterruptedException {
+		watermarkedImageName = fileName;
+		Image watermarkedImage = recoverCroppingAttack(watermarkedImageName);
 		double dwt2D[][] = WaveletTransformer.discreteWaveletTransform(watermarkedImage.getU(), level);
 		int[] recoveredLogo = watermarker.retrieveWaveletWatermark(dwt2D, dwt2Doriginal, origLogo.getBinaryImage1D().length);
 		postWMRetrieval(recoveredLogo);
@@ -73,14 +101,14 @@ public class WaveletWatermarkTester extends AbstractWatermarkTester {
 			
 			html.append("<p>Rotation Attack Results</p>");
 			noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();		
-			testRecoverWaveletWatermark(s.replace(".bmp","")+"_wm_rotate_M7.jpg");noiseAnalysisResults.add(result);
-			testRecoverWaveletWatermark(s.replace(".bmp","")+"_wm_rotate_M5.jpg");noiseAnalysisResults.add(result);
-			testRecoverWaveletWatermark(s.replace(".bmp","")+"_wm_rotate_M3.jpg");noiseAnalysisResults.add(result);
-			testRecoverWaveletWatermark(s.replace(".bmp","")+"_wm_rotate_M1.jpg");noiseAnalysisResults.add(result);
-			testRecoverWaveletWatermark(s.replace(".bmp","")+"_wm_rotate_1.jpg");noiseAnalysisResults.add(result);
-			testRecoverWaveletWatermark(s.replace(".bmp","")+"_wm_rotate_3.jpg");noiseAnalysisResults.add(result);
-			testRecoverWaveletWatermark(s.replace(".bmp","")+"_wm_rotate_5.jpg");noiseAnalysisResults.add(result);
-			testRecoverWaveletWatermark(s.replace(".bmp","")+"_wm_rotate_7.jpg");noiseAnalysisResults.add(result);
+			testRecoverWaveletRotatedWatermark(s.replace(".bmp","")+"_wm_rotate_M7.jpg");noiseAnalysisResults.add(result);
+			testRecoverWaveletRotatedWatermark(s.replace(".bmp","")+"_wm_rotate_M5.jpg");noiseAnalysisResults.add(result);
+			testRecoverWaveletRotatedWatermark(s.replace(".bmp","")+"_wm_rotate_M3.jpg");noiseAnalysisResults.add(result);
+			testRecoverWaveletRotatedWatermark(s.replace(".bmp","")+"_wm_rotate_M1.jpg");noiseAnalysisResults.add(result);
+			testRecoverWaveletRotatedWatermark(s.replace(".bmp","")+"_wm_rotate_1.jpg");noiseAnalysisResults.add(result);
+			testRecoverWaveletRotatedWatermark(s.replace(".bmp","")+"_wm_rotate_3.jpg");noiseAnalysisResults.add(result);
+			testRecoverWaveletRotatedWatermark(s.replace(".bmp","")+"_wm_rotate_5.jpg");noiseAnalysisResults.add(result);
+			testRecoverWaveletRotatedWatermark(s.replace(".bmp","")+"_wm_rotate_7.jpg");noiseAnalysisResults.add(result);
 			map.put(s+"_rotate", noiseAnalysisResults);
 			html.append(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults));
 			
@@ -122,7 +150,7 @@ public class WaveletWatermarkTester extends AbstractWatermarkTester {
 			
 			html.append("<p>Cropping Attack Results</p>");
 			noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();
-			testRecoverWaveletWatermark(s.replace(".bmp","")+"_wm_crop.jpg");noiseAnalysisResults.add(result);
+			testRecoverWaveletCropWatermark(s.replace(".bmp","")+"_wm_crop.jpg");noiseAnalysisResults.add(result);
 			map.put(s+"_crop", noiseAnalysisResults);
 			html.append(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults));
 		}

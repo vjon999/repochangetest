@@ -29,7 +29,6 @@ public class DCTWatermarkTester implements WMConsts {
 	private WatermarkUtils watermarkUtils = new WatermarkUtils();
 	private String inputImageName;
 	private NoiseAnalysisUtil noiseAnalysisUtil = new NoiseAnalysisUtil();
-	private String inputImage;
 	private String outputImage;
 	private String folderName;
 	private Image srcImg;
@@ -45,10 +44,9 @@ public class DCTWatermarkTester implements WMConsts {
 	
 	@Before
 	public void setUp() throws IOException {
-		inputImageName = GOLDHILL;
-		inputImage = GOLDHILL;
-		folderName = inputImage.substring(0, inputImage.indexOf("_"))+"/";
-		outputImage = WATERMARKED_IMAGES +"dct/"+folderName+ inputImage.substring(0, inputImage.lastIndexOf("."))+"_wm.jpg";
+		inputImageName = BARBARA;
+		folderName = inputImageName.substring(0, inputImageName.indexOf("_"))+"/";
+		outputImage = WATERMARKED_IMAGES +"dct/"+folderName+ inputImageName.substring(0, inputImageName.lastIndexOf("."))+"_wm.jpg";
 		init(RESOURCE_IMAGES+inputImageName);
 	}
 	
@@ -95,6 +93,9 @@ public class DCTWatermarkTester implements WMConsts {
 		ImageIO.write(outputBufferedImage, "jpg", jpg);
 		ImageIO.write(outputBufferedImage, "BMP", bmp);
 		LOG.info("saving watermarked file to "+outputImage+".bmp");
+		
+		NoiseAnalysisResult noiseAnalysisResult = noiseAnalysisUtil.calculatePSNR(inputImage, outputImage.replace(".bmp", "_wm.bmp") + ".bmp");
+		LOG.info("noiseAnalysisResult: "+noiseAnalysisResult);
 	}
 	
 	@Test

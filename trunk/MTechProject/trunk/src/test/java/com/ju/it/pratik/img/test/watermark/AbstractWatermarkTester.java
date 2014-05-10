@@ -10,9 +10,11 @@ import javax.imageio.ImageIO;
 
 import com.ju.it.pratik.img.Image;
 import com.ju.it.pratik.img.WMConsts;
+import com.ju.it.pratik.img.util.ImageMatcher;
 import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.NoiseAnalysisResult;
 import com.ju.it.pratik.img.util.NoiseAnalysisUtil;
+import com.ju.it.pratik.img.util.Sobel;
 import com.ju.it.pratik.img.util.TransformUtils;
 import com.ju.it.pratik.img.util.WatermarkUtils;
 import com.ju.it.pratik.img.util.WaveletTransformer;
@@ -87,6 +89,42 @@ public class AbstractWatermarkTester implements WMConsts {
 		ImageUtils.saveImage(recoveredLogo, origLogo.getWidth(), origLogo.getHeight(), new File(recWMFileName), "bmp");
 		result = noiseAnalysisUtil.calculatePSNR(WATERMARK_LOGO, recWMFileName);
 		LOG.info(result+"");
+	}
+	
+	public Image recoverRotation(String fileName) throws IOException {
+		watermarkedImageName = fileName;
+		int threshold = 100;
+		Image imgSrc = new Image(RESOURCE_IMAGES+inputImage, 64, 64, 448, 448);
+		Image rotatedImage = new Image(WATERMARKED_IMAGES+cname+folderName+watermarkedImageName, 64, 64, 448, 448);
+		Sobel edgeDetector = new Sobel();		
+		edgeDetector.setThreshold(threshold);
+		
+		int[] gradImgSrc = new int[imgSrc.getWidth()*imgSrc.getHeight()];
+		edgeDetector.init(imgSrc.getBlue(), imgSrc.getWidth(), imgSrc.getHeight());
+		gradImgSrc = edgeDetector.process();
+		ImageUtils.saveImage(gradImgSrc, imgSrc.getWidth(), imgSrc.getWidth(), new File("src/test/resources/test1.bmp"), "BMP");
+		edgeDetector.init(rotatedImage.getBlue(), rotatedImage.getWidth(), rotatedImage.getHeight());
+		int[] gradImgTarget = edgeDetector.process();
+		ImageUtils.saveImage(gradImgTarget, rotatedImage.getWidth(), rotatedImage.getWidth(), new File("src/test/resources/test2.bmp"), "BMP");		
+		int angle = new ImageMatcher().getBestRotationMatch(gradImgSrc, imgSrc.getHeight(), imgSrc.getWidth(), gradImgTarget, rotatedImage.getHeight(), rotatedImage.getWidth());
+		System.out.println("angle: "+angle);
+		
+		rotatedImage = new Image(WATERMARKED_IMAGES+cname+folderName+watermarkedImageName);
+		rotatedImage.rotate(angle);
+		rotatedImage.save(new File("src/test/resources/test3.jpg"), "jpg");
+		return rotatedImage;
+	}
+	
+	public Image recoverCroppingAttack(String fileName) throws IOException, InterruptedException {
+		ImageMatcher m = new ImageMatcher();
+		String src = RESOURCE_IMAGES + inputImage;
+		String target = WMConsts.WATERMARKED_IMAGES+cname+folderName+inputImage.replace(".bmp", "_wm_crop.jpg");
+		m.getStartingPixel(src, target);
+		
+		watermarkedImageName = inputImage.replace(".bmp", "_wm_crop_recovered.bmp");
+		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+cname+folderName+watermarkedImageName);
+		Image watermarkedImage = new Image(WATERMARKED_IMAGES+cname+folderName+watermarkedImageName);
+		return watermarkedImage;
 	}
 	
 }
