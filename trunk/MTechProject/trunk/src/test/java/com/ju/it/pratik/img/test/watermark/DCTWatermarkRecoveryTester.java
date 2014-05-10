@@ -23,16 +23,12 @@ import com.ju.it.pratik.img.util.NoiseAnalysisResult;
 import com.ju.it.pratik.img.util.NoiseAnalysisUtil;
 import com.ju.it.pratik.img.util.WatermarkUtils;
 
-public class DCTWatermarkRecoveryTester implements WMConsts {
+public class DCTWatermarkRecoveryTester extends AbstractWatermarkTester {
 
 	private static final Logger LOG = Logger.getLogger(DCTWatermarkTester.class.getName());
 	
 	private WatermarkUtils watermarkUtils = new WatermarkUtils();
-	private String inputImage;
-	private NoiseAnalysisUtil noiseAnalysisUtil = new NoiseAnalysisUtil();
 	private NoiseAnalysisResult result;
-	private String folderName;
-	private Image origLogo;
 	//set the policy
 	private Location[] policy = new Location[] {
 		new Location(3,0), new Location(2,1), 
@@ -48,16 +44,7 @@ public class DCTWatermarkRecoveryTester implements WMConsts {
 	}
 	
 	public void setUp(String fName) {
-		inputImage = fName;
-		folderName = inputImage.substring(0, inputImage.indexOf("_"))+"/";
-		try {
-			origLogo = new Image(WMConsts.WATERMARK_LOGO);
-			LOG.info("watermarkStr len: "+origLogo.getBinaryImage1D().length+"\twatermarkStr: "+Arrays.toString(origLogo.getBinaryImage1D()));
-			//we would consider watermark length as power of 2 only
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		super.setUp(fName);		
 	}
 	
 	@Test
@@ -67,6 +54,24 @@ public class DCTWatermarkRecoveryTester implements WMConsts {
 	
 	public void testRecoverWatermark(String fileName) throws IOException {
 		Image watermarkedImage = new Image(WATERMARKED_IMAGES+"dct/"+folderName+fileName);
+		DCTTransformUtil dctTransformUtil = new DCTTransformUtil(8);
+		double[][] dctResult = dctTransformUtil.applyDCTImproved(watermarkedImage.getU(), watermarkedImage.getWidth(), watermarkedImage.getHeight());		
+		double[] dctResult1D = ImageUtils.to1D(dctResult, watermarkedImage.getHeight(), watermarkedImage.getWidth());
+		/** adding watermark to U channel's DWT co-efficients */
+		DCTWatermarker icarWatermarker = new DCTWatermarker();
+		String recoveredWatermark = icarWatermarker.recoverWatermark(dctResult1D, watermarkedImage.getHeight(), watermarkedImage.getWidth(), policy, origLogo.getBinaryImage1D());
+		LOG.info("watermarkStr len: " + recoveredWatermark.length() + "\t watermarkStr: " + recoveredWatermark);
+		//watermarkUtils.writeBinaryWatermark(recoveredWatermark, watermarkWidth, watermarkHeight);
+		File recoveredWatermarkFile = new File(WATERMARKED_IMAGES+"dct/"+folderName+"recovered/" + fileName.replace(".jpg", ".bmp"));
+		int[] recoveredImage = watermarkUtils.toBWImageArray(recoveredWatermark, origLogo.getHeight(), origLogo.getWidth());
+		ImageUtils.saveImage(recoveredImage, origLogo.getWidth(), origLogo.getHeight(), recoveredWatermarkFile, "bmp");
+		
+		result = noiseAnalysisUtil.calculatePSNR(WMConsts.WATERMARK_LOGO, recoveredWatermarkFile.getAbsolutePath());
+		LOG.info(result+"");
+	}
+	
+	public void testRecoverCropWatermark(String fileName) throws IOException, InterruptedException {
+		Image watermarkedImage = recoverCroppingAttack(fileName);
 		DCTTransformUtil dctTransformUtil = new DCTTransformUtil(8);
 		double[][] dctResult = dctTransformUtil.applyDCTImproved(watermarkedImage.getU(), watermarkedImage.getWidth(), watermarkedImage.getHeight());		
 		double[] dctResult1D = ImageUtils.to1D(dctResult, watermarkedImage.getHeight(), watermarkedImage.getWidth());
@@ -156,7 +161,7 @@ public class DCTWatermarkRecoveryTester implements WMConsts {
 			
 			html.append("<p>Cropping Attack Results</p>");
 			noiseAnalysisResults = new ArrayList<NoiseAnalysisResult>();
-			testRecoverWatermark(s.replace(".bmp","")+"_wm_crop.jpg");noiseAnalysisResults.add(result);
+			testRecoverCropWatermark(s.replace(".bmp","")+"_wm_crop.jpg");noiseAnalysisResults.add(result);
 			map.put(s+"_crop", noiseAnalysisResults);
 			html.append(noiseAnalysisUtil.generateHTMLReport(noiseAnalysisResults));
 		}
