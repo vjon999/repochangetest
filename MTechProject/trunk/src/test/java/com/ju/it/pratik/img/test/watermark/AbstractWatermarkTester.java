@@ -91,11 +91,16 @@ public class AbstractWatermarkTester implements WMConsts {
 		LOG.info(result+"");
 	}
 	
-	public Image recoverRotation(String fileName) throws IOException {
-		watermarkedImageName = fileName;
+	protected Image recoverCrop(String target) throws IOException, InterruptedException {
+		ImageMatcher m = new ImageMatcher();
+		m.getStartingPixel(WATERMARKED_IMAGES + cname + folderName + target.replace("_crop.jpg", ".jpg"), WATERMARKED_IMAGES + cname + folderName + target);
+		return new Image(WATERMARKED_IMAGES+cname+folderName+target.replace(".jpg", "_recovered.bmp"));
+	}
+	
+	protected Image recoverRotatedImage(String fileName) throws IOException {
 		int threshold = 100;
 		Image imgSrc = new Image(RESOURCE_IMAGES+inputImage, 64, 64, 448, 448);
-		Image rotatedImage = new Image(WATERMARKED_IMAGES+cname+folderName+watermarkedImageName, 64, 64, 448, 448);
+		Image rotatedImage = new Image(WATERMARKED_IMAGES+cname+folderName+fileName, 64, 64, 448, 448);
 		Sobel edgeDetector = new Sobel();		
 		edgeDetector.setThreshold(threshold);
 		
@@ -113,18 +118,6 @@ public class AbstractWatermarkTester implements WMConsts {
 		rotatedImage.rotate(angle);
 		rotatedImage.save(new File("src/test/resources/test3.jpg"), "jpg");
 		return rotatedImage;
-	}
-	
-	public Image recoverCroppingAttack(String fileName) throws IOException, InterruptedException {
-		ImageMatcher m = new ImageMatcher();
-		String src = RESOURCE_IMAGES + inputImage;
-		String target = WMConsts.WATERMARKED_IMAGES+cname+folderName+inputImage.replace(".bmp", "_wm_crop.jpg");
-		m.getStartingPixel(src, target);
-		
-		watermarkedImageName = inputImage.replace(".bmp", "_wm_crop_recovered.bmp");
-		LOG.fine("reading watermarked image: "+WATERMARKED_IMAGES+cname+folderName+watermarkedImageName);
-		Image watermarkedImage = new Image(WATERMARKED_IMAGES+cname+folderName+watermarkedImageName);
-		return watermarkedImage;
 	}
 	
 }

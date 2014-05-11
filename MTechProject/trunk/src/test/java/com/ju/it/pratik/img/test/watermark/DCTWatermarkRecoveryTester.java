@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +19,6 @@ import com.ju.it.pratik.img.WMConsts;
 import com.ju.it.pratik.img.util.DCTTransformUtil;
 import com.ju.it.pratik.img.util.ImageUtils;
 import com.ju.it.pratik.img.util.NoiseAnalysisResult;
-import com.ju.it.pratik.img.util.NoiseAnalysisUtil;
 import com.ju.it.pratik.img.util.WatermarkUtils;
 
 public class DCTWatermarkRecoveryTester extends AbstractWatermarkTester {
@@ -71,7 +69,7 @@ public class DCTWatermarkRecoveryTester extends AbstractWatermarkTester {
 	}
 	
 	public void testRecoverCropWatermark(String fileName) throws IOException, InterruptedException {
-		Image watermarkedImage = recoverCroppingAttack(fileName);
+		Image watermarkedImage = recoverCrop(fileName);
 		DCTTransformUtil dctTransformUtil = new DCTTransformUtil(8);
 		double[][] dctResult = dctTransformUtil.applyDCTImproved(watermarkedImage.getU(), watermarkedImage.getWidth(), watermarkedImage.getHeight());		
 		double[] dctResult1D = ImageUtils.to1D(dctResult, watermarkedImage.getHeight(), watermarkedImage.getWidth());
