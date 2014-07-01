@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:stream="http://www.springframework.org/schema/integration/stream"
+             xmlns:int = "http://www.springframework.org/schema/integration"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                 http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                                 http://www.springframework.org/schema/context
+                                 http://www.springframework.org/schema/context/spring-context-3.2.xsd
+                                 http://www.springframework.org/schema/integration
+                                 http://www.springframework.org/schema/integration/spring-integration-3.0.xsd
+                                 http://www.springframework.org/schema/integration/stream
+                                 http://www.springframework.org/schema/integration/stream/spring-integration-stream-3.0.xsd">    
+	<int:gateway service-interface="com.prapps.core.web.gateway.DefaultGateway" default-request-channel="inRequest" default-reply-channel="yavni"></int:gateway> 
+	<int:header-value-router input-channel="inRequest" header-name="payload.appCode"/>
+    <channel id="inRequest"/>
+    <channel id="yavni"/>
+    <channel id="yavniResp"/>
+    <int:header-value-router input-channel="yavni" header-name="payload.action"/>
+    
+    <int:service-activator input-channel="LOAD_CITIES" ref="configService" method="loadCities" output-channel="yavniResp" />
+    
+    
+    
+    <!-- <gateway id="order" service-interface="org.springbyexample.integration.book.Order"/>    
+    
+    <bridge input-channel="pickup" output-channel="store" />    
+    <channel id="store"/>
+    <channel id="post"/>
+    
+    <outbound-channel-adapter channel="store" ref="storeEndpoint" method="processMessage" />
+    <outbound-channel-adapter channel="post" ref="postEndpoint" method="processMessage" /> -->
+    
+</beans:beans>
