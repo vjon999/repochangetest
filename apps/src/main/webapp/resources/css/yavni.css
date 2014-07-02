@@ -1,0 +1,446 @@
+body {
+	margin: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 931px;
+	height: 90%;
+	background: url(../images/bg.png) #dde2e8;
+	background-repeat: repeat-x;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+}
+
+.zebra > tbody > tr:nth-child(odd) {
+	
+}
+
+.zebra > tbody > tr > td:nth-child(even) {
+	
+}
+
+.wrapper{ width:973px; height:auto; background:#FFF; }
+
+
+.logo{ width:148px; height:150px; float:left; margin: 0px 12px 0px 0px;}
+.blank{ width:401px; height:150px; float:left; margin: 0px 12px 0px 0px; background:#FFF; background-image:url(../images/yavni.png); }
+.save_blood{ width:353px; height:150px; float:left; margin: 0px 0px 0px 0px; background:url(../images/save_blood.jpg); }
+
+.hader{ width:100%; height:150px; float:left; background:#FFF; }
+
+.main_body{ width:100%; height:auto; padding-bottom:15px; background:#FFF; float:left; }
+
+.footer{ width:100%; height:60px; background:#dde2e8; float:left; }
+
+
+/************ left Menu ************/
+.lm_bg{ width:189px; height:auto; float:left; border:1px #CCCCCC solid; margin: 0px 12px 0px 0px; }
+
+.lm_01{ width:100%; height:33px; float:left; border:1px #CCCCCC solid; margin: 0px 0px 0px 0px; background:url(../images/menu_bg.png); background-repeat:repeat-x; }
+.lm_02{ width:160px; height:20px; float:left; margin: 0px 0px 10px 0px; background:url(../images/menu_bg01.png); padding: 0px 0px 0px 29px; }
+.lm_03{ width:160px; height:20px; float:left; margin: 0px 0px 10px 0px; padding: 0px 0px 0px 5px; font-weight:bold; }
+
+/************************/
+
+/************ Center Part ************/
+.center_bg{ width:401px; height:468px; float:left; border:1px #CCCCCC solid; margin: 0px 12px 0px 0px; }
+
+.center_01{ width:401px; height:430px; float:left; border:1px #CCCCCC solid; margin: 0px 0px 10px 0px; }
+.center_02{ width:401px; height:330px; float:left; margin: 0px 0px 0px 0px; }
+
+/************************/
+/************ Center Part For Inner ************/
+.center_bg1{ width:760px; float:left; border:1px #CCCCCC solid; margin: 0px 0px 0px 0px; }
+
+.center_011{ width:760px; float:left; border:1px #CCCCCC solid; margin: 0px 0px 10px 0px; background:url(../images/demo.jpg); }
+.center_021{ width:750px; float:left; margin: 0px 0px 0px 0px; padding:0px; }
+
+/************************/
+
+
+/************ Right Part ************/
+.right_bg{ width:353px; height:468px; float:left; border:1px #CCCCCC solid; margin: 0px 0px 0px 0px; }
+
+.right_menu_01{ width:290px; height:32px; float:left; margin: 0px 0px 0px 30px; background:url(../images/menu_bg02.png); }
+.right_menu_02{ width:140px; height:22px; float:left; margin: 10px 0px 0px 0px; }
+.help_line{ width:353px; height:271px; float:left; margin: 35px 0px 0px 0px; }
+.info_form{ width:353px; height:310px; float:left; margin: 10px 0px 0px 0px; }
+
+/************************/
+
+
+
+
+/*_________________________Text_style______________________________*/
+#headTXT_1{font-family:Georgia, "Times New Roman", Times, serif; font-style:italic; color:#FFF; font-size:26px; padding: 5px 0px 0px 10px; }
+#headTXT_2{font-family:Georgia, "Times New Roman", Times, serif; font-style:italic; color:#dc0101; font-size:26px; padding: 5px 0px 0px 10px; }
+#headTXT_22{font-family:Georgia, "Times New Roman", Times, serif; font-style:italic; color:#dc0101; font-size:26px; padding: 5px 0px 0px 10px; }
+#headTXT_2_01{font-family:Georgia, "Times New Roman", Times, serif; font-style:italic; color:#000; font-size:18px; }
+#headTXT_2_02{font-family:Georgia, "Times New Roman", Times, serif; font-style:italic; color:#000; font-size:18px; text-align:center; }
+#headTXT_3{font-family:Verdana, Geneva, sans-serif; color:#666; font-size:18px;}
+#headTXT_4{font-family:Verdana, Geneva, sans-serif; color:#666; font-size:14px;}
+#headTXT_5{font-family:Tahoma, Geneva, sans-serif;color:#879626; font-size:46px;}
+
+#bodyTXT_1{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px;}
+#bodyTXT_2{ font-family:Arial, Helvetica, sans-serif; color:#693; font-size:20px; font-weight:bold;}
+#bodyTXT_3{ font-family:Arial, Helvetica, sans-serif; color:#FFF; font-size:14px;}
+#bodyTXT_4{ font-family:Verdana, Geneva, sans-serif; color:#999; font-size:14px;}
+#bodyTXT_5{ font-family:Verdana, Geneva, sans-serif; color:#000; font-size:11px;}
+
+/*_________________________End_Text_style______________________________*/
+
+
+
+/*_________________________Hover_Style______________________________*/
+a.a {display:block; background:url(../images/1.jpg); width:265px; height:265px;}
+a.a:hover {display:block; background:url(../images/1_1.jpg); width:265px; height:265px;}
+
+a.b {display:block; background:url(../images/2.jpg); width:265px; height:265px;}
+a.b:hover {display:block; background:url(../images/2_2.jpg); width:265px; height:265px;}
+
+a.c {display:block; background:url(../images/3.jpg); width:265px; height:265px;}
+a.c:hover {display:block; background:url(../images/3_3.jpg); width:265px; height:265px;}
+
+a.d {display:block; background:url(../images/4.jpg); width:176px; height:90px;}
+a.d:hover {display:block; background:url(../images/4_1.jpg); width:176px; height:90px;}
+
+a.e {display:block; background:url(../images/5.jpg); width:88px; height:90px;}
+a.e:hover {display:block; background:url(../images/5_1.jpg); width:88px; height:90px;}
+
+a.f {display:block; background:url(../images/6.jpg); width:195px; height:90px;}
+a.f:hover {display:block; background:url(../images/6_1.jpg); width:195px; height:90px;}
+
+
+a.more {display:block; background:url(../images/more.png); width:60px; height:20px;}
+a.more:hover {display:block; background:url(../images/more1.png); width:60px; height:20px;}
+
+a.fnv { font-family:Verdana, Geneva, sans-serif; font-size:12px; color:#666; text-decoration:none;}
+a.fnv:hover { font-family:Verdana, Geneva, sans-serif; font-size:12px; color:#666; text-decoration:underline;}
+
+a.fnv1 { font-family:Verdana, Geneva, sans-serif; font-size:14px; color:#999; text-decoration:none;}
+a.fnv1:hover { font-family:Verdana, Geneva, sans-serif; font-size:14px; color:#666; text-decoration:underline;}
+
+a.fb {display:block; background:url(../images/f2.png); width:36px; height:36px;}
+a.fb:hover{display:block; background:url(../images/f1.png); width:36px; height:36px;}
+
+a.gm {display:block; background:url(../images/g2.png); width:36px; height:36px;}
+a.gm:hover {display:block; background:url(../images/g1.png); width:36px; height:36px;}
+
+a.tweet{display:block; background:url(../images/t2.png); width:36px; height:36px;}
+a.tweet:hover {display:block; background:url(../images/t1.png); width:36px; height:36px;}
+
+a.nov{font-family:Verdana, Geneva, sans-serif; color:#690; font-size:14px;text-decoration:none;}
+a.nov:hover {font-family:Verdana, Geneva, sans-serif; color:#666666; font-size:14px; text-decoration:none;}
+
+a.sm {font-family:Verdana, Geneva, sans-serif; color:#000; font-size:14px; text-decoration:none;}
+a.sm:hover {font-family:Verdana, Geneva, sans-serif; color:#879626; font-size:14px;text-decoration:none;}
+
+/*_________________________End_Hover_Style______________________________*/
+
+
+
+/************ ID part  ************/
+
+#style{
+	font-family:Georgia, "Times New Roman", Times, serif; color:#F00; font-size:30px; padding: 0px 0px 0px 10px;
+}
+#style_00{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:15px;
+	text-align:left;
+	color:#F00;
+	font-weight:bold;
+	padding: 7px 0px 0px 10px;
+}
+#style_01{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	text-align:justify;
+	color:#000;
+	padding:10px;
+}
+#style_01_1{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	text-align:center;
+	color:#000;
+	padding: 20px 0px 0px 0px;
+}
+#style_01_2{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:center;
+	color:#000;
+	padding:10px;
+}
+
+#style_01_4{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	text-align:justify;
+	color:#000;
+	padding:10px;
+}
+#style_01_44{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:justify;
+	color:#4d4848;
+	padding:5px;
+}
+#style_01_45{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:justify;
+	color:#4d4848;
+	padding:5px;
+}
+
+#style_01_3{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:14px;
+	text-align:left;
+	color:#000;
+	padding:10px;
+}
+
+#style_02{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	text-align:left;
+	color:#d38e41;
+}
+#style_03{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:justify;
+	color:#FFF;
+}
+#style_03_01{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:right;
+	color:#FFFFFF;
+}
+#style_04{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:14px;
+	text-align:center;
+	font-weight:bold;
+	font-style:italic;
+	color:#FFF;
+}
+#style_05{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:justify;
+	color:#000;
+}
+#style_06{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:center;
+	color:#999;
+}
+
+#style_07{
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:20px;
+	text-align:center;
+	color:#669933;
+}
+
+#style_08{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:center;
+	color:#000;
+	font-style:italic;
+}
+#style_09{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:14px;
+	text-align:center;
+	color:#FFF;
+	font-style:italic;
+}
+
+#style_010{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	text-align:left;
+	color:#dc0101;
+}
+#style_011{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	text-align:justify;
+	color:#4d4848;
+}
+
+#style_012{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:14px;
+	text-align:left;
+	color:#dc0101;
+}
+
+#style_013{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:center;
+	font-weight:bold;
+	color:#F00;
+	padding:20px;
+}
+
+
+
+a.ho_01{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	color:#000;
+	text-decoration:none;
+}
+a.ho_01:hover{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	color:#F00;
+	text-decoration:none;
+}
+
+a.ho_02{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	color:#000;
+	text-decoration:none;
+}
+a.ho_02:hover{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	color:#F00;
+	text-decoration:underline;
+}
+
+a.ho_03{
+	text-align:center;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+a.ho_03:hover{
+	text-align:center;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	color:#FFFF00;
+	text-decoration:underline;
+}
+a.ho_04{
+	text-align:center;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	color:#5a7916;
+	text-decoration:none;
+}
+a.ho_04:hover{
+	text-align:center;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	color:#066;
+	text-decoration:underline;
+}
+a.ho_05{
+	text-align:right;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	color:#060;
+	text-decoration:none;
+}
+a.ho_05:hover{
+	text-align:right;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	color:#F00;
+	text-decoration:underline;
+}
+
+a.ho_06{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:center;
+	font-weight:bold;
+	color:#F00;
+	text-decoration:none;
+}
+a.ho_06:hover{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:center;
+	font-weight:bold;
+	color:#666;
+	text-decoration:none;
+}
+
+
+/************ End of ID part  ************/
+.box_wrap
+{
+	width:220px;
+	height:240px;
+	float:left;
+	margin-left:23px;
+	margin-bottom:10px;
+	border:1px #FFF solid;
+}
+	
+.box_image
+{
+	width:220px;
+	height:190px;
+}
+.box_text
+{
+	width:218px;
+	height:40px;
+	color:#06F;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:17px;
+	font-weight:bold;
+	text-align:center;
+	border:1px #CCCCCC solid;
+	background:#DEE3E9;
+	padding-top:10px;
+	
+}
+
+.box_text:hover
+{
+	width:218px;
+	height:40px;
+	
+	color:#000;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:17px;
+	font-weight:bold;
+	text-align:center;
+	border:1px #CCCCCC solid;
+	background:#DEE3E9;
+	padding-top:10px;
+	text-decoration:none;
+}
+/*---------form style-----------*/
+.formtextfield
+{
+	width:150px;
+	height:15px;
+	border:1px solid #999;
+}
+.formtextarea
+{
+	width:150px;
+	height:40px;
+	border:1px solid #999;
+}

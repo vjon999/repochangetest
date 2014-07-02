@@ -1,0 +1,89 @@
+/*
+body {
+	font-size: 12px;
+}*/
+
+
+#mainTable {
+	border: thin;
+	border-color: black;
+	border-width: 1px;
+}
+
+#errorMsg {
+	color: red;
+}
+
+/*
+ * Page length menu
+ */
+.dataTables_length {
+	float: left;
+}
+
+/*
+ * Filter
+ */
+.dataTables_filter {
+	float: right;
+	text-align: right;
+}
+
+
+/*
+table {
+	width: 100%;
+}
+
+thead>tr {
+	background-color: #ebeced;
+}
+
+tr:nth-child(even) {
+	background-color: #eeeeef;
+}*/
+
+
+/*
+.oddEven > tbody > tr:nth-child(even) {
+	background-color: #eeeeef;
+}*/
+
+
+.oddEven > tbody > tr:nth-child(odd) {
+	background-color: #ebeced;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	width: 75%;
+}
+
+.yavniHeader {
+	font-weight: bold;
+}
+
+/* Single-direction drop shadow */
+		
+hr.style-four {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0,0,0,0.5);
+}
+
+table.display {
+margin: 0 auto;
+width: 100%;
+clear: both;
+border-collapse: collapse;
+table-layout: fixed; // ***********add this 
+word-wrap:break-word; // ***********and this 
+
+}
+table.dataTable td {
+    padding-left: 10px;
+}
+.hideColumnFilter {
+	visibility: hidden;
+}

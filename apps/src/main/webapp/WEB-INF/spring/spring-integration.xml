@@ -13,16 +13,13 @@
                                  http://www.springframework.org/schema/integration/spring-integration-3.0.xsd
                                  http://www.springframework.org/schema/integration/stream
                                  http://www.springframework.org/schema/integration/stream/spring-integration-stream-3.0.xsd">    
-	<int:gateway service-interface="com.prapps.core.web.gateway.DefaultGateway" default-request-channel="inRequest" default-reply-channel="yavni"></int:gateway> 
-	<int:header-value-router input-channel="inRequest" header-name="payload.appCode"/>
-    <channel id="inRequest"/>
-    <channel id="yavni"/>
-    <channel id="yavniResp"/>
-    <int:header-value-router input-channel="yavni" header-name="payload.action"/>
-    
-    <int:service-activator input-channel="LOAD_CITIES" ref="configService" method="loadCities" output-channel="yavniResp" />
-    
-    
+	
+	<channel id="inRequest"/>
+    <channel id="outResponse"><int:queue /></channel>
+   
+	
+	<int:gateway service-interface="com.prapps.core.web.gateway.DefaultGateway" default-request-channel="inRequest" default-reply-channel="outResponse"></int:gateway> 
+	<int:header-value-router id="appCodeRouter" input-channel="inRequest" header-name="appCode" />    
     
     <!-- <gateway id="order" service-interface="org.springbyexample.integration.book.Order"/>    
     

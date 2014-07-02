@@ -17,10 +17,17 @@
    </appender> -->
 
    <logger name="org.springframework" additivity="false" >
+      <level value="info" />
+      <appender-ref ref="consoleAppender"/>
+      <!-- <appender-ref ref="fileAppender"/> -->
+   </logger>
+   <logger name="org.springframework.integration" additivity="false" >
       <level value="debug" />
       <appender-ref ref="consoleAppender"/>
       <!-- <appender-ref ref="fileAppender"/> -->
    </logger>
+   
+   
     <logger name="org.hibernate" additivity="false" >
       <level value="debug"/>
       <appender-ref ref="consoleAppender"/>

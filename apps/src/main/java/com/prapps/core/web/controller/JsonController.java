@@ -28,11 +28,12 @@ public class JsonController {
 	private DefaultGateway defaultGateway;
 	
 	@RequestMapping(value="/{action}", method={RequestMethod.GET, RequestMethod.POST})
-	public @ResponseBody Object handleJsonRequest(@PathVariable("action") String action, @RequestParam("appCode") String appCode, HttpServletRequest req) {
-		AppRequest appRequest = createAppRequest(req);
+	public @ResponseBody Object handleJsonRequest(@PathVariable String action, @RequestParam("appCode") String appCode, HttpServletRequest req) {
 		LOG.info("action: "+action+"\tappCode: "+appCode);
-		defaultGateway.send(appRequest);
-		return null;
+		AppRequest appRequest = createAppRequest(req, action, appCode);
+		Object response = defaultGateway.send(appRequest, appCode, action);
+		LOG.debug("response: "+response);
+		return response;
 	}
 	
 	@RequestMapping(value="/*.jsp", method={RequestMethod.GET, RequestMethod.POST})
@@ -48,11 +49,10 @@ public class JsonController {
 		return appRequest;
 	}
 	
-	public AppRequest createAppRequest(HttpServletRequest req) {
+	public AppRequest createAppRequest(HttpServletRequest req, String action, String appCode) {
 		AppRequest appRequest = new AppRequest();
-		String action = req.getParameter("action");
-		LOG.debug("action: "+action);
 		appRequest.setAction(action);
+		appRequest.setAppCode(appCode);
 		for(Object key : req.getParameterMap().keySet()) {
 			appRequest.add((String) key, req.getParameterMap().get(key));
 		}

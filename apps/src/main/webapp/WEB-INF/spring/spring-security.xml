@@ -5,14 +5,10 @@
 	">
 
 	<http pattern="/Login.jsp" security="none" />
-	<http pattern="/mvc/json/inventory1/**" security="none" />
 	<http pattern="/LogoutSuccess.jsp" security="none" />
 	<http pattern="/AccessDenied.jsp" security="none" />
-	<http pattern="/favicon.ico" security="none" />
+	<http pattern="./resources/**" security="none" />
 	
-	<http pattern="/images/**" security="none" />
-	<http pattern="/css/**" security="none" />
-	<http pattern="/js/**" security="none" />
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/mvc/bank/verify" access="hasAnyRole('ROLE_VERIFIER', 'ROLE_APPROVER', 'ROLE_CMO', 'ROLE_SUPER_USER')"></intercept-url>
 		<intercept-url pattern="/mvc/bank/approve" access="hasAnyRole('ROLE_APPROVER', 'ROLE_CMO', 'ROLE_SUPER_USER')"></intercept-url>
@@ -20,12 +16,12 @@
 		<intercept-url pattern="/mvc/logout/**" access="hasAnyRole('ROLE_BANK_USER', 'ROLE_SUPER_USER', 'ROLE_CALL_CENTER_USER')"></intercept-url>
 		<intercept-url pattern="/mvc/home/**" access="hasAnyRole('ROLE_BANK_USER', 'ROLE_SUPER_USER', 'ROLE_CALL_CENTER_USER', 'ROLE_BLOOD_BANK_ADMIN')"></intercept-url>
 		<intercept-url pattern="/mvc/search/**" access="hasAnyRole('ROLE_BANK_USER', 'ROLE_SUPER_USER', 'ROLE_CALL_CENTER_USER')"></intercept-url>
-		<intercept-url pattern="/mvc/json/**" access="hasAnyRole('ROLE_BANK_USER', 'ROLE_SUPER_USER', 'ROLE_CALL_CENTER_USER')"></intercept-url>
+		<intercept-url pattern="/mvc/resources/js/on/**" access="hasAnyRole('ROLE_BANK_USER', 'ROLE_SUPER_USER', 'ROLE_CALL_CENTER_USER')"></intercept-url>
 		<intercept-url pattern="/mvc/event/**" access="hasAnyRole('ROLE_BLOOD_BANK_ADMIN')"></intercept-url>
 		<intercept-url pattern="/mvc/su/**" access="hasAnyRole('ROLE_BLOOD_BANK_ADMIN')"></intercept-url>
 		<intercept-url pattern="/mvc/list*/**" access="hasAnyRole('ROLE_VERIFIER', 'ROLE_APPROVER', 'ROLE_CMO', 'ROLE_SUPER_USER','ROLE_BLOOD_BANK_ADMIN')"></intercept-url>
 		<intercept-url pattern="/**" access="hasAnyRole('ROLE_SUPER_USER', 'ROLE_CMO')"></intercept-url>
-		<form-login login-page="/Login.jsp" default-target-url="/mvc/home" authentication-failure-url="/Login.jsp?error=true"></form-login>
+		<form-login login-page="/Login.jsp" default-target-url="/home" authentication-failure-url="/Login.jsp?error=true"></form-login>
 		<logout invalidate-session="true" logout-success-url="/LogoutSuccess.jsp"></logout>
 
 		<access-denied-handler error-page="/AccessDenied.jsp"/>
