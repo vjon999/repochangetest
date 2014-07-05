@@ -14,6 +14,10 @@
                                  http://www.springframework.org/schema/integration/stream
                                  http://www.springframework.org/schema/integration/stream/spring-integration-stream-3.0.xsd">    
 	
+	<int:gateway id="defaultGateway" service-interface="com.prapps.core.web.gateway.DefaultGateway">
+		<int:method name="send" request-channel="inRequest" reply-channel="outResponse"></int:method>
+	</int:gateway>
+	<int:annotation-config />
 	<channel id="inRequest"/>
     <channel id="outResponse"><int:queue /></channel>
    
@@ -21,13 +25,5 @@
 	<int:gateway service-interface="com.prapps.core.web.gateway.DefaultGateway" default-request-channel="inRequest" default-reply-channel="outResponse"></int:gateway> 
 	<int:header-value-router id="appCodeRouter" input-channel="inRequest" header-name="appCode" />    
     
-    <!-- <gateway id="order" service-interface="org.springbyexample.integration.book.Order"/>    
-    
-    <bridge input-channel="pickup" output-channel="store" />    
-    <channel id="store"/>
-    <channel id="post"/>
-    
-    <outbound-channel-adapter channel="store" ref="storeEndpoint" method="processMessage" />
-    <outbound-channel-adapter channel="post" ref="postEndpoint" method="processMessage" /> -->
-    
+    <beans:import resource="yavni-integration.xml" />
 </beans:beans>
