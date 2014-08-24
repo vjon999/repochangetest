@@ -1,5 +1,6 @@
 package com.chess.uci.server;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -10,29 +11,38 @@ import com.chess.uci.share.AsyncWriter;
 import com.chess.uci.share.NetworkRW;
 import com.chess.uci.share.TCPNetworkRW;
 
-public class EngineServer implements Runnable {
+public class EngineServer extends Server implements Runnable {
 
 	private static Logger LOG = Logger.getLogger(EngineServer.class.getName());
 	
 	private NetworkRW networkRW;
-	private ServerSocket serverSocket;
 	public boolean exit = false;
-	private String enginePath;
-	public EngineServer(int port, String enginePath) throws FileNotFoundException, IOException {
-		this.enginePath = enginePath;
+	private ServerSocket serverSocket;
+	
+	public EngineServer(Server server) throws IOException {
+		this.id = server.id;
+		this.name = server.name;
+		this.path = server.path;
+		this.command = server.command;
+		this.port = server.port;
+		this.running = server.running;
+		File file = new File(path);
+		if(!file.exists()) {
+			throw new FileNotFoundException("Invalid Engine Path"+path);
+		}
 		serverSocket = new ServerSocket(port);
-		LOG.info("TCP server port: "+port);
 	}
 	
-	public void listen() throws IOException {
+	public void listen() throws IOException {		
+		LOG.info(name+" -> TCP server port: "+port);
 		LOG.info("waiting for connection on Engine port: "+serverSocket.getLocalPort());
-		LOG.info("Engine: "+enginePath);
+		LOG.info("Engine: "+path);
 		networkRW = new TCPNetworkRW(serverSocket.accept());
 		LOG.fine("\n--------------------------------------Start Server ----------------------------------\n");
 		Process p = null;
 		if(!networkRW.isClosed() && networkRW.isConnected()) {
 			try {
-				p = startEngine(enginePath);
+				p = startEngine(path);
 				Thread guiToEngineWriterThread = new Thread(new AsyncReader(p.getOutputStream(), networkRW, exit));
 				Thread engineToGUIWriterThread = new Thread(new AsyncWriter(p.getInputStream(), networkRW, exit));
 				// writer.setDaemon(true);
