@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="serverConfig">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="adminPort" type="xs:int"></xs:element>
+				<xs:element name="servers" type="server" maxOccurs="unbounded" />
+			</xs:sequence>
+			<xs:attribute name="protocol" type="xs:string"></xs:attribute>
+			<xs:attribute name="password" type="xs:string"></xs:attribute>
+			<xs:attribute name="fromMail" type="xs:string"></xs:attribute>
+			<xs:attribute name="mailPass" type="xs:string"></xs:attribute>
+			<xs:attribute name="toMail" type="xs:string"></xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="server">
+		<xs:sequence>
+			<xs:element name="path" type="xs:string"></xs:element>
+			<xs:element name="command" type="xs:string" minOccurs="0"></xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string"></xs:attribute>
+		<xs:attribute name="name" type="xs:string"></xs:attribute>
+		<xs:attribute name="port" type="xs:int"></xs:attribute>
+		<xs:attribute name="running" type="xs:boolean" fixed="false"></xs:attribute>
+	</xs:complexType>
+
+</xs:schema>
