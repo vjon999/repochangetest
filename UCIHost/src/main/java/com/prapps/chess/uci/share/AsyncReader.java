@@ -12,10 +12,12 @@ public class AsyncReader implements Runnable {
 	private NetworkRW networkRW;
 	private volatile boolean stop = false;
 	private OutputStream os;
+	public volatile boolean exit;
 	
 	public AsyncReader(OutputStream os, NetworkRW networkRW, Boolean exit) {
 		this.os = os;
 		this.networkRW = networkRW;
+		this.exit = exit;
 	}
 	
 	public void run() {

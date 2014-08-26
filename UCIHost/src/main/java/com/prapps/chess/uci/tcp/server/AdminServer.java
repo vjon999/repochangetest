@@ -1,6 +1,7 @@
 package com.prapps.chess.uci.tcp.server;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,11 +16,11 @@ import javax.xml.bind.JAXBException;
 import com.prapps.chess.uci.share.NetworkRW;
 import com.prapps.chess.uci.share.TCPNetworkRW;
 
-public class AdminServer implements Runnable {
+public class AdminServer {
 
 	private static Logger LOG = Logger.getLogger(AdminServer.class.getName());
 	
-	private static ServerConfig serverConfig;
+	private ServerConfig serverConfig;
 	protected Server[] server;
 	//protected static Properties config;
 	protected int cores = -1;
@@ -34,12 +35,16 @@ public class AdminServer implements Runnable {
 	protected String enginePath;
 	protected char[] password;
 	protected static List<EngineServer> servers = new ArrayList<EngineServer>();
+	protected static List<Thread> serverThreads = new ArrayList<Thread>();
 	
 	protected Thread guiToEngineWriterThread;
 	protected Thread engineToGUIWriterThread;
+	private Thread adminThread;
 	
-	public AdminServer() {
-		// TODO Auto-generated constructor stub
+	public AdminServer(String configPath) throws FileNotFoundException, JAXBException {
+		InputStream is = new FileInputStream(configPath);
+		ServerConfigUtil serverConfigUtil = new ServerConfigUtil(is);
+		serverConfig = serverConfigUtil.getServerConfig();
 	}
 
 	public AdminServer(int port) throws FileNotFoundException, IOException {
@@ -51,7 +56,7 @@ public class AdminServer implements Runnable {
 		//enginePath = config.getProperty(String.valueOf(port));
 	}
 
-	public void staticInitServer() throws IOException {
+	public void start() throws IOException {
 		//AdminServer.config = config;
 		LOG.info("server starting");
 		adminPort = serverConfig.getAdminPort();
@@ -77,10 +82,10 @@ public class AdminServer implements Runnable {
 						LOG.fine("Admin command: "+line);
 						if (line.startsWith(":q")) {
 							exit = true;
+							adminThread.interrupt();
 							for (EngineServer s : servers) {
-								s.exit = true;
-							}
-							
+								s.stateClosing = true;
+							}							
 							break;
 						}
 
@@ -91,6 +96,47 @@ public class AdminServer implements Runnable {
 			}
 		}).start();
 		
+		adminThread = new Thread(new Runnable() {
+			public void run() {
+				try {
+					System.err.println("--------------------------------------");
+					adminNetworkRW = new TCPNetworkRW(adminServerSocket.accept());
+					if(Thread.interrupted()) {
+						throw new InterruptedException("interrupting admin thread");
+					}
+					LOG.info("waiting for connection...");
+					LOG.info("Connection received from " + adminNetworkRW.getAddress().getHostName());
+					System.out.println("thread was interrupted");
+					String request = null;
+					String sentMsg = null;
+					do {
+						request = adminNetworkRW.readFromNetwork();
+						LOG.info("Client: " + request);
+						sentMsg = "";
+						if(null != request) {
+							if (request.equalsIgnoreCase("helloserver")) {
+								sentMsg = "connected";
+								connected = true;
+							}
+							else if(request.equalsIgnoreCase("all_servers")) {
+								for(Server server : serverConfig.getServers()) {
+									sentMsg += "Port: "+server.getPort() + "\t"+server.getName()+"\n";	
+								}
+								adminNetworkRW.writeToNetwork(sentMsg);								
+							}
+						}
+					} while (null != request && !"exit".equals(request));
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					System.out.println("thread was interrupted");
+					e.printStackTrace();
+				}
+				
+			}
+		}, "KeyboardListernerTherad");
+		adminThread.start();
+		
 		LOG.info("Admin server started");
 		/*while(!exit)
 			handshake();*/
@@ -98,7 +144,7 @@ public class AdminServer implements Runnable {
 		LOG.fine("Admin server closed");
 	}
 	
-	public Process startEngine() throws IOException {
+	/*public Process startEngine() throws IOException {
 		if (!engineStarted) {
 			Process p = Runtime.getRuntime().exec(enginePath);
 			//p.getOutputStream().write(("setoption name Max CPUs value "+cores+"\nsetoption name CPU Usage value 100\n").getBytes());
@@ -114,6 +160,26 @@ public class AdminServer implements Runnable {
 		connected = false;
 		p.destroy();
 		engineStarted = false;
+	}*/
+	
+	public void close() {
+		exit = true;
+		//adminThread.interrupt();
+		/*for(Thread t : serverThreads) {
+			t.interrupt();
+		}*/
+		
+		for (EngineServer engineServer : servers) {
+			engineServer.close();
+		}
+		if(adminServerSocket != null) {
+			try {
+				adminServerSocket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		System.exit(0);
 	}
 	
 	public void handshake() throws IOException {
@@ -161,43 +227,25 @@ public class AdminServer implements Runnable {
 		System.getProperties().put("-Djava.util.logging.config.file", "h:/logging.properties");
 		System.out.println(System.getProperty("java.home"));
 		LOG.info("Admin Server : Log initialized");
-		InputStream is = AdminServer.class.getClassLoader().getResourceAsStream("serverConfig.xml");		
-		ServerConfigUtil serverConfigUtil = new ServerConfigUtil(is);
-		serverConfig = serverConfigUtil.getServerConfig();
-		
-		/*Properties config = new Properties();
-		config.load(new FileInputStream("config.ini"));*/
-		AdminServer server = new AdminServer();
-		server.staticInitServer();
+		AdminServer server = new AdminServer("serverConfig.xml");
+		server.start();
 		LOG.info("Admin Server closed");
 	}
 	
 	private void initEngines() throws IOException {
-		/*int count = 0;
-		for (int port = 0; port <= 10; port++) {
-			if (config.containsKey(String.valueOf(port))) {
-				if("tcp".equalsIgnoreCase(protocol)) {
-					LOG.info("Starting Engine Server on port: "+(adminPort+port));
-					servers.add(new EngineServer((adminPort+port), config.getProperty(port+"")));
-				}
-				else {
-					//servers.add(new DatagramServer(port));
-				}				
-				new Thread(servers.get(count)).start();
-				count++;
-			}
-		}*/
 		for(Server server : serverConfig.getServers()) {
 			EngineServer engineServer = new EngineServer(server);
 			servers.add(engineServer);
-			new Thread(engineServer).start();
+			Thread t = new Thread(engineServer, server.getName());
+			t.start();
+			serverThreads.add(t);
 			LOG.info("server listening: "+server);
 		}
 		engineStarted = true;
 	}
 
-	public void run() {
-		// TODO Auto-generated method stub
-		
+	public ServerConfig getServerConfig() {
+		return serverConfig;
 	}
+	
 }

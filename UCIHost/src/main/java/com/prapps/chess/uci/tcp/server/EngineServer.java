@@ -16,8 +16,10 @@ public class EngineServer extends Server implements Runnable {
 	private static Logger LOG = Logger.getLogger(EngineServer.class.getName());
 	
 	private NetworkRW networkRW;
-	public boolean exit = false;
+	public volatile boolean stateClosing = false;
 	private ServerSocket serverSocket;
+	private Thread guiToEngineWriterThread;
+	private Thread engineToGUIWriterThread;
 	
 	public EngineServer(Server server) throws IOException {
 		this.id = server.id;
@@ -42,9 +44,9 @@ public class EngineServer extends Server implements Runnable {
 		Process p = null;
 		if(!networkRW.isClosed() && networkRW.isConnected()) {
 			try {
-				p = startEngine(path);
-				Thread guiToEngineWriterThread = new Thread(new AsyncReader(p.getOutputStream(), networkRW, exit));
-				Thread engineToGUIWriterThread = new Thread(new AsyncWriter(p.getInputStream(), networkRW, exit));
+				p = startEngine(path, command);
+				guiToEngineWriterThread = new Thread(new AsyncReader(p.getOutputStream(), networkRW, stateClosing));
+				engineToGUIWriterThread = new Thread(new AsyncWriter(p.getInputStream(), networkRW, stateClosing));
 				// writer.setDaemon(true);
 				guiToEngineWriterThread.start();
 				engineToGUIWriterThread.start();
@@ -69,18 +71,49 @@ public class EngineServer extends Server implements Runnable {
 		}
 	}
 	
-	public Process startEngine(String enginePath) throws IOException {
-		Process p = Runtime.getRuntime().exec(enginePath);
+	public Process startEngine(String enginePath, String command) throws IOException {
+		Process p = null;
+		if(null == command || "".equals(command)) {
+			 p = Runtime.getRuntime().exec(enginePath);
+		}
+		else {
+			p = new ProcessBuilder(command, enginePath).start();
+		}
 		return p;
 	}
 
 	public void run() {
 		try {
-			while(!exit)
+			while(!stateClosing)
 				listen();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}		
+		}
+		running = false;
+		LOG.info(name + "Engine Server closed");
+	}
+	
+	public void close() {
+		if(null  != guiToEngineWriterThread)
+			guiToEngineWriterThread.interrupt();
+		if(null != engineToGUIWriterThread)
+			engineToGUIWriterThread.interrupt();
+		if(null != guiToEngineWriterThread && null != engineToGUIWriterThread) {
+			if(!engineToGUIWriterThread.isAlive() && !guiToEngineWriterThread.isAlive()) {
+				try {
+					serverSocket.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		else {
+			try {
+				serverSocket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
