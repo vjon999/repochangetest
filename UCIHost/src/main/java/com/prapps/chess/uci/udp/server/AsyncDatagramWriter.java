@@ -1,4 +1,4 @@
-package com.prapps.chess.uci.udp.server;
+package com.prapps.chess.server.uci.udp;
 
 import java.io.IOException;
 import java.io.InputStream;

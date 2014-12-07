@@ -15,10 +15,21 @@
 	</xs:element>
 
 	<xs:complexType name="server">
-		<xs:sequence>
-			<xs:element name="path" type="xs:string"></xs:element>
-			<xs:element name="command" type="xs:string" minOccurs="0"></xs:element>
-		</xs:sequence>
+		<xs:complexContent>
+			<xs:extension base="basicServer">
+				<xs:sequence>
+					<xs:element name="path" type="xs:string"></xs:element>
+					<xs:element name="command" type="xs:string" minOccurs="0"></xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+		<!-- <xs:attribute name="id" type="xs:string"></xs:attribute>
+		<xs:attribute name="name" type="xs:string"></xs:attribute>
+		<xs:attribute name="port" type="xs:int"></xs:attribute>
+		<xs:attribute name="running" type="xs:boolean" fixed="false"></xs:attribute> -->
+	</xs:complexType>
+	
+	<xs:complexType name="basicServer">
 		<xs:attribute name="id" type="xs:string"></xs:attribute>
 		<xs:attribute name="name" type="xs:string"></xs:attribute>
 		<xs:attribute name="port" type="xs:int"></xs:attribute>

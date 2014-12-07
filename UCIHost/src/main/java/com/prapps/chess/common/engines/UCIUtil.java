@@ -7,7 +7,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.HttpCookie;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
@@ -34,6 +38,9 @@ import javax.mail.Store;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.net.ssl.HttpsURLConnection;
+
+import sun.net.www.content.text.PlainTextInputStream;
 
 public class UCIUtil {
 
@@ -147,14 +154,21 @@ public class UCIUtil {
 	public static String IPADDRESS_PATTERN =  "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
 	
 	public static void main(String[] arg) {
-		try {
+		/*try {
 			mailExternalIP(getExternalIP(), "vickysengupta006@gmail.com", "chinat0wn", "");
 			System.out.println(getExternalIP());
 	    } 
 	    catch (Exception e)
 	    {
 	    	e.printStackTrace();
-	    }
+	    }*/
+		
+		try {
+			getHttpExternalIP();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void mailExternalIP(String ip, final String fromMailAddress, final String password, final String toMailAddress) {
@@ -265,6 +279,66 @@ public class UCIUtil {
 			e.printStackTrace();
 		}
 		return -1;
+	}
+	
+	final static String publicUrl = "http://apps-pratiks.rhcloud.com/json/cs/ip";
+	public static void updateExternalIP(String ip, int port) {
+		final String USER_AGENT = "Mozilla/5.0";
+		try {
+			URL url = new URL(publicUrl+"?action=set&ip="+ip+":"+port);
+			HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("User-Agent", USER_AGENT);
+			int responseCode = conn.getResponseCode();
+			System.out.println("\nSending 'GET' request to URL : " + url);
+			System.out.println("Response Code : " + responseCode);
+	 
+			BufferedReader in = new BufferedReader(
+			        new InputStreamReader(conn.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+	 
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+	 
+			//print result
+			System.out.println(response.toString());
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static String getHttpExternalIP() throws IOException {
+		final String USER_AGENT = "Mozilla/5.0";
+		String ip = null;
+		URL url = new URL(publicUrl+"?action=get");
+		//URL url = new URL("http://localhost:8080/json/cs/ip?action=get");
+		HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("User-Agent", USER_AGENT);
+		conn.setRequestProperty("Content-length", "0");
+        conn.setUseCaches(false);
+        conn.setAllowUserInteraction(false);
+		conn.connect();
+		int responseCode = conn.getResponseCode();
+		System.out.println("Response Code : " + responseCode);
+		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();	 
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();	 
+		System.out.println("response: "+response.toString());
+		ip = response.toString();
+		return ip;
 	}
 
 }

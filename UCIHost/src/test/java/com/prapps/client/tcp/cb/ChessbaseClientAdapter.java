@@ -1,4 +1,4 @@
-package com.prapps.client.tcp.cb;
+package com.prapps.chess.client.tcp.cb;
 
 import static com.prapps.chess.common.engines.ProtocolConstants.CLOSE_MSG;
 import static com.prapps.chess.common.engines.ProtocolConstants.CONN_SUCCESS_MSG;

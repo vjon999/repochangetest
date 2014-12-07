@@ -41,4 +41,5 @@ public interface ProtocolConstants {
 	public static final String SUCCESS_SET_PROTOCOL_UDP = "udp protocol set";
 	public static final String QUIT_MSG = "quit";
 	public static final String CLOSE_MSG = "close";
+	public static final String SHUT_DOWN = "shut_down";
 }

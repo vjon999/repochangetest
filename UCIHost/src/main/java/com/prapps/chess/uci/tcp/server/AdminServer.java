@@ -1,4 +1,4 @@
-package com.prapps.chess.uci.tcp.server;
+package com.prapps.chess.server.uci.tcp;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBException;
 
+import com.prapps.chess.common.engines.ProtocolConstants;
+import com.prapps.chess.common.engines.UCIUtil;
 import com.prapps.chess.uci.share.NetworkRW;
 import com.prapps.chess.uci.share.TCPNetworkRW;
 
@@ -64,13 +66,7 @@ public class AdminServer {
 		LOG.info("protocol type: "+serverConfig.getProtocol());
 		LOG.info("admin port: "+adminPort);
 		adminServerSocket = new ServerSocket(adminPort);
-		
-		/*try {
-			LOG.info(UCIUtil.getExternalIP());
-			UCIUtil.mailExternalIP(UCIUtil.getExternalIP() + ":admin_port=" + adminPort, serverConfig.getFromMail(),serverConfig.getMailPass(), serverConfig.getToMail());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
+		Thread mailer = new Thread(new MailerThread(serverConfig));mailer.start();
 		
 		new Thread(new Runnable() {
 
@@ -100,39 +96,59 @@ public class AdminServer {
 			public void run() {
 				try {
 					System.err.println("--------------------------------------");
-					adminNetworkRW = new TCPNetworkRW(adminServerSocket.accept());
-					if(Thread.interrupted()) {
-						throw new InterruptedException("interrupting admin thread");
-					}
-					LOG.info("waiting for connection...");
-					LOG.info("Connection received from " + adminNetworkRW.getAddress().getHostName());
-					System.out.println("thread was interrupted");
-					String request = null;
-					String sentMsg = null;
+					LOG.info("waiting for connection..." + adminServerSocket.getLocalPort());
 					do {
-						request = adminNetworkRW.readFromNetwork();
-						LOG.info("Client: " + request);
-						sentMsg = "";
-						if(null != request) {
-							if (request.equalsIgnoreCase("helloserver")) {
-								sentMsg = "connected";
-								connected = true;
-							}
-							else if(request.equalsIgnoreCase("all_servers")) {
-								for(Server server : serverConfig.getServers()) {
-									sentMsg += "Port: "+server.getPort() + "\t"+server.getName()+"\n";	
+						adminNetworkRW = new TCPNetworkRW(adminServerSocket.accept());
+						/*
+						 * if(Thread.interrupted()) { throw new
+						 * InterruptedException("interrupting admin thread"); }
+						 */
+
+						LOG.info("Connection received from " + adminNetworkRW.getAddress().getHostName());
+						String request = null;
+						String sentMsg = null;
+						do {
+							request = adminNetworkRW.readFromNetwork();
+							LOG.info("Client: " + request);
+							sentMsg = "";
+							if (null != request) {
+								if (ProtocolConstants.START_MSG.equals(request)) {
+									sentMsg = ProtocolConstants.CONN_SUCCESS_MSG;
+									connected = true;
+								} else if (ProtocolConstants.GET_AVAILABLE_ENGINES.equals(request)) {
+									for (Server server : serverConfig.getServers()) {
+										sentMsg += server.getName() + ":" + server.getPort() + ";";
+									}
 								}
-								adminNetworkRW.writeToNetwork(sentMsg);								
+								else if(ProtocolConstants.SHUT_DOWN.equals(request)) {
+									LOG.info("shutting down...");
+									sentMsg = ProtocolConstants.CLOSE_MSG;
+									adminNetworkRW.writeToNetwork(sentMsg);
+									Process process = Runtime.getRuntime().exec("sudo poweroff");
+									byte[] buffer = new byte[1024];
+									int readLen = 0;
+									while((readLen = process.getErrorStream().read(buffer)) != -1)
+										System.out.println(new String(buffer,0, readLen));
+									
+									readLen = 0;
+									while((readLen = process.getInputStream().read(buffer)) != -1)
+										System.out.println(new String(buffer,0, readLen));
+									
+									process.getOutputStream().write("peed\n".getBytes());
+								}
+								LOG.finest("Writing to Socket: "+sentMsg);
+								adminNetworkRW.writeToNetwork(sentMsg);
 							}
-						}
-					} while (null != request && !"exit".equals(request));
+						} while (null != request && !"exit".equals(request));
+					} while (!exit);
 				} catch (IOException e) {
 					e.printStackTrace();
-				} catch (InterruptedException e) {
-					System.out.println("thread was interrupted");
-					e.printStackTrace();
-				}
-				
+				} /*
+				 * catch (InterruptedException e) {
+				 * System.out.println("thread was interrupted");
+				 * e.printStackTrace(); }
+				 */
+
 			}
 		}, "KeyboardListernerTherad");
 		adminThread.start();

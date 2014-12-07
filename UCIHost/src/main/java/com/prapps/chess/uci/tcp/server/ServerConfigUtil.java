@@ -1,4 +1,4 @@
-package com.prapps.chess.uci.tcp.server;
+package com.prapps.chess.server.uci.tcp;
 
 import java.io.InputStream;
 

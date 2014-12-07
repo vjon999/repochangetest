@@ -63,18 +63,27 @@ public class Socket {
 		}
 	}
 	
-	public String read() throws IOException {
+	public String read() throws IOException  {
 		LOG.finest(Socket.class.getName()+" -> read");
 		StringBuffer sb = new StringBuffer();
 		byte[] buf = new byte[ProtocolConstants.BUFFER_SIZE];
 		if(socket != null) {
 			LOG.finest("reading from socket -> "+socket.getLocalAddress()+":"+socket.getLocalPort());
 			int readLen = buf.length;
-			while (readLen == buf.length && (readLen = socket.getInputStream().read(buf, 0, buf.length)) != 0) {
-				if(readLen != -1)
-					sb.append(new String(buf, 0, readLen));
-				else 
-					return null;
+			try {
+				while (readLen == buf.length && (readLen = socket.getInputStream().read(buf, 0, buf.length)) != 0) {
+					if(readLen != -1) {
+						LOG.finest("readLen: "+readLen);
+						sb.append(new String(buf, 0, readLen));
+					}
+					else {
+						LOG.finest("end of stream");
+						return null;
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw e;
 			}
 			LOG.finest("returning -> "+sb.toString()+"\tLength -> "+sb.toString().length());
 			return sb.toString();
