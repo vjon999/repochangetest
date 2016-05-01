@@ -1,0 +1,7108 @@
+[
+  {
+    "no": 02261,
+    "from": "SDAH",
+    "to": "KYQ",
+    "rundays": "Sa",
+    "type": "Special",
+    "arr": "First",
+    "dep": "0.30"
+  },
+  {
+    "no": 02262,
+    "from": "KYQ",
+    "to": "SDAH",
+    "rundays": "Su",
+    "type": "Special",
+    "arr": "12.3",
+    "dep": "Last"
+  },
+  {
+    "no": 23154,
+    "from": "GOUR",
+    "to": "EXP",
+    "rundays": "Daily",
+    "type": "Link",
+    "arr": "5.2",
+    "dep": "Last"
+  },
+  {
+    "no": 31636,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.58",
+    "dep": "Last"
+  },
+  {
+    "no": 31633,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "8.08"
+  },
+  {
+    "no": 33529,
+    "from": "SDAH",
+    "to": "HNB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "6.12",
+    "route": [
+      {
+        "no": 1,
+        "code": "SDAH",
+        "desc": "Sealdah",
+        "arrival": "First",
+        "dep": "06.12",
+        "halt": "0",
+        "dist": "0",
+        "day": "1"
+      },
+      {
+        "no": 2,
+        "code": "BNXR",
+        "desc": "Bidhannagar Road",
+        "arrival": "06.19",
+        "dep": "06.20",
+        "halt": "1",
+        "dist": "4",
+        "day": "1"
+      },
+      {
+        "no": 3,
+        "code": "DDJ",
+        "desc": "Dumdum Jn",
+        "arrival": "06.25",
+        "dep": "06.26",
+        "halt": "1",
+        "dist": "7",
+        "day": "1"
+      },
+      {
+        "no": 4,
+        "code": "DDC",
+        "desc": "Dumdum Cantonment",
+        "arrival": "06.30",
+        "dep": "06.31",
+        "halt": "1",
+        "dist": "10",
+        "day": "1"
+      },
+      {
+        "no": 5,
+        "code": "DGNR",
+        "desc": "Durganagar F",
+        "arrival": "06.33",
+        "dep": "06.34",
+        "halt": "1",
+        "dist": "12",
+        "day": "1"
+      },
+      {
+        "no": 6,
+        "code": "BBT",
+        "desc": "Birati",
+        "arrival": "06.36",
+        "dep": "06.37",
+        "halt": "1",
+        "dist": "13",
+        "day": "1"
+      },
+      {
+        "no": 7,
+        "code": "BRPK",
+        "desc": "Bisharpara Kodaliya",
+        "arrival": "06.39",
+        "dep": "06.40",
+        "halt": "1",
+        "dist": "15",
+        "day": "1"
+      },
+      {
+        "no": 8,
+        "code": "NBE",
+        "desc": "New Barrackpur",
+        "arrival": "06.42",
+        "dep": "06.43",
+        "halt": "1",
+        "dist": "16",
+        "day": "1"
+      },
+      {
+        "no": 9,
+        "code": "MMG",
+        "desc": "Madhyamgram",
+        "arrival": "06.45",
+        "dep": "06.46",
+        "halt": "1",
+        "dist": "18",
+        "day": "1"
+      },
+      {
+        "no": 10,
+        "code": "HHR",
+        "desc": "Hridaypur",
+        "arrival": "06.48",
+        "dep": "06.49",
+        "halt": "1",
+        "dist": "20",
+        "day": "1"
+      },
+      {
+        "no": 11,
+        "code": "BT",
+        "desc": "Barasat Jn",
+        "arrival": "06.56",
+        "dep": "06.57",
+        "halt": "1",
+        "dist": "22",
+        "day": "1"
+      },
+      {
+        "no": 12,
+        "code": "KM26",
+        "desc": "Kazipara",
+        "arrival": "07.00",
+        "dep": "07.01",
+        "halt": "1",
+        "dist": "25",
+        "day": "1"
+      },
+      {
+        "no": 13,
+        "code": "KBGH",
+        "desc": "Karea Kadambagachi",
+        "arrival": "07.03",
+        "dep": "07.04",
+        "halt": "1",
+        "dist": "29",
+        "day": "1"
+      },
+      {
+        "no": 14,
+        "code": "BHKA",
+        "desc": "Bahira Kalibari",
+        "arrival": "07.06",
+        "dep": "07.07",
+        "halt": "1",
+        "dist": "32",
+        "day": "1"
+      },
+      {
+        "no": 15,
+        "code": "SXC",
+        "desc": "Sondalia",
+        "arrival": "07.10",
+        "dep": "07.11",
+        "halt": "1",
+        "dist": "34",
+        "day": "1"
+      },
+      {
+        "no": 16,
+        "code": "BGRD",
+        "desc": "Beliaghata Road",
+        "arrival": "07.14",
+        "dep": "07.15",
+        "halt": "1",
+        "dist": "37",
+        "day": "1"
+      },
+      {
+        "no": 17,
+        "code": "LBTL",
+        "desc": "Labutala H",
+        "arrival": "07.18",
+        "dep": "07.19",
+        "halt": "1",
+        "dist": "40",
+        "day": "1"
+      },
+      {
+        "no": 18,
+        "code": "BSLA",
+        "desc": "Bhasila",
+        "arrival": "07.21",
+        "dep": "07.22",
+        "halt": "1",
+        "dist": "42",
+        "day": "1"
+      },
+      {
+        "no": 19,
+        "code": "HRO",
+        "desc": "Harua Road",
+        "arrival": "07.25",
+        "dep": "07.26",
+        "halt": "1",
+        "dist": "46",
+        "day": "1"
+      },
+      {
+        "no": 20,
+        "code": "KMZA",
+        "desc": "Kankra Mirzanagar",
+        "arrival": "07.32",
+        "dep": "07.33",
+        "halt": "1",
+        "dist": "49",
+        "day": "1"
+      },
+      {
+        "no": 21,
+        "code": "MPE",
+        "desc": "Malatipur",
+        "arrival": "07.36",
+        "dep": "07.37",
+        "halt": "1",
+        "dist": "53",
+        "day": "1"
+      },
+      {
+        "no": 22,
+        "code": "GGV",
+        "desc": "Ghoraras Ghona H",
+        "arrival": "07.39",
+        "dep": "07.40",
+        "halt": "1",
+        "dist": "56",
+        "day": "1"
+      },
+      {
+        "no": 23,
+        "code": "CQR",
+        "desc": "Champapukur",
+        "arrival": "07.42",
+        "dep": "07.43",
+        "halt": "1",
+        "dist": "58",
+        "day": "1"
+      },
+      {
+        "no": 24,
+        "code": "BBLA",
+        "desc": "Bhyabla",
+        "arrival": "07.48",
+        "dep": "07.49",
+        "halt": "1",
+        "dist": "63",
+        "day": "1"
+      },
+      {
+        "no": 25,
+        "code": "BSHT",
+        "desc": "Basirhat",
+        "arrival": "08.01",
+        "dep": "08.02",
+        "halt": "1",
+        "dist": "64",
+        "day": "1"
+      },
+      {
+        "no": 26,
+        "code": "MTAP",
+        "desc": "Matania Anantpur",
+        "arrival": "08.05",
+        "dep": "08.06",
+        "halt": "1",
+        "dist": "66",
+        "day": "1"
+      },
+      {
+        "no": 27,
+        "code": "MPN",
+        "desc": "Madhyampur",
+        "arrival": "08.08",
+        "dep": "08.09",
+        "halt": "1",
+        "dist": "69",
+        "day": "1"
+      },
+      {
+        "no": 28,
+        "code": "NMDR",
+        "desc": "Nimdanri",
+        "arrival": "08.11",
+        "dep": "08.12",
+        "halt": "1",
+        "dist": "71",
+        "day": "1"
+      },
+      {
+        "no": 29,
+        "code": "TKF",
+        "desc": "Taki Road",
+        "arrival": "08.14",
+        "dep": "08.15",
+        "halt": "1",
+        "dist": "73",
+        "day": "1"
+      },
+      {
+        "no": 30,
+        "code": "HNB",
+        "desc": "Hasanabad Jn",
+        "arrival": "08.20",
+        "dep": "Last",
+        "halt": "0",
+        "dist": "74",
+        "day": "1"
+      }
+    ]
+  },
+  {
+    "no": 33531,
+    "from": "SDAH",
+    "to": "HNB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "14.25"
+  },
+  {
+    "no": 33536,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.37",
+    "dep": "Last"
+  },
+  {
+    "no": 53171,
+    "from": "SDAH",
+    "to": "LGL",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "First",
+    "dep": "3.30"
+  },
+  {
+    "no": 53173,
+    "from": "SDAH",
+    "to": "LGL",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "First",
+    "dep": "7.57"
+  },
+  {
+    "no": 53182,
+    "from": "LGL",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "22.55",
+    "dep": "Last"
+  },
+  {
+    "no": 53175,
+    "from": "SDAH",
+    "to": "LGL",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "First",
+    "dep": "12.20"
+  },
+  {
+    "no": 53176,
+    "from": "LGL",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "12.37",
+    "dep": "Last"
+  },
+  {
+    "no": 53178,
+    "from": "LGL",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "15.15",
+    "dep": "Last"
+  },
+  {
+    "no": 53177,
+    "from": "SDAH",
+    "to": "LGL",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "First",
+    "dep": "16.40"
+  },
+  {
+    "no": 53174,
+    "from": "LGL",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "9.57",
+    "dep": "1.30"
+  },
+  {
+    "no": 53181,
+    "from": "LALGOLA",
+    "to": "PASS",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 53172,
+    "from": "LGL",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "4.3",
+    "dep": "Last"
+  },
+  {
+    "no": 53131,
+    "from": "SDAH",
+    "to": "MFP",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 53132,
+    "from": "MFP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "3.25",
+    "dep": "9.08"
+  },
+  {
+    "no": 53135,
+    "from": "SDAH",
+    "to": "RPH",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "First",
+    "dep": "7.12"
+  },
+  {
+    "no": 53136,
+    "from": "RPH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "Passenger",
+    "arr": "20",
+    "dep": "15.25"
+  },
+  {
+    "no": 12313,
+    "from": "SDAH",
+    "to": "RAJDHANIEX",
+    "rundays": "Daily",
+    "type": "Rajdhani",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 12314,
+    "from": "SEALDAH",
+    "to": "RJDHANI",
+    "rundays": "Daily",
+    "type": "Rajdhani",
+    "arr": "10.15",
+    "dep": "4.30"
+  },
+  {
+    "no": 12315,
+    "from": "ANNANYA",
+    "to": "EXPRES",
+    "rundays": "Th",
+    "type": "Super Fast",
+    "arr": "First",
+    "dep": "8.57"
+  },
+  {
+    "no": 12316,
+    "from": "ANANYA",
+    "to": "EXPRESS",
+    "rundays": "Tu",
+    "type": "Super Fast",
+    "arr": "15.1",
+    "dep": "Last"
+  },
+  {
+    "no": 12317,
+    "from": "AKAL",
+    "to": "TAKHT",
+    "rundays": "W Su",
+    "type": "Super Fast",
+    "arr": "First",
+    "dep": "13.20"
+  },
+  {
+    "no": 12318,
+    "from": "AKAL",
+    "to": "TAKHAT",
+    "rundays": "W Sa",
+    "type": "Super Fast",
+    "arr": "15.1",
+    "dep": "Last"
+  },
+  {
+    "no": 12329,
+    "from": "W",
+    "to": "B",
+    "rundays": "Tu",
+    "type": "Sampark Kranti",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 12330,
+    "from": "W",
+    "to": "B",
+    "rundays": "Th",
+    "type": "Sampark Kranti",
+    "arr": "17.25",
+    "dep": "17.40"
+  },
+  {
+    "no": 12343,
+    "from": "DARJEELING",
+    "to": "MAIL",
+    "rundays": "Daily",
+    "type": "Super Fast",
+    "arr": "First",
+    "dep": "2.30"
+  },
+  {
+    "no": 12344,
+    "from": "DARJEELING",
+    "to": "MAIL",
+    "rundays": "Daily",
+    "type": "Super Fast",
+    "arr": "6",
+    "dep": "Last"
+  },
+  {
+    "no": 13103,
+    "from": "BHAGIRATHI",
+    "to": "EXP",
+    "rundays": "Daily",
+    "type": "Intercity Express",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 13104,
+    "from": "BHAGIRATHI",
+    "to": "EXP",
+    "rundays": "Daily",
+    "type": "Intercity Express",
+    "arr": "10.25",
+    "dep": "Last"
+  },
+  {
+    "no": 13105,
+    "from": "SDAH",
+    "to": "BUI",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "First",
+    "dep": "10.08"
+  },
+  {
+    "no": 13106,
+    "from": "BUI",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "3.35",
+    "dep": "8.12"
+  },
+  {
+    "no": 13133,
+    "from": "SDAH",
+    "to": "BSB",
+    "rundays": "M Tu W F Sa",
+    "type": "Mail \u0026 Express",
+    "arr": "First",
+    "dep": "16.25"
+  },
+  {
+    "no": 13134,
+    "from": "BSB",
+    "to": "SDAH",
+    "rundays": "Tu W F Sa Su",
+    "type": "Mail \u0026 Express",
+    "arr": "10.55",
+    "dep": "Last"
+  },
+  {
+    "no": 13141,
+    "from": "TESTA",
+    "to": "TORSA",
+    "rundays": "Daily",
+    "type": "Slip",
+    "arr": "First",
+    "dep": "5.30"
+  },
+  {
+    "no": 13141,
+    "from": "TESTA",
+    "to": "TORSA",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "First",
+    "dep": "9.57"
+  },
+  {
+    "no": 13142,
+    "from": "TESTA",
+    "to": "TORSA",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "4.35",
+    "dep": "Last"
+  },
+  {
+    "no": 23142,
+    "from": "TEESTA",
+    "to": "TORSA",
+    "rundays": "Daily",
+    "type": "Link",
+    "arr": "4.35",
+    "dep": "14.20"
+  },
+  {
+    "no": 13147,
+    "from": "UTTAR",
+    "to": "BANGA",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 13148,
+    "from": "UTTAR",
+    "to": "BANGA",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "5.1",
+    "dep": "Last"
+  },
+  {
+    "no": 13149,
+    "from": "KANCHANKANYA",
+    "to": "EX",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "First",
+    "dep": "18.40"
+  },
+  {
+    "no": 13150,
+    "from": "KANCHANKANYA",
+    "to": "EX",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "8.15",
+    "dep": "3.30"
+  },
+  {
+    "no": 13153,
+    "from": "GOUR",
+    "to": "EXPRESS",
+    "rundays": "Daily",
+    "type": "Slip",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 13153,
+    "from": "GOUR",
+    "to": "EXPRESS",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 13154,
+    "from": "GOUR",
+    "to": "EXP",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "5.2",
+    "dep": "Last"
+  },
+  {
+    "no": 13163,
+    "from": "HATE",
+    "to": "BAZARE",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "First",
+    "dep": "11.08"
+  },
+  {
+    "no": 13164,
+    "from": "HATE",
+    "to": "BAZARE",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "7.15",
+    "dep": "9.12"
+  },
+  {
+    "no": 13185,
+    "from": "GANGASAGAR",
+    "to": "EXP",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "First",
+    "dep": "17.25"
+  },
+  {
+    "no": 13186,
+    "from": "GANGA",
+    "to": "SAGAR",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "6.55",
+    "dep": "Last"
+  },
+  {
+    "no": 15657,
+    "from": "KANCHANJANGA",
+    "to": "EX",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "First",
+    "dep": "6.30"
+  },
+  {
+    "no": 15658,
+    "from": "KANCHANJUNGA",
+    "to": "EX",
+    "rundays": "Daily",
+    "type": "Mail \u0026 Express",
+    "arr": "19.25",
+    "dep": "10.57"
+  },
+  {
+    "no": 31211,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31212,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "7.26",
+    "dep": "15.20"
+  },
+  {
+    "no": 31213,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31214,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.2",
+    "dep": "Last"
+  },
+  {
+    "no": 31215,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "19.40"
+  },
+  {
+    "no": 31216,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "9.05",
+    "dep": "4.30"
+  },
+  {
+    "no": 31217,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31218,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "9.17",
+    "dep": "Last"
+  },
+  {
+    "no": 31219,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31220,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "9.33",
+    "dep": "12.08"
+  },
+  {
+    "no": 31221,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "10.12"
+  },
+  {
+    "no": 31223,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "18.25"
+  },
+  {
+    "no": 31222,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.45",
+    "dep": "Last"
+  },
+  {
+    "no": 31227,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "7.30"
+  },
+  {
+    "no": 31224,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "10.38",
+    "dep": "11.57"
+  },
+  {
+    "no": 31229,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31228,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "11.14",
+    "dep": "16.20"
+  },
+  {
+    "no": 31235,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31236,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.1",
+    "dep": "Last"
+  },
+  {
+    "no": 31239,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "20.40"
+  },
+  {
+    "no": 31238,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.05",
+    "dep": "5.30"
+  },
+  {
+    "no": 31240,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.07",
+    "dep": "Last"
+  },
+  {
+    "no": 33813,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33812,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.05",
+    "dep": "Last"
+  },
+  {
+    "no": 33815,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "13.08"
+  },
+  {
+    "no": 33814,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.17",
+    "dep": "11.12"
+  },
+  {
+    "no": 33817,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "19.25"
+  },
+  {
+    "no": 33816,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.02",
+    "dep": "Last"
+  },
+  {
+    "no": 33819,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "8.30"
+  },
+  {
+    "no": 33818,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.36",
+    "dep": "12.57"
+  },
+  {
+    "no": 33821,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33820,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.05",
+    "dep": "17.20"
+  },
+  {
+    "no": 33823,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33822,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.42",
+    "dep": "Last"
+  },
+  {
+    "no": 33825,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "21.40"
+  },
+  {
+    "no": 33827,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "6.30"
+  },
+  {
+    "no": 33824,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.05",
+    "dep": "Last"
+  },
+  {
+    "no": 33829,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33826,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.3",
+    "dep": "Last"
+  },
+  {
+    "no": 33831,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "14.08"
+  },
+  {
+    "no": 33828,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.05",
+    "dep": "12.12"
+  },
+  {
+    "no": 33833,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "20.25"
+  },
+  {
+    "no": 33835,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33830,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "12.35",
+    "dep": "9.30"
+  },
+  {
+    "no": 33839,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "13.57"
+  },
+  {
+    "no": 33832,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13.58",
+    "dep": "Last"
+  },
+  {
+    "no": 33841,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "18.20"
+  },
+  {
+    "no": 33834,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.45",
+    "dep": "Last"
+  },
+  {
+    "no": 33843,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33836,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "16.02",
+    "dep": "22.40"
+  },
+  {
+    "no": 33845,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "7.30"
+  },
+  {
+    "no": 33838,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "16.48",
+    "dep": "Last"
+  },
+  {
+    "no": 33847,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33840,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.2",
+    "dep": "Last"
+  },
+  {
+    "no": 33849,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "15.08"
+  },
+  {
+    "no": 33842,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.32",
+    "dep": "13.12"
+  },
+  {
+    "no": 33851,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "21.25"
+  },
+  {
+    "no": 33844,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.3",
+    "dep": "Last"
+  },
+  {
+    "no": 33853,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "10.30"
+  },
+  {
+    "no": 33846,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.25",
+    "dep": "14.57"
+  },
+  {
+    "no": 33855,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33848,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.53",
+    "dep": "19.20"
+  },
+  {
+    "no": 33857,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33850,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.37",
+    "dep": "Last"
+  },
+  {
+    "no": 33859,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "23.40"
+  },
+  {
+    "no": 33852,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.4",
+    "dep": "8.30"
+  },
+  {
+    "no": 33861,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33854,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "23.1",
+    "dep": "Last"
+  },
+  {
+    "no": 31151,
+    "from": "SDAH",
+    "to": "BWN",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31152,
+    "from": "BWN",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.4",
+    "dep": "16.08"
+  },
+  {
+    "no": 30451,
+    "from": "BBDB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.25",
+    "dep": "14.12"
+  },
+  {
+    "no": 33612,
+    "from": "DTK",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.4",
+    "dep": "22.25"
+  },
+  {
+    "no": 33613,
+    "from": "SDAH",
+    "to": "DTK",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33614,
+    "from": "DTK",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "7.25",
+    "dep": "11.30"
+  },
+  {
+    "no": 33615,
+    "from": "SDAH",
+    "to": "DTK",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "15.57"
+  },
+  {
+    "no": 33616,
+    "from": "DTK",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.3",
+    "dep": "Last"
+  },
+  {
+    "no": 33617,
+    "from": "SDAH",
+    "to": "DTK",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "20.20"
+  },
+  {
+    "no": 33618,
+    "from": "DTK",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.45",
+    "dep": "Last"
+  },
+  {
+    "no": 33619,
+    "from": "SDAH",
+    "to": "DTK",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33620,
+    "from": "DTK",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "10.45",
+    "dep": "24.40"
+  },
+  {
+    "no": 33622,
+    "from": "DTK",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "12.05",
+    "dep": "9.30"
+  },
+  {
+    "no": 33624,
+    "from": "DTK",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.5",
+    "dep": "Last"
+  },
+  {
+    "no": 33623,
+    "from": "SDAH",
+    "to": "DTK",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33626,
+    "from": "DTK",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.45",
+    "dep": "Last"
+  },
+  {
+    "no": 33625,
+    "from": "SDAH",
+    "to": "DTK",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "17.08"
+  },
+  {
+    "no": 33628,
+    "from": "DTK",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.1",
+    "dep": "15.12"
+  },
+  {
+    "no": 33630,
+    "from": "DTK",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.03",
+    "dep": "23.25"
+  },
+  {
+    "no": 33411,
+    "from": "SDAH",
+    "to": "DDC",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33412,
+    "from": "DDC",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "10.25",
+    "dep": "12.30"
+  },
+  {
+    "no": 32211,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "16.57"
+  },
+  {
+    "no": 32212,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.45",
+    "dep": "Last"
+  },
+  {
+    "no": 32213,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "21.20"
+  },
+  {
+    "no": 32214,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.35",
+    "dep": "Last"
+  },
+  {
+    "no": 32215,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 32216,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.18",
+    "dep": "25.40"
+  },
+  {
+    "no": 32217,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "10.30"
+  },
+  {
+    "no": 32218,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.46",
+    "dep": "Last"
+  },
+  {
+    "no": 32219,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 32220,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.27",
+    "dep": "Last"
+  },
+  {
+    "no": 32221,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "18.08"
+  },
+  {
+    "no": 32222,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.28",
+    "dep": "16.12"
+  },
+  {
+    "no": 32223,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "24.25"
+  },
+  {
+    "no": 32224,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10",
+    "dep": "Last"
+  },
+  {
+    "no": 32225,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "13.30"
+  },
+  {
+    "no": 32226,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "10.35",
+    "dep": "17.57"
+  },
+  {
+    "no": 32227,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 32228,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.37",
+    "dep": "22.20"
+  },
+  {
+    "no": 32231,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 32232,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "12.46",
+    "dep": "Last"
+  },
+  {
+    "no": 32233,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "26.40"
+  },
+  {
+    "no": 32234,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.05",
+    "dep": "11.30"
+  },
+  {
+    "no": 32411,
+    "from": "SDAH",
+    "to": "BRPA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 32412,
+    "from": "BRPA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "16.3",
+    "dep": "Last"
+  },
+  {
+    "no": 32237,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 32238,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.07",
+    "dep": "19.08"
+  },
+  {
+    "no": 32239,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "17.12"
+  },
+  {
+    "no": 32240,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.5",
+    "dep": "25.25"
+  },
+  {
+    "no": 32241,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 32242,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.55",
+    "dep": "14.30"
+  },
+  {
+    "no": 32243,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "18.57"
+  },
+  {
+    "no": 32244,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "19.15",
+    "dep": "Last"
+  },
+  {
+    "no": 32245,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "23.20"
+  },
+  {
+    "no": 32246,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.58",
+    "dep": "Last"
+  },
+  {
+    "no": 32413,
+    "from": "SDAH",
+    "to": "BRPA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 32248,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.05",
+    "dep": "27.40"
+  },
+  {
+    "no": 32247,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "12.30"
+  },
+  {
+    "no": 32414,
+    "from": "BRPA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.5",
+    "dep": "Last"
+  },
+  {
+    "no": 32249,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 32250,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.2",
+    "dep": "Last"
+  },
+  {
+    "no": 32252,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "0.25",
+    "dep": "20.08"
+  },
+  {
+    "no": 33212,
+    "from": "DDJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.42",
+    "dep": "18.12"
+  },
+  {
+    "no": 33681,
+    "from": "SDAH",
+    "to": "GBG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "26.25"
+  },
+  {
+    "no": 33682,
+    "from": "GBG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13",
+    "dep": "Last"
+  },
+  {
+    "no": 33683,
+    "from": "SDAH",
+    "to": "GBG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "15.30"
+  },
+  {
+    "no": 33684,
+    "from": "GBG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.12",
+    "dep": "19.57"
+  },
+  {
+    "no": 33685,
+    "from": "SDAH",
+    "to": "GBG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33686,
+    "from": "GBG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.54",
+    "dep": "24.20"
+  },
+  {
+    "no": 33651,
+    "from": "SDAH",
+    "to": "HB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33652,
+    "from": "HB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.56",
+    "dep": "Last"
+  },
+  {
+    "no": 33653,
+    "from": "SDAH",
+    "to": "HB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "28.40"
+  },
+  {
+    "no": 33654,
+    "from": "HB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.1",
+    "dep": "13.30"
+  },
+  {
+    "no": 33655,
+    "from": "SDAH",
+    "to": "HB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33656,
+    "from": "HB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.03",
+    "dep": "Last"
+  },
+  {
+    "no": 33657,
+    "from": "SDAH",
+    "to": "HB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33660,
+    "from": "HB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "16.15",
+    "dep": "21.08"
+  },
+  {
+    "no": 33664,
+    "from": "HB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.5",
+    "dep": "19.12"
+  },
+  {
+    "no": 33666,
+    "from": "HB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.27",
+    "dep": "27.25"
+  },
+  {
+    "no": 33658,
+    "from": "HB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.57",
+    "dep": "Last"
+  },
+  {
+    "no": 31311,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "16.30"
+  },
+  {
+    "no": 31312,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.3",
+    "dep": "20.57"
+  },
+  {
+    "no": 31313,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31314,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.33",
+    "dep": "25.20"
+  },
+  {
+    "no": 31315,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31316,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.48",
+    "dep": "Last"
+  },
+  {
+    "no": 31317,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "29.40"
+  },
+  {
+    "no": 31318,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.47",
+    "dep": "14.30"
+  },
+  {
+    "no": 31321,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31320,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.32",
+    "dep": "Last"
+  },
+  {
+    "no": 31323,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31322,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.06",
+    "dep": "22.08"
+  },
+  {
+    "no": 31325,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "20.12"
+  },
+  {
+    "no": 31324,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.45",
+    "dep": "28.25"
+  },
+  {
+    "no": 31327,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31326,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18",
+    "dep": "17.30"
+  },
+  {
+    "no": 31329,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "21.57"
+  },
+  {
+    "no": 31328,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.02",
+    "dep": "Last"
+  },
+  {
+    "no": 31331,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "26.20"
+  },
+  {
+    "no": 31330,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.35",
+    "dep": "Last"
+  },
+  {
+    "no": 31333,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31332,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.32",
+    "dep": "30.40"
+  },
+  {
+    "no": 31335,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "15.30"
+  },
+  {
+    "no": 31334,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.45",
+    "dep": "Last"
+  },
+  {
+    "no": 31337,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31336,
+    "from": "KLYM",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.42",
+    "dep": "Last"
+  },
+  {
+    "no": 31339,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "23.08"
+  },
+  {
+    "no": 31111,
+    "from": "SDAH",
+    "to": "KWAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "21.12"
+  },
+  {
+    "no": 31112,
+    "from": "KWAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.3",
+    "dep": "29.25"
+  },
+  {
+    "no": 33421,
+    "from": "SDAH",
+    "to": "MMG",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33422,
+    "from": "MMG",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "9.35",
+    "dep": "18.30"
+  },
+  {
+    "no": 31411,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "22.57"
+  },
+  {
+    "no": 31412,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.1",
+    "dep": "Last"
+  },
+  {
+    "no": 31413,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "27.20"
+  },
+  {
+    "no": 31414,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.55",
+    "dep": "Last"
+  },
+  {
+    "no": 31415,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31416,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "8.58",
+    "dep": "31.40"
+  },
+  {
+    "no": 31417,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "16.30"
+  },
+  {
+    "no": 31418,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.38",
+    "dep": "Last"
+  },
+  {
+    "no": 31419,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31420,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.13",
+    "dep": "Last"
+  },
+  {
+    "no": 31421,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "24.08"
+  },
+  {
+    "no": 31422,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.3",
+    "dep": "22.12"
+  },
+  {
+    "no": 31423,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "30.25"
+  },
+  {
+    "no": 31424,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "11.5",
+    "dep": "Last"
+  },
+  {
+    "no": 31426,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13.14",
+    "dep": "19.30"
+  },
+  {
+    "no": 31429,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "23.57"
+  },
+  {
+    "no": 31430,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.25",
+    "dep": "Last"
+  },
+  {
+    "no": 31431,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "28.20"
+  },
+  {
+    "no": 31434,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "15.55",
+    "dep": "Last"
+  },
+  {
+    "no": 31433,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31435,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "32.40"
+  },
+  {
+    "no": 31437,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "17.30"
+  },
+  {
+    "no": 31436,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.25",
+    "dep": "Last"
+  },
+  {
+    "no": 31439,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31441,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31438,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "20.24",
+    "dep": "25.08"
+  },
+  {
+    "no": 31443,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "23.12"
+  },
+  {
+    "no": 31440,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "20.48",
+    "dep": "31.25"
+  },
+  {
+    "no": 31442,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.2",
+    "dep": "Last"
+  },
+  {
+    "no": 31445,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "20.30"
+  },
+  {
+    "no": 31444,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.15",
+    "dep": "24.57"
+  },
+  {
+    "no": 31447,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31446,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "22.35",
+    "dep": "29.20"
+  },
+  {
+    "no": 31448,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "23.12",
+    "dep": "Last"
+  },
+  {
+    "no": 31451,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31450,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "0.2",
+    "dep": "33.40"
+  },
+  {
+    "no": 31911,
+    "from": "SDAH",
+    "to": "GEDE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "18.30"
+  },
+  {
+    "no": 31912,
+    "from": "GEDE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "",
+    "arr": "6.25",
+    "dep": "Last"
+  },
+  {
+    "no": 31913,
+    "from": "SDAH",
+    "to": "GEDE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31915,
+    "from": "SDAH",
+    "to": "GEDE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31916,
+    "from": "GEDE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.52",
+    "dep": "26.08"
+  },
+  {
+    "no": 31917,
+    "from": "SDAH",
+    "to": "GEDE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "24.12"
+  },
+  {
+    "no": 31918,
+    "from": "GEDE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.3",
+    "dep": "32.25"
+  },
+  {
+    "no": 31919,
+    "from": "SDAH",
+    "to": "GEDE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31920,
+    "from": "GEDE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "",
+    "arr": "13.07",
+    "dep": "21.30"
+  },
+  {
+    "no": 31921,
+    "from": "SDAH",
+    "to": "GEDE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "25.57"
+  },
+  {
+    "no": 31922,
+    "from": "GEDE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17",
+    "dep": "Last"
+  },
+  {
+    "no": 31923,
+    "from": "SDAH",
+    "to": "GEDE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "30.20"
+  },
+  {
+    "no": 31924,
+    "from": "GEDE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.12",
+    "dep": "Last"
+  },
+  {
+    "no": 31925,
+    "from": "SDAH",
+    "to": "GEDE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31926,
+    "from": "GEDE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "",
+    "arr": "22.35",
+    "dep": "34.40"
+  },
+  {
+    "no": 31929,
+    "from": "SDAH",
+    "to": "GEDE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "19.30"
+  },
+  {
+    "no": 31928,
+    "from": "GEDE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "0.02",
+    "dep": "Last"
+  },
+  {
+    "no": 31611,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "Daily",
+    "type": "",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31612,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.05",
+    "dep": "Last"
+  },
+  {
+    "no": 31615,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "27.08"
+  },
+  {
+    "no": 31614,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.54",
+    "dep": "25.12"
+  },
+  {
+    "no": 31617,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "M Tu W Th F",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "33.25"
+  },
+  {
+    "no": 31618,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.1",
+    "dep": "Last"
+  },
+  {
+    "no": 31619,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "22.30"
+  },
+  {
+    "no": 31616,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.1",
+    "dep": "26.57"
+  },
+  {
+    "no": 31621,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31620,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.18",
+    "dep": "31.20"
+  },
+  {
+    "no": 31624,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F",
+    "type": "EMU",
+    "arr": "17.02",
+    "dep": "Last"
+  },
+  {
+    "no": 31626,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.1",
+    "dep": "Last"
+  },
+  {
+    "no": 31625,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "35.40"
+  },
+  {
+    "no": 31628,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.3",
+    "dep": "20.30"
+  },
+  {
+    "no": 31627,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31632,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.25",
+    "dep": "Last"
+  },
+  {
+    "no": 31629,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31622,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.22",
+    "dep": "28.08"
+  },
+  {
+    "no": 31511,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "26.12"
+  },
+  {
+    "no": 31512,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.4",
+    "dep": "34.25"
+  },
+  {
+    "no": 31513,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31514,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.05",
+    "dep": "23.30"
+  },
+  {
+    "no": 31515,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "27.57"
+  },
+  {
+    "no": 31516,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.07",
+    "dep": "Last"
+  },
+  {
+    "no": 31517,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "32.20"
+  },
+  {
+    "no": 31518,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.4",
+    "dep": "Last"
+  },
+  {
+    "no": 31519,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31520,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "",
+    "arr": "10.52",
+    "dep": "36.40"
+  },
+  {
+    "no": 31521,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "21.30"
+  },
+  {
+    "no": 31522,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "12.22",
+    "dep": "Last"
+  },
+  {
+    "no": 31523,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31524,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13.42",
+    "dep": "Last"
+  },
+  {
+    "no": 31525,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "29.08"
+  },
+  {
+    "no": 31526,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.3",
+    "dep": "27.12"
+  },
+  {
+    "no": 31527,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "35.25"
+  },
+  {
+    "no": 31528,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "16.4",
+    "dep": "Last"
+  },
+  {
+    "no": 31529,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "24.30"
+  },
+  {
+    "no": 31530,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.55",
+    "dep": "28.57"
+  },
+  {
+    "no": 31531,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31532,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.25",
+    "dep": "33.20"
+  },
+  {
+    "no": 31533,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31534,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.45",
+    "dep": "Last"
+  },
+  {
+    "no": 31535,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "37.40"
+  },
+  {
+    "no": 31536,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.03",
+    "dep": "22.30"
+  },
+  {
+    "no": 31537,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31540,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.5",
+    "dep": "Last"
+  },
+  {
+    "no": 31539,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31542,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "0.57",
+    "dep": "30.08"
+  },
+  {
+    "no": 31541,
+    "from": "SDAH",
+    "to": "STB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "28.12"
+  },
+  {
+    "no": 31538,
+    "from": "STB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.15",
+    "dep": "36.25"
+  },
+  {
+    "no": 34648,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34611,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.07",
+    "dep": "25.30"
+  },
+  {
+    "no": 34612,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "29.57"
+  },
+  {
+    "no": 34613,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.38",
+    "dep": "Last"
+  },
+  {
+    "no": 34614,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "34.20"
+  },
+  {
+    "no": 34615,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "8.29",
+    "dep": "Last"
+  },
+  {
+    "no": 34616,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34617,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "8.45",
+    "dep": "38.40"
+  },
+  {
+    "no": 34618,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "23.30"
+  },
+  {
+    "no": 34619,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.08",
+    "dep": "Last"
+  },
+  {
+    "no": 34620,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34621,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "9.47",
+    "dep": "Last"
+  },
+  {
+    "no": 34622,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "31.08"
+  },
+  {
+    "no": 34623,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.1",
+    "dep": "29.12"
+  },
+  {
+    "no": 34624,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "37.25"
+  },
+  {
+    "no": 34625,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.38",
+    "dep": "Last"
+  },
+  {
+    "no": 34626,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "26.30"
+  },
+  {
+    "no": 34629,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.45",
+    "dep": "30.57"
+  },
+  {
+    "no": 34628,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34631,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "12.57",
+    "dep": "35.20"
+  },
+  {
+    "no": 34630,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34633,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.05",
+    "dep": "Last"
+  },
+  {
+    "no": 34632,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "39.40"
+  },
+  {
+    "no": 34635,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.27",
+    "dep": "24.30"
+  },
+  {
+    "no": 34634,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34637,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "16.57",
+    "dep": "Last"
+  },
+  {
+    "no": 34636,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34639,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.57",
+    "dep": "32.08"
+  },
+  {
+    "no": 34638,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "30.12"
+  },
+  {
+    "no": 34641,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.44",
+    "dep": "38.25"
+  },
+  {
+    "no": 34640,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34643,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.3",
+    "dep": "27.30"
+  },
+  {
+    "no": 34645,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.17",
+    "dep": "31.57"
+  },
+  {
+    "no": 34647,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.27",
+    "dep": "Last"
+  },
+  {
+    "no": 34644,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "36.20"
+  },
+  {
+    "no": 34627,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.27",
+    "dep": "Last"
+  },
+  {
+    "no": 34646,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33111,
+    "from": "SDAH",
+    "to": "BNBA",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "40.40"
+  },
+  {
+    "no": 30411,
+    "from": "BBDB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "12",
+    "dep": "25.30"
+  },
+  {
+    "no": 30412,
+    "from": "SDAH",
+    "to": "BBDB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 30416,
+    "from": "SDAH",
+    "to": "BBDB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34511,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.1",
+    "dep": "Last"
+  },
+  {
+    "no": 34512,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "33.08"
+  },
+  {
+    "no": 34513,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.47",
+    "dep": "31.12"
+  },
+  {
+    "no": 34514,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "39.25"
+  },
+  {
+    "no": 34515,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.37",
+    "dep": "Last"
+  },
+  {
+    "no": 34516,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "28.30"
+  },
+  {
+    "no": 34517,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.17",
+    "dep": "32.57"
+  },
+  {
+    "no": 34518,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34519,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.12",
+    "dep": "37.20"
+  },
+  {
+    "no": 34520,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34521,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.37",
+    "dep": "Last"
+  },
+  {
+    "no": 34522,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "41.40"
+  },
+  {
+    "no": 34523,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.3",
+    "dep": "26.30"
+  },
+  {
+    "no": 34524,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34525,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.22",
+    "dep": "Last"
+  },
+  {
+    "no": 34528,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34527,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.2",
+    "dep": "34.08"
+  },
+  {
+    "no": 34532,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "32.12"
+  },
+  {
+    "no": 34529,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "12.05",
+    "dep": "40.25"
+  },
+  {
+    "no": 34534,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34531,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13.23",
+    "dep": "29.30"
+  },
+  {
+    "no": 34536,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "33.57"
+  },
+  {
+    "no": 34533,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.4",
+    "dep": "Last"
+  },
+  {
+    "no": 34538,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "38.20"
+  },
+  {
+    "no": 34537,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "16.2",
+    "dep": "Last"
+  },
+  {
+    "no": 34540,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34541,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.33",
+    "dep": "42.40"
+  },
+  {
+    "no": 34542,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "27.30"
+  },
+  {
+    "no": 34543,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.3",
+    "dep": "Last"
+  },
+  {
+    "no": 34544,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34545,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.35",
+    "dep": "Last"
+  },
+  {
+    "no": 34546,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "35.08"
+  },
+  {
+    "no": 34547,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "",
+    "arr": "20.02",
+    "dep": "33.12"
+  },
+  {
+    "no": 34548,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "41.25"
+  },
+  {
+    "no": 34551,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.17",
+    "dep": "Last"
+  },
+  {
+    "no": 34550,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "30.30"
+  },
+  {
+    "no": 34553,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.2",
+    "dep": "34.57"
+  },
+  {
+    "no": 34552,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34555,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.5",
+    "dep": "39.20"
+  },
+  {
+    "no": 34554,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34557,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.35",
+    "dep": "Last"
+  },
+  {
+    "no": 34549,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.34",
+    "dep": "43.40"
+  },
+  {
+    "no": 34811,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "4.45",
+    "dep": "28.30"
+  },
+  {
+    "no": 34812,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34813,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.35",
+    "dep": "Last"
+  },
+  {
+    "no": 34814,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34815,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.14",
+    "dep": "36.08"
+  },
+  {
+    "no": 34816,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "34.12"
+  },
+  {
+    "no": 34817,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.52",
+    "dep": "42.25"
+  },
+  {
+    "no": 34818,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34819,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.47",
+    "dep": "31.30"
+  },
+  {
+    "no": 34820,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "35.57"
+  },
+  {
+    "no": 34821,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.2",
+    "dep": "Last"
+  },
+  {
+    "no": 34824,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "40.20"
+  },
+  {
+    "no": 34823,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.25",
+    "dep": "Last"
+  },
+  {
+    "no": 34826,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34825,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.05",
+    "dep": "44.40"
+  },
+  {
+    "no": 34828,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "29.30"
+  },
+  {
+    "no": 34827,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.52",
+    "dep": "Last"
+  },
+  {
+    "no": 34830,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34831,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.55",
+    "dep": "Last"
+  },
+  {
+    "no": 34832,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "37.08"
+  },
+  {
+    "no": 34833,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "12.4",
+    "dep": "35.12"
+  },
+  {
+    "no": 34836,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "43.25"
+  },
+  {
+    "no": 34835,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13.38",
+    "dep": "Last"
+  },
+  {
+    "no": 34838,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "32.30"
+  },
+  {
+    "no": 34837,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.28",
+    "dep": "36.57"
+  },
+  {
+    "no": 34840,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34839,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "16",
+    "dep": "41.20"
+  },
+  {
+    "no": 34842,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34841,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "16.3",
+    "dep": "Last"
+  },
+  {
+    "no": 34844,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "45.40"
+  },
+  {
+    "no": 34843,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.18",
+    "dep": "30.30"
+  },
+  {
+    "no": 34846,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34845,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.15",
+    "dep": "Last"
+  },
+  {
+    "no": 34848,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34847,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.15",
+    "dep": "38.08"
+  },
+  {
+    "no": 34850,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "36.12"
+  },
+  {
+    "no": 34849,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.45",
+    "dep": "44.25"
+  },
+  {
+    "no": 34852,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34851,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.44",
+    "dep": "33.30"
+  },
+  {
+    "no": 34854,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "37.57"
+  },
+  {
+    "no": 34853,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.4",
+    "dep": "Last"
+  },
+  {
+    "no": 34856,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "42.20"
+  },
+  {
+    "no": 34855,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.19",
+    "dep": "Last"
+  },
+  {
+    "no": 34858,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34857,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.5",
+    "dep": "46.40"
+  },
+  {
+    "no": 34834,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "31.30"
+  },
+  {
+    "no": 34111,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.4",
+    "dep": "Last"
+  },
+  {
+    "no": 34112,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34113,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.45",
+    "dep": "Last"
+  },
+  {
+    "no": 34114,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "39.08"
+  },
+  {
+    "no": 34115,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.3",
+    "dep": "37.12"
+  },
+  {
+    "no": 34116,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "45.25"
+  },
+  {
+    "no": 34117,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.02",
+    "dep": "Last"
+  },
+  {
+    "no": 34118,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "34.30"
+  },
+  {
+    "no": 34119,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.2",
+    "dep": "38.57"
+  },
+  {
+    "no": 34120,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34121,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.59",
+    "dep": "43.20"
+  },
+  {
+    "no": 34122,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34123,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.32",
+    "dep": "Last"
+  },
+  {
+    "no": 34124,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "47.40"
+  },
+  {
+    "no": 34125,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.15",
+    "dep": "32.30"
+  },
+  {
+    "no": 34126,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34127,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "11.5",
+    "dep": "Last"
+  },
+  {
+    "no": 34128,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34129,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "12.2",
+    "dep": "40.08"
+  },
+  {
+    "no": 34130,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "38.12"
+  },
+  {
+    "no": 34131,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13.02",
+    "dep": "46.25"
+  },
+  {
+    "no": 34132,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34135,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13.47",
+    "dep": "35.30"
+  },
+  {
+    "no": 34136,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "39.57"
+  },
+  {
+    "no": 34137,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.2",
+    "dep": "Last"
+  },
+  {
+    "no": 34138,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "44.20"
+  },
+  {
+    "no": 34141,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.52",
+    "dep": "Last"
+  },
+  {
+    "no": 34140,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34143,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "",
+    "arr": "16.25",
+    "dep": "48.40"
+  },
+  {
+    "no": 34142,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "33.30"
+  },
+  {
+    "no": 34145,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.08",
+    "dep": "Last"
+  },
+  {
+    "no": 34144,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34147,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "",
+    "arr": "17.5",
+    "dep": "Last"
+  },
+  {
+    "no": 34146,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "41.08"
+  },
+  {
+    "no": 34149,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.04",
+    "dep": "39.12"
+  },
+  {
+    "no": 34148,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "47.25"
+  },
+  {
+    "no": 34151,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.55",
+    "dep": "Last"
+  },
+  {
+    "no": 34150,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "36.30"
+  },
+  {
+    "no": 34153,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.22",
+    "dep": "40.57"
+  },
+  {
+    "no": 34152,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34155,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.04",
+    "dep": "45.20"
+  },
+  {
+    "no": 34154,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34157,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.49",
+    "dep": "Last"
+  },
+  {
+    "no": 34156,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "49.40"
+  },
+  {
+    "no": 34159,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.35",
+    "dep": "34.30"
+  },
+  {
+    "no": 34158,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34161,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.06",
+    "dep": "Last"
+  },
+  {
+    "no": 34160,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34163,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.55",
+    "dep": "42.08"
+  },
+  {
+    "no": 34162,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "40.12"
+  },
+  {
+    "no": 34165,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "0.43",
+    "dep": "48.25"
+  },
+  {
+    "no": 34164,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34139,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.12",
+    "dep": "37.30"
+  },
+  {
+    "no": 34166,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "41.57"
+  },
+  {
+    "no": 33512,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.3",
+    "dep": "Last"
+  },
+  {
+    "no": 33511,
+    "from": "SDAH",
+    "to": "HNB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "46.20"
+  },
+  {
+    "no": 33514,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.55",
+    "dep": "Last"
+  },
+  {
+    "no": 33516,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.5",
+    "dep": "Last"
+  },
+  {
+    "no": 33513,
+    "from": "SDAH",
+    "to": "HNB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "50.40"
+  },
+  {
+    "no": 33518,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.52",
+    "dep": "35.30"
+  },
+  {
+    "no": 33515,
+    "from": "SDAH",
+    "to": "HNB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33519,
+    "from": "SDAH",
+    "to": "HNB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33520,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13.1",
+    "dep": "Last"
+  },
+  {
+    "no": 33524,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.1",
+    "dep": "43.08"
+  },
+  {
+    "no": 33521,
+    "from": "SDAH",
+    "to": "HNB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "41.12"
+  },
+  {
+    "no": 33526,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.47",
+    "dep": "49.25"
+  },
+  {
+    "no": 33528,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.12",
+    "dep": "Last"
+  },
+  {
+    "no": 33525,
+    "from": "SDAH",
+    "to": "HNB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "38.30"
+  },
+  {
+    "no": 33530,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.07",
+    "dep": "42.57"
+  },
+  {
+    "no": 33527,
+    "from": "SDAH",
+    "to": "HNB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33534,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.3",
+    "dep": "47.20"
+  },
+  {
+    "no": 33532,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.15",
+    "dep": "Last"
+  },
+  {
+    "no": 31811,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31812,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.45",
+    "dep": "51.40"
+  },
+  {
+    "no": 31813,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "36.30"
+  },
+  {
+    "no": 31814,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.12",
+    "dep": "Last"
+  },
+  {
+    "no": 31817,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31816,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.22",
+    "dep": "Last"
+  },
+  {
+    "no": 31819,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "44.08"
+  },
+  {
+    "no": 31818,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.26",
+    "dep": "42.12"
+  },
+  {
+    "no": 31821,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "50.25"
+  },
+  {
+    "no": 31820,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.22",
+    "dep": "Last"
+  },
+  {
+    "no": 31823,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "39.30"
+  },
+  {
+    "no": 31822,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "12.1",
+    "dep": "43.57"
+  },
+  {
+    "no": 31825,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31824,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.32",
+    "dep": "48.20"
+  },
+  {
+    "no": 31827,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31826,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "16",
+    "dep": "Last"
+  },
+  {
+    "no": 31829,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "52.40"
+  },
+  {
+    "no": 31828,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "17.37",
+    "dep": "37.30"
+  },
+  {
+    "no": 31831,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31830,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.45",
+    "dep": "Last"
+  },
+  {
+    "no": 31833,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31832,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.58",
+    "dep": "45.08"
+  },
+  {
+    "no": 31835,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "43.12"
+  },
+  {
+    "no": 31834,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.43",
+    "dep": "51.25"
+  },
+  {
+    "no": 31837,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31838,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "",
+    "arr": "0.38",
+    "dep": "40.30"
+  },
+  {
+    "no": 34711,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "4.55",
+    "dep": "44.57"
+  },
+  {
+    "no": 34712,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34713,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.25",
+    "dep": "49.20"
+  },
+  {
+    "no": 34714,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34715,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.58",
+    "dep": "Last"
+  },
+  {
+    "no": 34716,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "53.40"
+  },
+  {
+    "no": 34717,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.2",
+    "dep": "38.30"
+  },
+  {
+    "no": 34718,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34719,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.25",
+    "dep": "Last"
+  },
+  {
+    "no": 34720,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34721,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.04",
+    "dep": "46.08"
+  },
+  {
+    "no": 34722,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "44.12"
+  },
+  {
+    "no": 34723,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "8.53",
+    "dep": "52.25"
+  },
+  {
+    "no": 34724,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34725,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.37",
+    "dep": "41.30"
+  },
+  {
+    "no": 34727,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "10.17",
+    "dep": "45.57"
+  },
+  {
+    "no": 34726,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34729,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.03",
+    "dep": "50.20"
+  },
+  {
+    "no": 34728,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34731,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "12.15",
+    "dep": "Last"
+  },
+  {
+    "no": 34730,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "54.40"
+  },
+  {
+    "no": 34733,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13.17",
+    "dep": "39.30"
+  },
+  {
+    "no": 34732,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34735,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.5",
+    "dep": "Last"
+  },
+  {
+    "no": 34734,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34737,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.37",
+    "dep": "47.08"
+  },
+  {
+    "no": 34736,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "45.12"
+  },
+  {
+    "no": 34738,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "53.25"
+  },
+  {
+    "no": 34739,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "16.37",
+    "dep": "Last"
+  },
+  {
+    "no": 34740,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "42.30"
+  },
+  {
+    "no": 34741,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.04",
+    "dep": "46.57"
+  },
+  {
+    "no": 34742,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34743,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.57",
+    "dep": "51.20"
+  },
+  {
+    "no": 34744,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34745,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.45",
+    "dep": "Last"
+  },
+  {
+    "no": 34746,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "55.40"
+  },
+  {
+    "no": 34749,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.12",
+    "dep": "40.30"
+  },
+  {
+    "no": 34751,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.55",
+    "dep": "Last"
+  },
+  {
+    "no": 34748,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34753,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.28",
+    "dep": "Last"
+  },
+  {
+    "no": 34750,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "48.08"
+  },
+  {
+    "no": 34755,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.28",
+    "dep": "46.12"
+  },
+  {
+    "no": 34752,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "54.25"
+  },
+  {
+    "no": 34757,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "0.02",
+    "dep": "Last"
+  },
+  {
+    "no": 34754,
+    "from": "SDAH",
+    "to": "LKPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "43.30"
+  },
+  {
+    "no": 34782,
+    "from": "SDAH",
+    "to": "KWDP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "47.57"
+  },
+  {
+    "no": 34411,
+    "from": "SPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "5.02",
+    "dep": "Last"
+  },
+  {
+    "no": 34412,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "52.20"
+  },
+  {
+    "no": 34415,
+    "from": "SPR",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "9.15",
+    "dep": "Last"
+  },
+  {
+    "no": 34416,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34417,
+    "from": "SPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "9.54",
+    "dep": "56.40"
+  },
+  {
+    "no": 34418,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "41.30"
+  },
+  {
+    "no": 34419,
+    "from": "SPR",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "10.44",
+    "dep": "Last"
+  },
+  {
+    "no": 34420,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34421,
+    "from": "SPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.07",
+    "dep": "Last"
+  },
+  {
+    "no": 34423,
+    "from": "SPR",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "16.48",
+    "dep": "49.08"
+  },
+  {
+    "no": 34424,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "47.12"
+  },
+  {
+    "no": 34425,
+    "from": "SPR",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "17.4",
+    "dep": "55.25"
+  },
+  {
+    "no": 34426,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34427,
+    "from": "SPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.25",
+    "dep": "44.30"
+  },
+  {
+    "no": 34428,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "48.57"
+  },
+  {
+    "no": 34431,
+    "from": "SPR",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "19.5",
+    "dep": "Last"
+  },
+  {
+    "no": 34430,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "53.20"
+  },
+  {
+    "no": 34434,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34414,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33431,
+    "from": "SDAH",
+    "to": "BT",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "57.40"
+  },
+  {
+    "no": 33432,
+    "from": "BT",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.05",
+    "dep": "42.30"
+  },
+  {
+    "no": 33433,
+    "from": "SDAH",
+    "to": "BT",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33434,
+    "from": "BT",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "9.02",
+    "dep": "Last"
+  },
+  {
+    "no": 33435,
+    "from": "SDAH",
+    "to": "BT",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33436,
+    "from": "BT",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "11.27",
+    "dep": "50.08"
+  },
+  {
+    "no": 33437,
+    "from": "SDAH",
+    "to": "BT",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "48.12"
+  },
+  {
+    "no": 33438,
+    "from": "BT",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.25",
+    "dep": "56.25"
+  },
+  {
+    "no": 33439,
+    "from": "SDAH",
+    "to": "BT",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33440,
+    "from": "BT",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "16.57",
+    "dep": "45.30"
+  },
+  {
+    "no": 33441,
+    "from": "SDAH",
+    "to": "BT",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "49.57"
+  },
+  {
+    "no": 33443,
+    "from": "SDAH",
+    "to": "BT",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33445,
+    "from": "SDAH",
+    "to": "BT",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "54.20"
+  },
+  {
+    "no": 33447,
+    "from": "SDAH",
+    "to": "BT",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 13187,
+    "from": "SDAH",
+    "to": "RPH",
+    "rundays": "Daily",
+    "type": "Intercity Express",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 13188,
+    "from": "RPH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "Intercity Express",
+    "arr": "18.45",
+    "dep": "58.40"
+  },
+  {
+    "no": 12259,
+    "from": "NDLS",
+    "to": "DURONTO",
+    "rundays": "M W Th Su",
+    "type": "Duranto",
+    "arr": "First",
+    "dep": "43.30"
+  },
+  {
+    "no": 12260,
+    "from": "SDAH",
+    "to": "DURONTO",
+    "rundays": "Tu W F Sa",
+    "type": "Duranto",
+    "arr": "12.35",
+    "dep": "Last"
+  },
+  {
+    "no": 12987,
+    "from": "SDAH",
+    "to": "AJMER",
+    "rundays": "Daily",
+    "type": "Super Fast",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 12988,
+    "from": "AII",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "Super Fast",
+    "arr": "15.55",
+    "dep": "Last"
+  },
+  {
+    "no": 12377,
+    "from": "PADATIK",
+    "to": "EXPRESS",
+    "rundays": "Daily",
+    "type": "Super Fast",
+    "arr": "First",
+    "dep": "51.08"
+  },
+  {
+    "no": 12378,
+    "from": "PADATIK",
+    "to": "EXPRESS",
+    "rundays": "Daily",
+    "type": "Super Fast",
+    "arr": "6.45",
+    "dep": "49.12"
+  },
+  {
+    "no": 12379,
+    "from": "JALIANWALAB",
+    "to": "EXP",
+    "rundays": "F",
+    "type": "Super Fast",
+    "arr": "First",
+    "dep": "57.25"
+  },
+  {
+    "no": 12380,
+    "from": "JALIANWALA",
+    "to": "B",
+    "rundays": "M",
+    "type": "Super Fast",
+    "arr": "17.25",
+    "dep": "Last"
+  },
+  {
+    "no": 12343,
+    "from": "DARJEELING",
+    "to": "MAIL",
+    "rundays": "Daily",
+    "type": "Slip",
+    "arr": "First",
+    "dep": "46.30"
+  },
+  {
+    "no": 33112,
+    "from": "BNBA",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "23.02",
+    "dep": "50.57"
+  },
+  {
+    "no": 31613,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31319,
+    "from": "SDAH",
+    "to": "KLYM",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "55.20"
+  },
+  {
+    "no": 31237,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31623,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31449,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "59.40"
+  },
+  {
+    "no": 33591,
+    "from": "SDAH",
+    "to": "BSHT",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "44.30"
+  },
+  {
+    "no": 33659,
+    "from": "SDAH",
+    "to": "HB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33837,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33621,
+    "from": "SDAH",
+    "to": "DTK",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33523,
+    "from": "SDAH",
+    "to": "HNB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "52.08"
+  },
+  {
+    "no": 34642,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "50.12"
+  },
+  {
+    "no": 34422,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "58.25"
+  },
+  {
+    "no": 34526,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 30414,
+    "from": "SDAH",
+    "to": "BBDB",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "47.30"
+  },
+  {
+    "no": 33858,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "0.3",
+    "dep": "51.57"
+  },
+  {
+    "no": 31630,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "21.55",
+    "dep": "Last"
+  },
+  {
+    "no": 31230,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "11.42",
+    "dep": "56.20"
+  },
+  {
+    "no": 33592,
+    "from": "BSHT",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "15.15",
+    "dep": "Last"
+  },
+  {
+    "no": 30413,
+    "from": "BBDB",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "12.3",
+    "dep": "Last"
+  },
+  {
+    "no": 34413,
+    "from": "SPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.54",
+    "dep": "60.40"
+  },
+  {
+    "no": 34535,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.17",
+    "dep": "45.30"
+  },
+  {
+    "no": 33801,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31601,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33802,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "9.15",
+    "dep": "Last"
+  },
+  {
+    "no": 31602,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "9.22",
+    "dep": "53.08"
+  },
+  {
+    "no": 34602,
+    "from": "SDAH",
+    "to": "BRP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "51.12"
+  },
+  {
+    "no": 34502,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "59.25"
+  },
+  {
+    "no": 34501,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "9.42",
+    "dep": "Last"
+  },
+  {
+    "no": 34601,
+    "from": "BRP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "10.27",
+    "dep": "48.30"
+  },
+  {
+    "no": 33611,
+    "from": "SDAH",
+    "to": "DTK",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "52.57"
+  },
+  {
+    "no": 30452,
+    "from": "SDAH",
+    "to": "KOAA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31225,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "57.20"
+  },
+  {
+    "no": 31226,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "11.05",
+    "dep": "Last"
+  },
+  {
+    "no": 31233,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31234,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "16.25",
+    "dep": "61.40"
+  },
+  {
+    "no": 31393,
+    "from": "SDAH",
+    "to": "KYI",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "46.30"
+  },
+  {
+    "no": 31394,
+    "from": "KYI",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "16.5",
+    "dep": "Last"
+  },
+  {
+    "no": 31425,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31427,
+    "from": "SDAH",
+    "to": "NH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31428,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "13.32",
+    "dep": "54.08"
+  },
+  {
+    "no": 31432,
+    "from": "NH",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "14.42",
+    "dep": "52.12"
+  },
+  {
+    "no": 31801,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "60.25"
+  },
+  {
+    "no": 31802,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "10.45",
+    "dep": "Last"
+  },
+  {
+    "no": 31836,
+    "from": "KNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.25",
+    "dep": "49.30"
+  },
+  {
+    "no": 32229,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "53.57"
+  },
+  {
+    "no": 32230,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "12.1",
+    "dep": "Last"
+  },
+  {
+    "no": 33401,
+    "from": "SDAH",
+    "to": "BT",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "58.20"
+  },
+  {
+    "no": 33402,
+    "from": "BT",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "10.2",
+    "dep": "Last"
+  },
+  {
+    "no": 33661,
+    "from": "SDAH",
+    "to": "HB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33662,
+    "from": "HB",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "17.35",
+    "dep": "62.40"
+  },
+  {
+    "no": 34747,
+    "from": "LKPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "20.28",
+    "dep": "47.30"
+  },
+  {
+    "no": 34793,
+    "from": "NMKA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "",
+    "arr": "19.2",
+    "dep": "Last"
+  },
+  {
+    "no": 34792,
+    "from": "SDAH",
+    "to": "NMKA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31815,
+    "from": "SDAH",
+    "to": "KNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 32235,
+    "from": "SDAH",
+    "to": "DKAE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "55.08"
+  },
+  {
+    "no": 32236,
+    "from": "DKAE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "14.52",
+    "dep": "53.12"
+  },
+  {
+    "no": 33856,
+    "from": "BNJ",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "23.35",
+    "dep": "61.25"
+  },
+  {
+    "no": 33811,
+    "from": "SDAH",
+    "to": "BNJ",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34794,
+    "from": "SDAH",
+    "to": "NMKA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "50.30"
+  },
+  {
+    "no": 34791,
+    "from": "NMKA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "6.58",
+    "dep": "54.57"
+  },
+  {
+    "no": 31391,
+    "from": "SDAH",
+    "to": "KYI",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33517,
+    "from": "SDAH",
+    "to": "HNB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "59.20"
+  },
+  {
+    "no": 31231,
+    "from": "SDAH",
+    "to": "BP",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33593,
+    "from": "SDAH",
+    "to": "BSHT",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 33895,
+    "from": "SDAH",
+    "to": "TKNR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "63.40"
+  },
+  {
+    "no": 31927,
+    "from": "SDAH",
+    "to": "GEDE",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "48.30"
+  },
+  {
+    "no": 33522,
+    "from": "HNB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13.45",
+    "dep": "Last"
+  },
+  {
+    "no": 33594,
+    "from": "BSHT",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.37",
+    "dep": "Last"
+  },
+  {
+    "no": 34822,
+    "from": "SDAH",
+    "to": "DH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 34134,
+    "from": "SDAH",
+    "to": "BGB",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "56.08"
+  },
+  {
+    "no": 34530,
+    "from": "SDAH",
+    "to": "CG",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "54.12"
+  },
+  {
+    "no": 34432,
+    "from": "SDAH",
+    "to": "SPR",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "62.25"
+  },
+  {
+    "no": 34829,
+    "from": "DH",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.08",
+    "dep": "Last"
+  },
+  {
+    "no": 34133,
+    "from": "BGB",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "13.28",
+    "dep": "51.30"
+  },
+  {
+    "no": 34539,
+    "from": "CG",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "EMU",
+    "arr": "17.02",
+    "dep": "55.57"
+  },
+  {
+    "no": 34429,
+    "from": "SPR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "18.37",
+    "dep": "Last"
+  },
+  {
+    "no": 31914,
+    "from": "GEDE",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "7.4",
+    "dep": "60.20"
+  },
+  {
+    "no": 23141,
+    "from": "TESTA",
+    "to": "TORSA",
+    "rundays": "Daily",
+    "type": "Slip",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 22201,
+    "from": "DURONTO",
+    "to": "EXPRESS",
+    "rundays": "M W F",
+    "type": "Duranto",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 22202,
+    "from": "DURONTO",
+    "to": "EXPRESS",
+    "rundays": "W F Su",
+    "type": "Duranto",
+    "arr": "4",
+    "dep": "64.40"
+  },
+  {
+    "no": 63101,
+    "from": "SDAH",
+    "to": "LGL",
+    "rundays": "M Tu W Th F Sa",
+    "type": "MEMU",
+    "arr": "First",
+    "dep": "49.30"
+  },
+  {
+    "no": 63102,
+    "from": "LGL",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "MEMU",
+    "arr": "23.25",
+    "dep": "Last"
+  },
+  {
+    "no": 73151,
+    "from": "SDAH",
+    "to": "JRLE",
+    "rundays": "M Tu W Th F Sa",
+    "type": "DMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 73152,
+    "from": "JRLE",
+    "to": "SDAH",
+    "rundays": "M Tu W Th F Sa",
+    "type": "DMU",
+    "arr": "20.2",
+    "dep": "Last"
+  },
+  {
+    "no": 31392,
+    "from": "KYI",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "11.58",
+    "dep": "57.08"
+  },
+  {
+    "no": 33896,
+    "from": "TKNR",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "19.5",
+    "dep": "55.12"
+  },
+  {
+    "no": 31232,
+    "from": "BP",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "15.2",
+    "dep": "63.25"
+  },
+  {
+    "no": 31631,
+    "from": "SDAH",
+    "to": "RHA",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 31634,
+    "from": "RHA",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "21.15",
+    "dep": "52.30"
+  },
+  {
+    "no": 63103,
+    "from": "SDAH",
+    "to": "LGL",
+    "rundays": "Daily",
+    "type": "MEMU",
+    "arr": "First",
+    "dep": "56.57"
+  },
+  {
+    "no": 63104,
+    "from": "LGL",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "MEMU",
+    "arr": "16.15",
+    "dep": "Last"
+  },
+  {
+    "no": 12373,
+    "from": "SDAH",
+    "to": "RPH",
+    "rundays": "W F Su",
+    "type": "Intercity Express",
+    "arr": "First",
+    "dep": "61.20"
+  },
+  {
+    "no": 12374,
+    "from": "RPH",
+    "to": "SDAH",
+    "rundays": "M Th Sa",
+    "type": "Intercity Express",
+    "arr": "14.4",
+    "dep": "Last"
+  },
+  {
+    "no": 12383,
+    "from": "INTERCITY",
+    "to": "EXP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "Intercity Express",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 12384,
+    "from": "INTERCITY",
+    "to": "EXP",
+    "rundays": "M Tu W Th F Sa",
+    "type": "Intercity Express",
+    "arr": "10.4",
+    "dep": "65.40"
+  },
+  {
+    "no": 34898,
+    "from": "SDAH",
+    "to": "MGT",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "First",
+    "dep": "50.30"
+  },
+  {
+    "no": 34899,
+    "from": "MGT",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "EMU",
+    "arr": "22.1",
+    "dep": "Last"
+  },
+  {
+    "no": 63105,
+    "from": "SDAH",
+    "to": "BPC",
+    "rundays": "Daily",
+    "type": "MEMU",
+    "arr": "First",
+    "dep": "Last"
+  },
+  {
+    "no": 63106,
+    "from": "BPC",
+    "to": "SDAH",
+    "rundays": "Daily",
+    "type": "MEMU",
+    "arr": "12.45",
+    "dep": "Last"
+  },
+  {
+    "no": 13119,
+    "from": "SDAH",
+    "to": "DLI",
+    "rundays": "Th Su",
+    "type": "Mail \u0026 Express",
+    "arr": "First",
+    "dep": "58.08"
+  },
+  {
+    "no": 13120,
+    "from": "DLI",
+    "to": "SDAH",
+    "rundays": "M Th",
+    "type": "Mail \u0026 Express",
+    "arr": "10.55",
+    "dep": "56.12"
+  }
+]
